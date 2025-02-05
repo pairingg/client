@@ -5,6 +5,7 @@ import { useState } from 'react';
 export default function ProgressBar() {
   const steps = Array.from({ length: 8 }, (_, i) => i + 1);
   const [currentStep, setCurrentStep] = useState(1);
+  const [complete, setComplete] = useState(false);
 
   return (
     <div className="w-full flex flex-col items-center">
@@ -24,17 +25,20 @@ export default function ProgressBar() {
               setCurrentStep((prev) => prev - 1);
             }
           }}
+          disabled={currentStep === 1}
         >
           {'<'}
         </button>
         <button
           onClick={() => {
-            if (currentStep < steps.length) {
+            if (currentStep === steps.length) {
+              setComplete(true);
+            } else {
               setCurrentStep((prev) => prev + 1);
             }
           }}
         >
-          다음
+          {currentStep === steps.length ? '완료' : '다음'}
         </button>
       </div>
     </div>
