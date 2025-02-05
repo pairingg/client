@@ -3,9 +3,9 @@ import { ButtonHTMLAttributes, PropsWithChildren } from 'react';
 import { cn } from '@/utils/cn';
 
 const VARIANTS = {
-  small: 'rounded-[20px] px-[15px] py-[4px]',
-  rectangle: 'rounded-[14px] px-[75px] py-[16px]',
-  wide: 'rounded-[14px] pl-[15px] py-[13px] w-full',
+  small: 'rounded-[20px] w-[64px] h-[34px] text-center',
+  rectangle: 'rounded-[14px] w-[163px] h-[52px] text-center',
+  wide: 'rounded-[14px] w-full h-[52px] pl-[15px] text-left',
 } as const;
 
 type ChipButtonVariant = keyof typeof VARIANTS;
