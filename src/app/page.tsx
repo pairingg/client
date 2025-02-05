@@ -1,3 +1,5 @@
+import ProgressBar from '@/components/ProgressBar';
+
 export default function Home() {
-  return <div>Hello World</div>;
+  return <ProgressBar />;
 }
