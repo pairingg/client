@@ -1,5 +1,5 @@
-import ProfileCard from '@/components/header/ProfileCard';
+import Chatroom from '@/components/header/ChatRoom';
 
 export default function Home() {
-  return <ProfileCard name="김이름이름" age={20} />;
+  return <Chatroom />;
 }
