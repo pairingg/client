@@ -14,7 +14,7 @@ export default function ProfileCard() {
       </button>
 
       {/* 사용자 정보 */}
-      <div className="absolute items-start flex-col pl-3 bottom-7">
+      <div className="absolute items-start flex-col pl-5 bottom-6">
         <div className="pb-2">
           <Image
             src="/images/face-auth.png"
@@ -38,6 +38,26 @@ export default function ProfileCard() {
             서울시 용산구
           </span>
         </div>
+      </div>
+
+      {/* 버튼 */}
+      <div className="absolute flex items-start right-3 bottom-3">
+        <button>
+          <Image
+            src="/images/button_direct.png"
+            alt="채팅 버튼"
+            width={75}
+            height={75}
+          />
+        </button>
+        <button>
+          <Image
+            src="/images/button_heart.png"
+            alt="하트 버튼"
+            width={75}
+            height={75}
+          />
+        </button>
       </div>
     </div>
   );
