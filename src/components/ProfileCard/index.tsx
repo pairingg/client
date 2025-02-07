@@ -1,13 +1,19 @@
 import Image from 'next/image';
 
-export default function ProfileCard() {
+interface ProfileCardProps {
+  name: string;
+  age: number;
+  location: string;
+}
+
+export default function ProfileCard({ name, age, location }: ProfileCardProps) {
   return (
-    <div className="relative w-80 h-80 bg-gray1 rounded-xl">
+    <div className=" m-7 relative w-80 h-80 bg-gray1 rounded-xl">
       {/* 배경 그라데이션 */}
       <div className="absolute w-full h-full bg-gradient-to-t from-mainPink2 via-transparent to-transparent rounded-xl z-0"></div>
 
       {/* 닫기 버튼 */}
-      <button className="absolute top-3 right-2">
+      <button className="absolute top-3 right-2 mr-2">
         <Image
           src="/images/profileCard_delete.png"
           alt="프로필카드 닫기"
@@ -27,8 +33,8 @@ export default function ProfileCard() {
           />
         </div>
         <div className="text-22px font-semiBold text-white space-x-3 pb-2">
-          <span>김이름</span>
-          <span>20</span>
+          <span>{name}</span>
+          <span>{age}</span>
         </div>
         <div className="flex items-center space-x-2">
           <Image
@@ -37,9 +43,7 @@ export default function ProfileCard() {
             width={16}
             height={16}
           />
-          <span className="text-14px font-medium text-white">
-            서울시 용산구
-          </span>
+          <span className="text-14px font-medium text-white">{location}</span>
         </div>
       </div>
 
