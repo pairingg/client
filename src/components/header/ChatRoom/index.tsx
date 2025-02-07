@@ -1,11 +1,11 @@
 import Image from 'next/image';
 
-interface ChatroomHeader {
+interface ChatRoomHeader {
   profileImage: string;
   name: string;
 }
 
-export default function Chatroom({ profileImage, name }: ChatroomHeader) {
+export default function ChatRoom({ profileImage, name }: ChatRoomHeader) {
   return (
     <div className="flex items-center">
       <button className="mr-2">
