@@ -1,5 +1,5 @@
-import ProfileCardHeader from '@/components/header/ProfileCardHeader';
+import ChatRoomHeader from '@/components/header/ChatRoomHeader';
 
 export default function Home() {
-  return <ProfileCardHeader name="김이름" age={20} />;
+  return <ChatRoomHeader name="김이름" profileImage="/images/profile.png" />;
 }
