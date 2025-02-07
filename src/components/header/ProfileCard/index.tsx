@@ -12,6 +12,9 @@ export default function ProfileCard() {
           width={16}
           height={16}
         />
+        <button className="pl-10">
+          <Image src="/images/more_black.png" width={16} height={16} />
+        </button>
       </div>
     </div>
   );
