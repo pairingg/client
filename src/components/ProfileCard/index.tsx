@@ -3,6 +3,9 @@ import Image from 'next/image';
 export default function ProfileCard() {
   return (
     <div className="relative w-80 h-80 bg-gray1 rounded-xl">
+      {/* 배경 그라데이션 */}
+      <div className="absolute w-full h-full bg-gradient-to-t from-mainPink2 via-transparent to-transparent rounded-xl z-0"></div>
+
       {/* 닫기 버튼 */}
       <button className="absolute top-3 right-2">
         <Image
