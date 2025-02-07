@@ -16,9 +16,7 @@ export function TabGroup({ children, initialTab }: TabGroupProps) {
   const [activeValue, setActiveValue] = useState(initialTab ?? null);
 
   return (
-    <TabContext.Provider value={{ activeValue, setActiveValue }}>
-      {children}
-    </TabContext.Provider>
+    <TabContext value={{ activeValue, setActiveValue }}>{children}</TabContext>
   );
 }
 
