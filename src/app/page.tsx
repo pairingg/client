@@ -1,3 +1,5 @@
+import ProfileCard from '@/components/header/ProfileCard';
+
 export default function Home() {
-  return <div>Hello World</div>;
+  return <ProfileCard />;
 }
