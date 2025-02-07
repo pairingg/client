@@ -1,5 +1,3 @@
-import NotificationCard from '@/components/NotificationCard';
-
 export default function Home() {
-  return <NotificationCard />;
+  return <div>Hello World</div>;
 }
