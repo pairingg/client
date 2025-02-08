@@ -16,6 +16,7 @@ interface NavItemProps {
   label?: any;
   activeIcon: React.ReactNode;
   isActive: boolean;
+  hasNotification?: boolean;
 }
 
 const NavItem: React.FC<NavItemProps> = ({
@@ -24,11 +25,15 @@ const NavItem: React.FC<NavItemProps> = ({
   label,
   activeIcon,
   isActive,
+  hasNotification,
 }) => (
   <Link
     href={href}
-    className={`flex flex-col items-center ${isActive ? 'text-mainPink1' : 'text-black'}`}
+    className={`relative flex flex-col items-center ${isActive ? 'text-mainPink1 font-semiBold' : 'text-black'}`}
   >
+    {hasNotification && (
+      <span className="absolute top-0 left-5 w-2 h-2 bg-mainPink1 rounded-full" />
+    )}
     {isActive ? activeIcon : icon}
     <span className="text-12px mt-1">{label}</span>
   </Link>
@@ -37,7 +42,7 @@ const NavItem: React.FC<NavItemProps> = ({
 export default function ButtomNavBar() {
   return (
     <nav className="fixed bottom-0 left-0 w-full bg-white border-t border-gray-200 py-2 pb-4 rounded-r-3xl rounded-l-3xl">
-      <div className="flex justify-around items-center max-w-md mx-3">
+      <div className="flex justify-around items-center max-w-md mx-3 ">
         <NavItem
           href="#"
           icon={<HomeIcon />}
@@ -65,6 +70,7 @@ export default function ButtomNavBar() {
           activeIcon={<NotificationActiveIcon />}
           label="알림"
           isActive={false}
+          hasNotification={true}
         />
         <NavItem
           href="#"
