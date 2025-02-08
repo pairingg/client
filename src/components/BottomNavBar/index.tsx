@@ -48,7 +48,7 @@ const NavItem: React.FC<NavItemProps> = ({
   </Link>
 );
 
-export default function ButtomNavBar() {
+export default function BottomNavBar() {
   return (
     <nav className="fixed bottom-0 left-0 w-full bg-white border-t border-gray-200 py-3 pb-4 rounded-r-3xl rounded-l-3xl">
       <div className="flex justify-around items-center max-w-md mx-3 ">
