@@ -36,7 +36,6 @@ export default function ChatInput({ onSendMessage }: Props) {
         value={message}
         onChange={(e) => setMessage(e.target.value)}
         onKeyDown={handleKeyDown}
-        placeholder="메시지를 입력하세요."
       />
 
       <button
