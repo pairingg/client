@@ -1,12 +1,12 @@
 import ProfileImage from '../common/ProfileImage';
-import NotificationIcon from '/public/assets/icons/Notification_sign.svg';
 
 interface NotificationCardProps {
   profileImg: string;
   name: string;
   age: number;
   location: string;
-  time: string;
+  time?: string;
+  isRead: boolean;
 }
 export default function NotificationCard({
   profileImg,
@@ -14,10 +14,14 @@ export default function NotificationCard({
   age,
   location,
   time,
+  isRead,
 }: NotificationCardProps) {
   return (
     <div className="relative flex items-center bg-white w-[340px] h-[110px] rounded-xl m-4 shadow-md">
-      <NotificationIcon className="absolute top-2 right-2" />
+      {/* 읽음 여부 아이콘 표시 */}
+      {!isRead && (
+        <div className="absolute top-2 right-2 w-3 h-3 bg-mainPink1 rounded-full"></div>
+      )}
 
       {/* 프로필 이미지 */}
       <div className="mr-2">
