@@ -2,10 +2,21 @@ import { cn } from '@/utils/cn';
 import { PropsWithChildren } from 'react';
 
 interface Props {
-  time: string;
+  time: Date;
   isMe?: boolean; // 내가 보낸 메시지인지
   isRead?: boolean; // 읽음 표시
 }
+
+const formatTime = (date: Date) => {
+  return date
+    .toLocaleTimeString('en-US', {
+      hour: 'numeric',
+      minute: '2-digit',
+      hour12: true,
+    })
+    .replace('AM', 'AM')
+    .replace('PM', 'PM');
+};
 
 export default function ChatBubble({
   time,
@@ -38,7 +49,9 @@ export default function ChatBubble({
           {isMe && (
             <div className="font-medium leading-[14px]">{isRead && '읽음'}</div>
           )}
-          <div className="font-roboto translate-y-[0.5px]">{time}</div>
+          <div className="font-roboto translate-y-[0.5px]">
+            {formatTime(time)}
+          </div>
         </div>
       </div>
     </div>
