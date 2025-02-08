@@ -1,4 +1,4 @@
-import Image from 'next/image';
+import ProfileImage from '../common/ProfileImage';
 import NotificationIcon from '/public/assets/icons/Notification_sign.svg';
 
 interface NotificationCardProps {
@@ -20,14 +20,8 @@ export default function NotificationCard({
       <NotificationIcon className="absolute top-2 right-2" />
 
       {/* 프로필 이미지 */}
-      <div className="rounded-full overflow-hidden mr-2">
-        <Image
-          src={profileImg}
-          alt="프로필 이미지"
-          width={90}
-          height={90}
-          className="object-cover"
-        />
+      <div className="mr-2">
+        <ProfileImage src={profileImg} size={90} />
       </div>
 
       {/* 알림 내용 */}
