@@ -17,6 +17,7 @@ interface NavItemProps {
   activeIcon: React.ReactNode;
   isActive: boolean;
   hasNotification?: boolean;
+  notificationCount?: number;
 }
 
 const NavItem: React.FC<NavItemProps> = ({
@@ -26,22 +27,30 @@ const NavItem: React.FC<NavItemProps> = ({
   activeIcon,
   isActive,
   hasNotification,
+  notificationCount,
 }) => (
   <Link
     href={href}
     className={`relative flex flex-col items-center ${isActive ? 'text-mainPink1 font-semiBold' : 'text-black'}`}
   >
+    {notificationCount && notificationCount > 0 && (
+      <div className="absolute -top-2 -right-3 w-[17px] h-[17px] px-[6px] py-[2px] bg-mainPink1 rounded-full flex justify-center items-center shadow-md">
+        <span className="text-white text-[12px] font-bold">
+          {notificationCount > 99 ? '99+' : notificationCount}
+        </span>
+      </div>
+    )}
     {hasNotification && (
-      <span className="absolute top-0 left-5 w-2 h-2 bg-mainPink1 rounded-full" />
+      <span className="absolute -top-1 -right-2 w-2 h-2 bg-mainPink1 rounded-full" />
     )}
     {isActive ? activeIcon : icon}
-    <span className="text-12px mt-1">{label}</span>
+    <span className="text-[12px] mt-1">{label}</span>
   </Link>
 );
 
 export default function ButtomNavBar() {
   return (
-    <nav className="fixed bottom-0 left-0 w-full bg-white border-t border-gray-200 py-2 pb-4 rounded-r-3xl rounded-l-3xl">
+    <nav className="fixed bottom-0 left-0 w-full bg-white border-t border-gray-200 py-3 pb-4 rounded-r-3xl rounded-l-3xl">
       <div className="flex justify-around items-center max-w-md mx-3 ">
         <NavItem
           href="#"
@@ -56,6 +65,7 @@ export default function ButtomNavBar() {
           activeIcon={<ChatActiveIcon />}
           label="채팅"
           isActive={false}
+          notificationCount={10}
         />
         <NavItem
           href="#"
