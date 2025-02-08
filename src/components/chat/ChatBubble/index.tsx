@@ -8,14 +8,14 @@ interface Props {
 }
 
 const formatTime = (date: Date) => {
-  return date
-    .toLocaleTimeString('en-US', {
-      hour: 'numeric',
-      minute: '2-digit',
-      hour12: true,
-    })
-    .replace('AM', 'AM')
-    .replace('PM', 'PM');
+  const timeString = date.toLocaleTimeString('en-US', {
+    hour: 'numeric',
+    minute: '2-digit',
+    hour12: true,
+  });
+
+  const [time, meridiem] = timeString.split(' ');
+  return `${meridiem} ${time}`;
 };
 
 export default function ChatBubble({
