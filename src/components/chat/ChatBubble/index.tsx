@@ -2,8 +2,8 @@ import { PropsWithChildren } from 'react';
 
 interface Props {
   time: string;
-  isMe?: boolean;
-  isRead?: boolean;
+  isMe?: boolean; // 내가 보낸 메시지인지
+  isRead?: boolean; // 읽음 표시
 }
 
 export default function ChatBubble({
