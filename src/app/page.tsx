@@ -1,5 +1,3 @@
-import ButtomNavBar from '@/components/ButtomNavBar';
-
 export default function Home() {
-  return <ButtomNavBar />;
+  return <div>Hello World</div>;
 }

@@ -41,7 +41,7 @@ const NavItem: React.FC<NavItemProps> = ({
       </div>
     )}
     {hasNotification && (
-      <span className="absolute -top-1 -right-2 w-2 h-2 bg-mainPink1 rounded-full" />
+      <span className="absolute -top-1 -right-2 w-1.5 h-1.5 bg-mainPink1 rounded-full" />
     )}
     {isActive ? activeIcon : icon}
     <span className="text-[12px] mt-1">{label}</span>
