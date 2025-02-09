@@ -20,8 +20,8 @@ export default {
         gray3: '#EFEFEF',
       },
       fontFamily: {
-        sans: ['Graphik', 'sans-serif'],
-        roboto: ['Roboto', 'sans-serif'],
+        sans: ['var(--font-noto)', 'sans-serif'],
+        roboto: ['var(--font-roboto)', 'sans-serif'],
       },
     },
     fontSize: {
