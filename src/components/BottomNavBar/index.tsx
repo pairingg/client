@@ -49,46 +49,52 @@ const NavItem: React.FC<NavItemProps> = ({
 );
 
 export default function BottomNavBar() {
+  const navItems = [
+    {
+      href: '#',
+      icon: <HomeIcon />,
+      activeIcon: <HomeActiveIcon />,
+      label: '홈',
+      isActive: false,
+    },
+    {
+      href: '#',
+      icon: <ChatIcon />,
+      activeIcon: <ChatActiveIcon />,
+      label: '채팅',
+      isActive: false,
+      notificationCount: 10,
+    },
+    {
+      href: '#',
+      icon: <CommunityIcon />,
+      activeIcon: <CommunityActiveIcon />,
+      label: '커뮤니티',
+      isActive: false,
+    },
+    {
+      href: '#',
+      icon: <NotificationIcon />,
+      activeIcon: <NotificationActiveIcon />,
+      label: '알림',
+      isActive: false,
+      hasNotification: true,
+    },
+    {
+      href: '#',
+      icon: <MypageIcon />,
+      activeIcon: <MypageActiveIcon />,
+      label: '마이프로필',
+      isActive: false,
+    },
+  ];
+
   return (
     <nav className="fixed bottom-0 left-0 w-full bg-white border-t border-gray-200 py-3 pb-4 rounded-r-3xl rounded-l-3xl">
       <div className="flex justify-around items-center max-w-md mx-3 ">
-        <NavItem
-          href="#"
-          icon={<HomeIcon />}
-          activeIcon={<HomeActiveIcon />}
-          label="홈"
-          isActive={false}
-        />
-        <NavItem
-          href="#"
-          icon={<ChatIcon />}
-          activeIcon={<ChatActiveIcon />}
-          label="채팅"
-          isActive={false}
-          notificationCount={10}
-        />
-        <NavItem
-          href="#"
-          icon={<CommunityIcon />}
-          activeIcon={<CommunityActiveIcon />}
-          label="커뮤니티"
-          isActive={false}
-        />
-        <NavItem
-          href="#"
-          icon={<NotificationIcon />}
-          activeIcon={<NotificationActiveIcon />}
-          label="알림"
-          isActive={false}
-          hasNotification={true}
-        />
-        <NavItem
-          href="#"
-          icon={<MypageIcon />}
-          activeIcon={<MypageActiveIcon />}
-          label="마이프로필"
-          isActive={false}
-        />
+        {navItems.map((item, index) => (
+          <NavItem key={index} {...item} />
+        ))}
       </div>
     </nav>
   );
