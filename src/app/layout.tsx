@@ -27,7 +27,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${roboto.variable} ${noto.variable} antialiased`}>
+      <body
+        className={`${roboto.variable} ${noto.variable} antialiased relative overscroll-y-none min-h-[100dvh] max-w-[480px] min-w-[375px] mx-auto scrollbar-hide`}
+      >
         <Providers>{children}</Providers>
       </body>
     </html>
