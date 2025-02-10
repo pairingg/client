@@ -31,7 +31,9 @@ const NavItem: React.FC<NavItemProps> = ({
 }) => (
   <Link
     href={href}
-    className={`relative flex flex-col items-center ${isActive ? 'text-mainPink1 font-semiBold' : 'text-black'}`}
+    className={`relative flex flex-col items-center ${
+      isActive ? 'text-mainPink1 font-semiBold' : 'text-black'
+    }`}
   >
     {notificationCount && notificationCount > 0 && (
       <div className="absolute -top-2 -right-3 w-[17px] h-[17px] px-[6px] py-[2px] bg-mainPink1 rounded-full flex justify-center items-center shadow-md">
@@ -51,7 +53,7 @@ const NavItem: React.FC<NavItemProps> = ({
 export default function BottomNavBar() {
   const navItems = [
     {
-      href: '#',
+      href: '/pAIring',
       icon: <HomeIcon />,
       activeIcon: <HomeActiveIcon />,
       label: '홈',
@@ -90,8 +92,8 @@ export default function BottomNavBar() {
   ];
 
   return (
-    <nav className="fixed bottom-0 left-0 w-full bg-white border-t border-gray-200 py-3 pb-4 rounded-r-3xl rounded-l-3xl">
-      <div className="flex justify-around items-center max-w-md mx-3 ">
+    <nav className="bottom-0 bg-white border-t border-gray2 py-3 rounded-r-3xl rounded-l-3xl">
+      <div className="flex justify-around items-center">
         {navItems.map((item, index) => (
           <NavItem key={index} {...item} />
         ))}
