@@ -92,12 +92,17 @@ export default function BottomNavBar() {
   ];
 
   return (
-    <nav className="bottom-0 bg-white border-t border-gray2 py-3 rounded-r-3xl rounded-l-3xl">
-      <div className="flex justify-around items-center">
-        {navItems.map((item, index) => (
-          <NavItem key={index} {...item} />
-        ))}
+    <div className="fixed bottom-0 w-full">
+      {/* 내부 wrapper에 w-full, max-w와 mx-auto를 적용 */}
+      <div className="w-full max-w-[520px]">
+        <nav className="bg-white border-t border-gray2 py-3 rounded-r-3xl rounded-l-3xl">
+          <div className="flex justify-around items-center">
+            {navItems.map((item, index) => (
+              <NavItem key={index} {...item} />
+            ))}
+          </div>
+        </nav>
       </div>
-    </nav>
+    </div>
   );
 }

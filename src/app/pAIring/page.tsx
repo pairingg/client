@@ -23,7 +23,7 @@ const profileCardList = [
 export default function MainPage() {
   return (
     <div className="relative min-h-screen">
-      <main className="layout flex flex-col overflow-hidden shadow-lg pb">
+      <main className="layout flex flex-col overflow-hidden shadow-lg pb-20">
         <div className="w-full mx-auto px-[100px]">
           {/* 로고 영역 */}
           <div className="flex justify-start py-4">
