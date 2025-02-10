@@ -13,23 +13,38 @@ const keywords = [
   { icon: <BeerIcon />, title: '음주 스타일' },
 ];
 
+const profileCardList = [
+  { name: '김이름', age: '20', location: '서울시 용산구' },
+  { name: '김이름', age: '20', location: '서울시 용산구' },
+];
+
 export default function MainPage() {
   return (
     <main className="layout flex flex-col overflow-hidden shadow-lg">
-      <div>
-        <LogoIcon />
-      </div>
+      <div className="w-full mx-auto px-[100px]">
+        {/* 로고 영역 */}
+        <div className="flex justify-start py-4">
+          <LogoIcon />
+        </div>
 
-      <div>
-        <ProfileCard name="김이름" age={20} location="서울시 용산구" />
-        <ProfileCard name="김이름" age={20} location="서울시 용산구" />
-      </div>
+        {/* 프로필카드 영역 */}
+        <div className="flex flex-col items-center">
+          {profileCardList.map((item, index) => (
+            <ProfileCard
+              key={index}
+              name={item.name}
+              age={item.age}
+              location={item.location}
+            />
+          ))}
+        </div>
 
-      <div>
-        <p>맞춤 추천</p>
-        <KeywordRecommendation keywords={keywords} />
+        {/* 추천 키워드 영역 */}
+        <div className="mt-6">
+          <p className="font-24-bold pt-6 pb-4">맞춤 추천</p>
+          <KeywordRecommendation keywords={keywords} />
+        </div>
       </div>
-
       <div>{/* <BottomNavBar /> */}</div>
     </main>
   );
