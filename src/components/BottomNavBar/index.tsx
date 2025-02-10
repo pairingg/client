@@ -1,4 +1,7 @@
+'use client';
+
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import ChatIcon from '/public/assets/icons/navBar_chat.svg';
 import ChatActiveIcon from '/public/assets/icons/navBar_chat_active.svg';
 import CommunityIcon from '/public/assets/icons/navBar_community.svg';
@@ -51,13 +54,15 @@ const NavItem: React.FC<NavItemProps> = ({
 );
 
 export default function BottomNavBar() {
+  const pathname = usePathname();
+
   const navItems = [
     {
       href: '/pAIring',
       icon: <HomeIcon />,
       activeIcon: <HomeActiveIcon />,
       label: '홈',
-      isActive: false,
+      isActive: pathname === '/pAIring',
     },
     {
       href: '#',
