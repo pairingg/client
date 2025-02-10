@@ -1,6 +1,17 @@
-import BottomNavBar from '@/components/BottomNavBar';
+import KeywordRecommendation from '@/components/KeywordRecommendation';
 import ProfileCard from '@/components/ProfileCard';
+import AgeIcon from '/public/assets/icons/keyword_age.svg';
+import BeerIcon from '/public/assets/icons/keyword_beer.svg';
+import LocationIcon from '/public/assets/icons/keyword_location.svg';
+import PersonalityIcon from '/public/assets/icons/keyword_personality.svg';
 import LogoIcon from '/public/assets/icons/logo_letter.svg';
+
+const keywords = [
+  { icon: <PersonalityIcon />, title: '성격' },
+  { icon: <LocationIcon />, title: '상대의 위치' },
+  { icon: <AgeIcon />, title: '나이' },
+  { icon: <BeerIcon />, title: '음주 스타일' },
+];
 
 export default function MainPage() {
   return (
@@ -16,11 +27,10 @@ export default function MainPage() {
 
       <div>
         <p>맞춤 추천</p>
+        <KeywordRecommendation keywords={keywords} />
       </div>
 
-      <div>
-        <BottomNavBar />
-      </div>
+      <div>{/* <BottomNavBar /> */}</div>
     </main>
   );
 }
