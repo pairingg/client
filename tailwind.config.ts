@@ -23,7 +23,7 @@ export default {
         gray3: '#EFEFEF',
       },
       fontFamily: {
-        sans: ['var(--font-noto)', 'sans-serif'],
+        noto: ['var(--font-noto)', 'sans-serif'],
         roboto: ['var(--font-roboto)', 'sans-serif'],
       },
     },
