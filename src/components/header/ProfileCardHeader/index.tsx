@@ -1,5 +1,6 @@
 import ListModal from '@/components/modal/\bListModal';
 import OneButtonModal from '@/components/modal/OneButtonModal';
+import TwoButtonMoal from '@/components/modal/TwoButtonModal';
 import { useState } from 'react';
 import ExclamationIcon from '/public/assets/icons/alert_exclamationMark.svg';
 import FaceAuthIcon from '/public/assets/icons/face_auth.svg';
@@ -16,6 +17,7 @@ export default function ProfileCardHeader({
 }: ProfileCardHeaderProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isReportModalOpen, setIsReportModalOpen] = useState(false);
+  const [isBlockCheckModalOpen, setIsBlockCheckModalOpen] = useState(false);
   const [isBlockModalOpen, setIsBlockModalOpen] = useState(false);
 
   return (
@@ -46,7 +48,7 @@ export default function ProfileCardHeader({
           {
             label: '차단하기',
             onClick: () => {
-              setIsModalOpen(false), setIsBlockModalOpen(true);
+              setIsModalOpen(false), setIsBlockCheckModalOpen(true);
             },
           },
         ]}
@@ -66,6 +68,17 @@ export default function ProfileCardHeader({
           onClick: () => setIsReportModalOpen(false),
           color: 'text-mainPink1',
         }}
+      />
+
+      {/* 차단하기 여부 모달 */}
+      <TwoButtonMoal
+        isOpen={isBlockCheckModalOpen}
+        icon={<ExclamationIcon />}
+        message="차단 하시겠습니까?"
+        leftButtonLabel="취소"
+        rightButtonLabel="확인"
+        rightOnClick={() => setIsBlockCheckModalOpen(false)}
+        leftOnClick={() => setIsBlockCheckModalOpen(false)}
       />
 
       {/* 차단하기 확인 모달 */}
