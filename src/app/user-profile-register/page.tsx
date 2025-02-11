@@ -19,16 +19,17 @@ export default function UserProfileRegister() {
   };
 
   return (
-    <div>
+    <div className="relative min-h-screen pb-24">
       <div>
         <ProfileCardHeader name="김이름" age={20} />
       </div>
 
-      <div>
+      {/* ProfileCard를 가운데 정렬 */}
+      <div className="flex justify-center my-4">
         <ProfileCard />
       </div>
 
-      <div>
+      <div className="flex flex-col gap-y-8">
         <ProfileCardInfoContainer
           icon={<LocationIcon />}
           title="거주지"
@@ -51,7 +52,7 @@ export default function UserProfileRegister() {
         />
       </div>
 
-      <div>
+      <div className="absolute bottom-4 right-4">
         <FloatingButton
           onClickDirect={handleDirectClick}
           onClickHeart={handleHeartClick}
