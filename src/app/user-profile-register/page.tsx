@@ -1,0 +1,62 @@
+'use client';
+
+import FloatingButton from '@/components/common/FloatingButton';
+import ProfileCardHeader from '@/components/header/ProfileCardHeader';
+import ProfileCard from '@/components/ProfileCard';
+import ProfileCardInfoContainer from '@/components/ProfileCardInfoContainer';
+import BeerIcon from '/public/assets/icons/profilecard_bottle_pink.svg';
+import HobbyIcon from '/public/assets/icons/profilecard_heart_pink.svg';
+import LocationIcon from '/public/assets/icons/profilecard_location_pink.svg';
+import PerconalityIcon from '/public/assets/icons/profilecard_user_pink.svg';
+
+export default function UserProfileRegister() {
+  const handleDirectClick = () => {
+    console.log('Direct 버튼 클릭!');
+  };
+
+  const handleHeartClick = () => {
+    console.log('Heart 버튼 클릭!');
+  };
+
+  return (
+    <div>
+      <div>
+        <ProfileCardHeader name="김이름" age={20} />
+      </div>
+
+      <div>
+        <ProfileCard />
+      </div>
+
+      <div>
+        <ProfileCardInfoContainer
+          icon={<LocationIcon />}
+          title="거주지"
+          description="서울시 강남구 역삼동"
+        />
+        <ProfileCardInfoContainer
+          icon={<HobbyIcon />}
+          title="취미"
+          tags={['운동', '독서', '맛집탐방']}
+        />
+        <ProfileCardInfoContainer
+          icon={<PerconalityIcon />}
+          title="성격(MBTI)"
+          description="INFP"
+        />
+        <ProfileCardInfoContainer
+          icon={<BeerIcon />}
+          title="음주 흡연 여부"
+          tags={['전혀 안마심', '비흡연']}
+        />
+      </div>
+
+      <div>
+        <FloatingButton
+          onClickDirect={handleDirectClick}
+          onClickHeart={handleHeartClick}
+        />
+      </div>
+    </div>
+  );
+}
