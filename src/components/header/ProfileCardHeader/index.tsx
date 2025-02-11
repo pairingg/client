@@ -29,7 +29,14 @@ export default function ProfileCardHeader({
       </div>
 
       {/* 신고/차단 모달 */}
-      <BlockModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+      <BlockModal
+        isOpen={isModalOpen}
+        buttonList={[
+          { label: '신고하기', onClick: () => console.log('신고하기 클릭') },
+          { label: '차단하기', onClick: () => console.log('차단하기 클릭') },
+        ]}
+        oneButton={{ label: '취소', onClick: () => setIsModalOpen(false) }}
+      />
     </div>
   );
 }
