@@ -1,3 +1,5 @@
+import BlockModal from '@/components/\bBlockModal';
+import { useState } from 'react';
 import FaceAuthIcon from '/public/assets/icons/face_auth.svg';
 import MoreBlackIcon from '/public/assets/icons/more_black.svg';
 
@@ -10,6 +12,8 @@ export default function ProfileCardHeader({
   name,
   age,
 }: ProfileCardHeaderProps) {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   return (
     <div className="m-7">
       <div className="flex items-center">
@@ -19,10 +23,13 @@ export default function ProfileCardHeader({
           <FaceAuthIcon />
         </div>
 
-        <button className="ml-auto">
+        <button className="ml-auto" onClick={() => setIsModalOpen(true)}>
           <MoreBlackIcon />
         </button>
       </div>
+
+      {/* 신고/차단 모달 */}
+      <BlockModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </div>
   );
 }

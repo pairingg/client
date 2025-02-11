@@ -11,11 +11,11 @@ import PerconalityIcon from '/public/assets/icons/profilecard_user_pink.svg';
 
 export default function UserProfileRegister() {
   const handleDirectClick = () => {
-    console.log('Direct 버튼 클릭!');
+    alert('Direct 버튼이 클릭되었습니다!');
   };
 
   const handleHeartClick = () => {
-    console.log('Heart 버튼 클릭!');
+    alert('Heart 버튼이 클릭되었습니다!');
   };
 
   return (
