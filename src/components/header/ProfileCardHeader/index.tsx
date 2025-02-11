@@ -1,5 +1,7 @@
 import ListModal from '@/components/modal/\bListModal';
+import OneButtonModal from '@/components/modal/OneButtonModal';
 import { useState } from 'react';
+import ExclamationIcon from '/public/assets/icons/alert_exclamationMark.svg';
 import FaceAuthIcon from '/public/assets/icons/face_auth.svg';
 import MoreBlackIcon from '/public/assets/icons/more_black.svg';
 
@@ -41,7 +43,12 @@ export default function ProfileCardHeader({
             },
             color: 'text-mainPink1',
           },
-          { label: '차단하기', onClick: () => console.log('차단하기 클릭') },
+          {
+            label: '차단하기',
+            onClick: () => {
+              setIsModalOpen(false), setIsBlockModalOpen(true);
+            },
+          },
         ]}
         oneButton={{ label: '취소', onClick: () => setIsModalOpen(false) }}
       />
@@ -59,6 +66,15 @@ export default function ProfileCardHeader({
           onClick: () => setIsReportModalOpen(false),
           color: 'text-mainPink1',
         }}
+      />
+
+      {/* 차단하기 확인 모달 */}
+      <OneButtonModal
+        isOpen={isBlockModalOpen}
+        icon={<ExclamationIcon />}
+        message="차단 되었습니다."
+        buttonLabel="닫기"
+        onClick={() => setIsBlockModalOpen(false)}
       />
     </div>
   );
