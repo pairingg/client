@@ -1,7 +1,9 @@
 'use client';
 
-import Image from 'next/image';
 import { useEffect } from 'react';
+
+import Image from 'next/image';
+
 import LoginButtons from './OAuthButtons';
 
 interface LoginProps {
