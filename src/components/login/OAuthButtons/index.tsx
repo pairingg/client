@@ -1,3 +1,7 @@
+'use client';
+
+import { useCallback } from 'react';
+
 import OAuthButton from '../OAuthButton';
 import KakaoLogo from '/public/assets/icons/kakao_logo.svg';
 import NaverLogo from '/public/assets/icons/naver_logo.svg';
@@ -26,13 +30,16 @@ export default function OAuthButtons() {
       text: '카카오 로그인',
       bgColor: 'bg-[#FFE812]',
       textColor: 'text-[#181600]',
-      url: `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.NEXT_PUBLIC_REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`,
+      url: `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.NEXT_PUBLIC_KAKAO_REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`,
     },
   };
 
-  const handleLogin = (url: string) => () => {
-    window.location.href = url;
-  };
+  const handleLogin = useCallback(
+    (url: string) => () => {
+      window.location.href = url;
+    },
+    [],
+  );
 
   return (
     <div className="absolute bottom-0 w-full">

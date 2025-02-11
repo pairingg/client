@@ -1,7 +1,21 @@
+'use client';
+
 import Image from 'next/image';
+import { useEffect } from 'react';
 import LoginButtons from './OAuthButtons';
 
-export default function Login() {
+interface LoginProps {
+  code?: string;
+}
+
+export default function Login({ code }: LoginProps) {
+  useEffect(() => {
+    if (code) {
+      console.log('Authorization code:', code);
+      // TODO: 여기서 인가 코드를 사용하여 필요한 처리를 수행
+    }
+  }, [code]);
+
   return (
     <div className="relative flex flex-col items-center justify-center h-full">
       <Image
