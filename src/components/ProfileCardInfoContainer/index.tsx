@@ -24,7 +24,10 @@ export default function ProfileCardInfoContainer({
       {tags && tags.length > 0 && (
         <div className="flex flex-wrap gap-[10px]">
           {tags.map((tag) => (
-            <div className="text-18px bg-gray3 px-[12px] py-[3px] rounded-[20px]">
+            <div
+              key={tag}
+              className="text-18px bg-gray3 px-[12px] py-[3px] rounded-[20px]"
+            >
               {tag}
             </div>
           ))}
