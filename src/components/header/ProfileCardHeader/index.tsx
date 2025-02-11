@@ -77,7 +77,9 @@ export default function ProfileCardHeader({
         message="차단 하시겠습니까?"
         leftButtonLabel="취소"
         rightButtonLabel="확인"
-        rightOnClick={() => setIsBlockCheckModalOpen(false)}
+        rightOnClick={() => {
+          setIsBlockCheckModalOpen(false), setIsBlockModalOpen(true);
+        }}
         leftOnClick={() => setIsBlockCheckModalOpen(false)}
       />
 
