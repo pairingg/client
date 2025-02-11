@@ -1,7 +1,11 @@
+'use client';
+
+import Login from '@/components/login';
+
 export default function Home() {
   return (
-    <main className="layout flex flex-col overflow-hidden shadow-lg">
-      Hello World
-    </main>
+    <div className="h-full px-5 py-10">
+      <Login />
+    </div>
   );
 }
