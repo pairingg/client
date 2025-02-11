@@ -45,9 +45,11 @@ export default function MainPage() {
           </div>
 
           {/* 추천 키워드 영역 */}
-          <div className="mt-6 pb-6">
+          <div className="flex flex-col mt-6 pb-6">
             <p className="font-24-bold pt-6 pb-4">맞춤 추천</p>
-            <KeywordRecommendation keywords={keywords} />
+            <div className="items-center">
+              <KeywordRecommendation keywords={keywords} />
+            </div>
           </div>
         </div>
 
