@@ -9,11 +9,22 @@
     --layout-min-h: 100dvh;
     --layout-min-w: 375px;
   }
-  .layout {
-    @apply w-full mx-auto;
-    max-width: var(--layout-max-w);
-    min-height: var(--layout-min-h);
+
+  html {
+    background-color: white;
+  }
+
+  body {
+    @apply antialiased mx-auto;
+    color: var(--foreground);
+    background: var(--background);
+    font-family: var(--font-noto), sans-serif;
     min-width: var(--layout-min-w);
+  }
+
+  .layout {
+    @apply w-full mx-auto h-[100dvh];
+    max-width: var(--layout-max-w);
   }
 }
 
@@ -77,13 +88,4 @@
   .font-24-bold {
     @apply text-[24px]/[140%] tracking-[-0.42px] font-bold;
   }
-}
-
-html {
-  background-color: white;
-}
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: var(--font-noto), sans-serif;
 }
