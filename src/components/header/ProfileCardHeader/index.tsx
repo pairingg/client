@@ -1,8 +1,6 @@
 import ListModal from '@/components/modal/\bListModal';
-import OneButtonModal from '@/components/modal/OneButtonModal';
-import TwoButtonMoal from '@/components/modal/TwoButtonModal';
+import ActionModal from '@/components/modal/ActionModal';
 import { useState } from 'react';
-import CheckIcon from '/public/assets/icons/alert_checkMark.svg';
 import ExclamationIcon from '/public/assets/icons/alert_exclamationMark.svg';
 import FaceAuthIcon from '/public/assets/icons/face_auth.svg';
 import MoreBlackIcon from '/public/assets/icons/more_black.svg';
@@ -72,25 +70,38 @@ export default function ProfileCardHeader({
       />
 
       {/* 차단하기 여부 모달 */}
-      <TwoButtonMoal
+      <ActionModal
         isOpen={isBlockCheckModalOpen}
         icon={<ExclamationIcon />}
         message="차단 하시겠습니까?"
-        leftButtonLabel="취소"
-        rightButtonLabel="확인"
-        rightOnClick={() => {
-          setIsBlockCheckModalOpen(false), setIsBlockModalOpen(true);
-        }}
-        leftOnClick={() => setIsBlockCheckModalOpen(false)}
+        buttons={[
+          {
+            label: '취소',
+            onClick: () => setIsBlockCheckModalOpen(false),
+          },
+          {
+            label: '확인',
+            onClick: () => {
+              setIsBlockCheckModalOpen(false);
+              setIsBlockModalOpen(true);
+            },
+            className: 'text-mainPink1',
+          },
+        ]}
       />
 
       {/* 차단하기 확인 모달 */}
-      <OneButtonModal
+      <ActionModal
         isOpen={isBlockModalOpen}
-        icon={<CheckIcon />}
+        icon={<ExclamationIcon />}
         message="차단 되었습니다."
-        buttonLabel="닫기"
-        onClick={() => setIsBlockModalOpen(false)}
+        buttons={[
+          {
+            label: '닫기',
+            onClick: () => setIsBlockModalOpen(false),
+            className: 'w-full',
+          },
+        ]}
       />
     </div>
   );
