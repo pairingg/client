@@ -1,6 +1,6 @@
-import ListModal from '@/components/modal/\bListModal';
 import ActionModal from '@/components/modal/ActionModal';
-import { useState } from 'react';
+import ListModal from '@/components/modal/ListModal';
+import { useModal } from '@/hooks/useModal';
 import ExclamationIcon from '/public/assets/icons/alert_exclamationMark.svg';
 import FaceAuthIcon from '/public/assets/icons/face_auth.svg';
 import MoreBlackIcon from '/public/assets/icons/more_black.svg';
@@ -14,10 +14,10 @@ export default function ProfileCardHeader({
   name,
   age,
 }: ProfileCardHeaderProps) {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isReportModalOpen, setIsReportModalOpen] = useState(false);
-  const [isBlockCheckModalOpen, setIsBlockCheckModalOpen] = useState(false);
-  const [isBlockModalOpen, setIsBlockModalOpen] = useState(false);
+  const checkModal = useModal(); // 신고/차단 체크 모달
+  const reportModal = useModal(); // 신고하기 상세 모달
+  const blockCheckModal = useModal(); // 차단 여부 확인 모달
+  const blockModal = useModal(); // 차단 완료 모달
 
   return (
     <div className="m-7">
@@ -28,35 +28,37 @@ export default function ProfileCardHeader({
           <FaceAuthIcon />
         </div>
 
-        <button className="ml-auto" onClick={() => setIsModalOpen(true)}>
+        <button className="ml-auto" onClick={checkModal.openModal}>
           <MoreBlackIcon />
         </button>
       </div>
 
       {/* 신고/차단 모달 */}
       <ListModal
-        isOpen={isModalOpen}
+        isOpen={checkModal.isOpen}
         buttonList={[
           {
             label: '신고하기',
             onClick: () => {
-              setIsModalOpen(false), setIsReportModalOpen(true);
+              checkModal.closeModal();
+              reportModal.openModal();
             },
             color: 'text-mainPink1',
           },
           {
             label: '차단하기',
             onClick: () => {
-              setIsModalOpen(false), setIsBlockCheckModalOpen(true);
+              checkModal.closeModal();
+              blockCheckModal.openModal();
             },
           },
         ]}
-        oneButton={{ label: '취소', onClick: () => setIsModalOpen(false) }}
+        oneButton={{ label: '취소', onClick: checkModal.closeModal }}
       />
 
       {/* 신고하기 상세 모달 */}
       <ListModal
-        isOpen={isReportModalOpen}
+        isOpen={reportModal.isOpen}
         buttonList={[
           { label: '허위 인증', onClick: () => console.log('허위 인증') },
           { label: '불쾌한 대화', onClick: () => console.log('불쾌한 대화') },
@@ -64,26 +66,26 @@ export default function ProfileCardHeader({
         ]}
         oneButton={{
           label: '신고하기',
-          onClick: () => setIsReportModalOpen(false),
+          onClick: reportModal.closeModal,
           color: 'text-mainPink1',
         }}
       />
 
       {/* 차단하기 여부 모달 */}
       <ActionModal
-        isOpen={isBlockCheckModalOpen}
+        isOpen={blockCheckModal.isOpen}
         icon={<ExclamationIcon />}
         message="차단 하시겠습니까?"
         buttons={[
           {
             label: '취소',
-            onClick: () => setIsBlockCheckModalOpen(false),
+            onClick: blockCheckModal.closeModal,
           },
           {
             label: '확인',
             onClick: () => {
-              setIsBlockCheckModalOpen(false);
-              setIsBlockModalOpen(true);
+              blockCheckModal.closeModal();
+              blockModal.openModal();
             },
             className: 'text-mainPink1',
           },
@@ -92,13 +94,13 @@ export default function ProfileCardHeader({
 
       {/* 차단하기 확인 모달 */}
       <ActionModal
-        isOpen={isBlockModalOpen}
+        isOpen={blockModal.isOpen}
         icon={<ExclamationIcon />}
         message="차단 되었습니다."
         buttons={[
           {
             label: '닫기',
-            onClick: () => setIsBlockModalOpen(false),
+            onClick: blockModal.closeModal,
             className: 'w-full',
           },
         ]}
