@@ -1,5 +1,6 @@
 'use client';
 
+import AiButton from '@/components/buttons/AiButton/indexx';
 import ChatBubble from '@/components/chat/ChatBubble';
 import ChatInput from '@/components/chat/ChatInput';
 import ChatRoomHeader from '@/components/header/ChatRoomHeader';
@@ -82,6 +83,9 @@ export default function ChatRoom() {
             </div>
           );
         })}
+        <div className="absolute bottom-20 left-1/2 -translate-x-1/2 z-10">
+          <AiButton />
+        </div>
       </div>
 
       <div className="w-full bg-[#f9f9f9] p-3 pb-6">
