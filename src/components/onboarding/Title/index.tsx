@@ -12,7 +12,7 @@ export default function Title({
   return (
     <div className="flex items-center gap-2">
       <h2 className="font-24-bold">{title}</h2>
-      <p className="font-14-regular font-roboto text-gray1 text-center">
+      <p className="font-14-regular font-roboto text-gray1 text-center translate-y-1">
         {currentStepNumber} / {totalStepsNumber}
       </p>
     </div>

@@ -1,6 +1,6 @@
 'use client';
 
-import type { ReactElement } from 'react';
+import { useState, type ReactElement } from 'react';
 
 import type { StepChildProps } from '@/hooks/useFunnel';
 import { useFunnel } from '@/hooks/useFunnel';
@@ -27,15 +27,27 @@ const steps = [
   'complete',
 ];
 
+export interface Content {
+  name?: string;
+  gender?: string;
+  birth?: string;
+  address?: string;
+  hobby?: string;
+  mbti?: string;
+  wellness?: string;
+  photo?: string;
+}
+
 export default function ProfileOnboarding() {
   const { Funnel, Step, currentStep, currentStepNumber, totalStepsNumber } =
     useFunnel(steps);
+  const [content, setContent] = useState<Content>({});
 
   const stepComponents: Record<
     (typeof steps)[number],
     ReactElement<StepChildProps>
   > = {
-    name: <Name />,
+    name: <Name setContent={setContent} />,
     gender: <Gender />,
     birth: <BirthDay />,
     address: <Address />,

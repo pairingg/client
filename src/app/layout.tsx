@@ -1,6 +1,7 @@
-import Providers from '@/provider/providers';
 import type { Metadata } from 'next';
 import { Noto_Sans_KR, Roboto } from 'next/font/google';
+
+import Providers from '@/provider/providers';
 import './globals.css';
 
 const roboto = Roboto({
