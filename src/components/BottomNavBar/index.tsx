@@ -13,6 +13,10 @@ import MypageActiveIcon from '/public/assets/icons/navBar_mypage_active.svg';
 import NotificationIcon from '/public/assets/icons/navBar_notification.svg';
 import NotificationActiveIcon from '/public/assets/icons/navBar_notification_active.svg';
 
+interface Props {
+  chatNotificationCount?: number;
+}
+
 interface NavItemProps {
   href: string;
   icon: React.ReactNode;
@@ -39,8 +43,8 @@ const NavItem: React.FC<NavItemProps> = ({
     }`}
   >
     {notificationCount && notificationCount > 0 && (
-      <div className="absolute -top-2 -right-3 w-[17px] h-[17px] px-[6px] py-[2px] bg-mainPink1 rounded-full flex justify-center items-center shadow-md">
-        <span className="text-white text-[12px] font-bold">
+      <div className="absolute -top-2.5 -right-3 min-w-[17px] h-[17px] px-[3px]  bg-mainPink1 rounded-full flex justify-center items-center shadow-md">
+        <span className="text-white text-[12px] font-bold flex justify-center items-center">
           {notificationCount > 99 ? '99+' : notificationCount}
         </span>
       </div>
@@ -53,7 +57,7 @@ const NavItem: React.FC<NavItemProps> = ({
   </Link>
 );
 
-export default function BottomNavBar() {
+export default function BottomNavBar({ chatNotificationCount = 0 }: Props) {
   const pathname = usePathname();
 
   const navItems = [
@@ -70,7 +74,7 @@ export default function BottomNavBar() {
       activeIcon: <ChatActiveIcon />,
       label: '채팅',
       isActive: pathname === '/chat',
-      notificationCount: 10,
+      notificationCount: chatNotificationCount,
     },
     {
       href: '#',
