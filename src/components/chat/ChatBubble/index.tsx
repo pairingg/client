@@ -32,7 +32,7 @@ export default function ChatBubble({
         {/* 채팅 시간, 읽음 표시 */}
         <div
           className={cn(
-            'flex gap-[5px] text-black text-[12px] items-center',
+            'flex gap-[5px] text-black text-[12px] items-center pb-2',
             isMe && 'justify-end',
           )}
         >
