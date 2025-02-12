@@ -4,6 +4,7 @@ import { useState, type ReactElement } from 'react';
 
 import type { StepChildProps } from '@/hooks/useFunnel';
 import { useFunnel } from '@/hooks/useFunnel';
+import type { Content } from '@/types/onboarding';
 
 import Address from './Address';
 import BirthDay from './BirthDay';
@@ -26,20 +27,6 @@ const steps = [
   'photo',
   'complete',
 ];
-
-export interface Content {
-  name?: string;
-  gender?: string;
-  birth?: string;
-  address?: {
-    city: string;
-    district: string;
-  };
-  hobby?: string[];
-  mbti?: string;
-  wellness?: string;
-  photo?: string;
-}
 
 export default function ProfileOnboarding() {
   const { Funnel, Step, currentStep, currentStepNumber, totalStepsNumber } =

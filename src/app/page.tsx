@@ -1,13 +1,9 @@
-import ChatListItem from '@/components/chat/ChatListItem';
+import ProfileOnboarding from '@/components/onboarding/Profile';
 
 export default function Home() {
   return (
-    <ChatListItem
-      name={'김이름'}
-      time={new Date()}
-      message={'안녕하세요'}
-      profileImage={'/images/profile.png'}
-      messageCnt={0}
-    />
+    <div className="w-full h-screen">
+      <ProfileOnboarding />
+    </div>
   );
 }
