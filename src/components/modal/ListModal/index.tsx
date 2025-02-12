@@ -15,11 +15,11 @@ export default function ListModal({
     <div className="fixed inset-0 flex items-end justify-center bg-black bg-opacity-50 z-50">
       <div className="max-w-sm pb-5 mx-auto">
         {/* 버튼 리스트 */}
-        <div className="bg-white rounded-2xl p-4 w-80 shadow-lg">
+        <div className="bg-white rounded-2xl py-2 w-full shadow-lg overflow-hidde">
           {buttonList.map(({ label, onClick, color }, index) => (
             <button
               key={index}
-              className={`w-full py-2 font-bold ${index !== buttonList.length - 1 ? 'border-b' : ''} ${color ? color : ''}`}
+              className={`w-full py-2 font-bold  ${index !== buttonList.length - 1 ? 'border-b' : ''} ${color ? color : ''}`}
               onClick={onClick}
             >
               {label}
