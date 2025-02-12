@@ -9,17 +9,7 @@ import { useInput } from '@/hooks/useInput';
 import OnboardingInput from '../Input';
 import Title from '../Title';
 
-import type { Dispatch, SetStateAction } from 'react';
-
-import type { Content } from '.';
-
-interface NameProps {
-  setContent: Dispatch<SetStateAction<Content>>;
-  onNext?: () => void;
-  onPrev?: () => void;
-  currentStepNumber?: number;
-  totalStepsNumber?: number;
-}
+import type { OnboardingProps } from '@/types/onboarding';
 
 export default function Name({
   setContent,
@@ -27,11 +17,11 @@ export default function Name({
   onPrev,
   currentStepNumber = 1,
   totalStepsNumber = 8,
-}: NameProps) {
+}: OnboardingProps) {
   const { value, setValue } = useInput();
 
   const handleNext = () => {
-    setContent({ name: value });
+    setContent((prev) => ({ ...prev, name: value }));
     onNext?.();
   };
 

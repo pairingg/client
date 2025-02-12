@@ -15,7 +15,7 @@ export default function OnboardingInput({
   className,
 }: OnboardingInputProps) {
   return (
-    <div className="relative border-b border-black w-full ">
+    <div className="relative border-b border-black w-full pb-2">
       <input
         type={type}
         value={value}

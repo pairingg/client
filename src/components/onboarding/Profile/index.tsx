@@ -31,8 +31,11 @@ export interface Content {
   name?: string;
   gender?: string;
   birth?: string;
-  address?: string;
-  hobby?: string;
+  address?: {
+    city: string;
+    district: string;
+  };
+  hobby?: string[];
   mbti?: string;
   wellness?: string;
   photo?: string;
@@ -41,21 +44,23 @@ export interface Content {
 export default function ProfileOnboarding() {
   const { Funnel, Step, currentStep, currentStepNumber, totalStepsNumber } =
     useFunnel(steps);
-  const [content, setContent] = useState<Content>({});
+  const [content, setContent] = useState<Content>({ name: 'd' });
+
+  console.log(content);
 
   const stepComponents: Record<
     (typeof steps)[number],
     ReactElement<StepChildProps>
   > = {
     name: <Name setContent={setContent} />,
-    gender: <Gender />,
-    birth: <BirthDay />,
-    address: <Address />,
-    hobby: <Hobby />,
-    mbti: <Mbti />,
-    wellness: <Wellness />,
-    photo: <MyImage />,
-    complete: <Complete />,
+    gender: <Gender setContent={setContent} />,
+    birth: <BirthDay setContent={setContent} />,
+    address: <Address setContent={setContent} />,
+    hobby: <Hobby setContent={setContent} />,
+    mbti: <Mbti setContent={setContent} />,
+    wellness: <Wellness setContent={setContent} />,
+    photo: <MyImage setContent={setContent} />,
+    complete: <Complete setContent={setContent} />,
   } as const;
 
   return (

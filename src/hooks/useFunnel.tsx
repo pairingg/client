@@ -20,7 +20,7 @@ interface FunnelProps {
 export const useFunnel = (steps: readonly string[]) => {
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
   const currentStep = steps[currentStepIndex];
-  const totalStepsNumber = steps.length;
+  const totalStepsNumber = steps.length - 1;
   const currentStepNumber = currentStepIndex + 1;
 
   const next = () => {
@@ -48,6 +48,7 @@ export const useFunnel = (steps: readonly string[]) => {
     return (
       <div>
         {React.cloneElement(children, {
+          ...children.props,
           onNext: next,
           onPrev: prev,
           totalStepsNumber,
