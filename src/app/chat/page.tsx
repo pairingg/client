@@ -3,6 +3,7 @@ import ChatListItem from '@/components/chat/ChatListItem';
 import SearchInput from '@/components/SearchInput';
 
 export default function Chat() {
+  const chatListItems = [];
   return (
     <div>
       <div>

@@ -19,7 +19,7 @@ interface NavItemProps {
   label?: any;
   activeIcon: React.ReactNode;
   isActive: boolean;
-  hasNotification?: boolean;
+  // hasNotification?: boolean;
   notificationCount?: number;
 }
 
@@ -29,7 +29,7 @@ const NavItem: React.FC<NavItemProps> = ({
   label,
   activeIcon,
   isActive,
-  hasNotification,
+  // hasNotification,
   notificationCount,
 }) => (
   <Link
@@ -45,9 +45,9 @@ const NavItem: React.FC<NavItemProps> = ({
         </span>
       </div>
     )}
-    {hasNotification && (
+    {/* {hasNotification && (
       <span className="absolute -top-1 -right-2 w-1.5 h-1.5 bg-mainPink1 rounded-full" />
-    )}
+    )} */}
     {isActive ? activeIcon : icon}
     <span className="text-[12px] mt-1">{label}</span>
   </Link>
@@ -85,7 +85,7 @@ export default function BottomNavBar() {
       activeIcon: <NotificationActiveIcon />,
       label: '알림',
       isActive: false,
-      hasNotification: true,
+      // hasNotification: true,
     },
     {
       href: '#',
