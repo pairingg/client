@@ -26,7 +26,7 @@ export default function ActionModal({
         {icon && <div className="flex justify-center pt-6">{icon}</div>}
 
         {/* 메시지 */}
-        <p className="text-24px font-medium py-2">{message}</p>
+        <p className="font-16-medium py-2">{message}</p>
 
         {/* 버튼 영역 */}
         <div className={cn('mt-6 py-2 border-t', buttons.length > 1 && 'flex')}>
