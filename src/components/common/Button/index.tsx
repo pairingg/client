@@ -34,6 +34,7 @@ export default function Button({
   return (
     <button
       type="button"
+      disabled={variant === 'disabled'}
       className={cn(
         'font-16-medium flex items-center justify-center',
         width,
