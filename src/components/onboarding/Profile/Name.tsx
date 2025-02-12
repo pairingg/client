@@ -1,18 +1,35 @@
+import OnboardingHeader from '@/components/header/OnboardingHeader';
+
+import Title from '../Title';
+
 interface NameProps {
   onNext?: () => void;
   onPrev?: () => void;
+  currentStepNumber?: number;
+  totalStepsNumber?: number;
 }
 
-export default function Name({ onNext, onPrev }: NameProps) {
+export default function Name({
+  onNext,
+  onPrev,
+  currentStepNumber = 1,
+  totalStepsNumber = 8,
+}: NameProps) {
   return (
-    <div>
-      <h2>이름을 입력하세요</h2>
-      <button onClick={onPrev} disabled={!onPrev}>
-        이전
-      </button>
-      <button onClick={onNext} disabled={!onNext}>
-        다음
-      </button>
-    </div>
+    <>
+      <OnboardingHeader
+        onPrev={onPrev}
+        currentStep={currentStepNumber}
+        totalSteps={totalStepsNumber}
+      />
+      <div className="w-full px-5 py-8">
+        <Title
+          title="이름이 무엇인가요?"
+          currentStepNumber={currentStepNumber}
+          totalStepsNumber={totalStepsNumber}
+        />
+        <button onClick={onNext}>다음</button>
+      </div>
+    </>
   );
 }
