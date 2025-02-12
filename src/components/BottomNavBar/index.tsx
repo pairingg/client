@@ -65,11 +65,11 @@ export default function BottomNavBar() {
       isActive: pathname === '/pAIring',
     },
     {
-      href: '#',
+      href: '/chat',
       icon: <ChatIcon />,
       activeIcon: <ChatActiveIcon />,
       label: '채팅',
-      isActive: false,
+      isActive: pathname === '/chat',
       notificationCount: 10,
     },
     {
@@ -99,7 +99,10 @@ export default function BottomNavBar() {
   return (
     <div className="fixed bottom-0 w-full">
       <div className="w-full max-w-[520px]">
-        <nav className="bg-white border-t border-gray2 py-3 rounded-tr-3xl rounded-tl-3xl">
+        <nav
+          className="bg-white py-3 rounded-tr-3xl rounded-tl-3xl
+        shadow-[0px_-3px_3px_rgba(0,0,0,0.01)]"
+        >
           <div className="flex justify-around items-center">
             {navItems.map((item, index) => (
               <NavItem key={index} {...item} />
