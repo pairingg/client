@@ -12,7 +12,7 @@ export default function ChatRoomHeader({
   name,
 }: ChatRoomHeaderProps) {
   return (
-    <div className="flex items-center m-5">
+    <div className="flex items-center p-4 bg-white shadow-md">
       <button className="mr-5">
         <BackIcon />
       </button>
