@@ -1,7 +1,17 @@
 interface ListModalProps {
   isOpen: boolean;
-  buttonList: { label: string; onClick: () => void; color?: string }[];
-  oneButton: { label: string; onClick: () => void; color?: string };
+  buttonList: {
+    label: string;
+    onClick: () => void;
+    color?: string;
+    className?: string;
+  }[];
+  oneButton: {
+    label: string;
+    onClick: () => void;
+    color?: string;
+    className?: string;
+  };
 }
 
 export default function ListModal({
