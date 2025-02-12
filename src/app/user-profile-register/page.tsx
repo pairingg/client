@@ -19,7 +19,7 @@ export default function UserProfileRegister() {
   };
 
   return (
-    <div className="relative min-h-screen pb-24">
+    <div className="relative min-h-screen pb-24 p-5">
       <div>
         <ProfileCardHeader name="김이름" age={20} />
       </div>
