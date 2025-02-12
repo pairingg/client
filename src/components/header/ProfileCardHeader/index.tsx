@@ -2,6 +2,7 @@ import ListModal from '@/components/modal/\bListModal';
 import OneButtonModal from '@/components/modal/OneButtonModal';
 import TwoButtonMoal from '@/components/modal/TwoButtonModal';
 import { useState } from 'react';
+import CheckIcon from '/public/assets/icons/alert_checkMark.svg';
 import ExclamationIcon from '/public/assets/icons/alert_exclamationMark.svg';
 import FaceAuthIcon from '/public/assets/icons/face_auth.svg';
 import MoreBlackIcon from '/public/assets/icons/more_black.svg';
@@ -86,7 +87,7 @@ export default function ProfileCardHeader({
       {/* 차단하기 확인 모달 */}
       <OneButtonModal
         isOpen={isBlockModalOpen}
-        icon={<ExclamationIcon />}
+        icon={<CheckIcon />}
         message="차단 되었습니다."
         buttonLabel="닫기"
         onClick={() => setIsBlockModalOpen(false)}
