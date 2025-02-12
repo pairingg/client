@@ -18,6 +18,7 @@ export default function Chat() {
           time={new Date()}
           message="채팅방 리스트"
           profileImage="/images/profile.png"
+          messageCnt={0}
         />
       </div>
 
