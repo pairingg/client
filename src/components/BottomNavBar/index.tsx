@@ -20,7 +20,7 @@ interface Props {
 interface NavItemProps {
   href: string;
   icon: React.ReactNode;
-  label?: any;
+  label?: React.ReactNode;
   activeIcon: React.ReactNode;
   isActive: boolean;
   // hasNotification?: boolean;
