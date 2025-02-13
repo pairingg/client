@@ -61,7 +61,7 @@ export default function Address({
                   : '주소를 선택해주세요'
               }
               onClick={() => setIsOpen(true)}
-              className="w-full h-[35px] outline-none border-none appearance-none bg-transparent border-b border-black text-gray-900 font-18-regular text-start pb-1"
+              className="w-full h-[35px] outline-none border-none appearance-none bg-transparent border-b border-black text-gray-900 font-18-regular text-start pb-1 [text-align-last:start] [-webkit-text-fill-color:currentColor]"
             />
           </div>
         </div>
