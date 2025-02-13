@@ -49,7 +49,7 @@ export default function ChatRoomHeader({
         isOpen={outModal.isOpen}
         buttonList={[
           {
-            label: '신고하기',
+            label: '채팅방 나가기',
             onClick: () => {
               outModal.closeModal();
               outConfirmModal.openModal();
@@ -86,7 +86,7 @@ export default function ChatRoomHeader({
       <ActionModal
         isOpen={outSuccessModal.isOpen}
         icon={<CheckIcon />}
-        message="차단 되었습니다."
+        message="채팅방을 나갔습니다."
         buttons={[
           {
             label: '닫기',
