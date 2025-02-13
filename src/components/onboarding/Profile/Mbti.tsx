@@ -1,3 +1,5 @@
+'use client';
+
 import { useState } from 'react';
 
 import Button from '@/components/common/Button';
@@ -37,26 +39,16 @@ export default function Mbti({
     setSelections((prev) => ({ ...prev, [type]: value }));
   };
 
-  const getMbtiValue = () => {
-    const { ei, sn, tf, jp } = selections;
-    return `${ei}${sn}${tf}${jp}`;
-  };
-
-  const isComplete = () => {
-    return Object.values(selections).every(Boolean);
-  };
-
   const handleNext = () => {
-    if (!isComplete()) {
-      return;
-    }
+    if (!isButtonEnabled) return;
 
-    setContent((prev) => ({ ...prev, mbti: getMbtiValue() }));
+    const mbtiValue = Object.values(selections).join('');
+    setContent((prev) => ({ ...prev, mbti: mbtiValue }));
     onNext?.();
   };
 
   return (
-    <div className="h-screen">
+    <div className="h-[100dvh]">
       <OnboardingHeader
         onPrev={onPrev}
         currentStep={currentStepNumber}
@@ -78,7 +70,7 @@ export default function Mbti({
               (typeof MBTI_OPTIONS)[MbtiType],
             ][]
           ).map(([type, { title, options }]) => (
-            <div key={type} className="mb-6">
+            <div key={type} className="mb-3">
               <div className="mb-2">{title}</div>
               <div className="flex gap-4">
                 {options.map(({ value }) => (
@@ -98,7 +90,7 @@ export default function Mbti({
 
         <Button
           shape="rectangle"
-          variant={isComplete() ? 'filled' : 'disabled'}
+          variant={isButtonEnabled ? 'filled' : 'disabled'}
           width="w-full"
           height="55px"
           onClick={handleNext}

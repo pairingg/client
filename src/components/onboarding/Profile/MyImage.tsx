@@ -1,3 +1,5 @@
+'use client';
+
 import { useState } from 'react';
 
 import Button from '@/components/common/Button';
@@ -36,7 +38,7 @@ export default function MyImage({
   };
 
   return (
-    <div className="h-screen">
+    <div className="h-[100dvh]">
       <OnboardingHeader
         onPrev={onPrev}
         currentStep={currentStepNumber}
@@ -59,7 +61,7 @@ export default function MyImage({
             </div>
           </div>
 
-          <div className="flex flex-wrap gap-3">
+          <div className="flex flex-wrap gap-2">
             {[...Array(5)].map((_, index) => (
               <ImageUploader
                 key={index}

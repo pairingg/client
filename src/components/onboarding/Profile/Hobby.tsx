@@ -1,3 +1,5 @@
+'use client';
+
 import { useState } from 'react';
 
 import Button from '@/components/common/Button';
@@ -46,7 +48,7 @@ export default function Hobby({
   };
 
   return (
-    <div className="h-screen">
+    <div className="h-[100dvh]">
       <OnboardingHeader
         onPrev={onPrev}
         currentStep={currentStepNumber}

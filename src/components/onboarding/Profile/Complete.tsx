@@ -1,3 +1,5 @@
+'use client';
+
 import { useRouter } from 'next/navigation';
 
 import Button from '@/components/common/Button';
@@ -10,13 +12,13 @@ export default function Complete() {
 
   const handleNext = () => {
     console.log('complete');
-    router.push('/');
+    router.push('/onboarding');
   };
 
   return (
-    <div className="h-screen">
+    <div className="h-[100dvh]">
       <div className="w-full mt-14">
-        <ProgressBar currentStep={8} totalSteps={8} />
+        <ProgressBar currentStep={9} totalSteps={8} />
       </div>
       <div className="w-full px-5 py-8 flex flex-col h-[calc(100%-56px)] justify-between">
         <div>

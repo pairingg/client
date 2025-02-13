@@ -1,3 +1,5 @@
+'use client';
+
 import { useState } from 'react';
 
 import Button from '@/components/common/Button';
@@ -52,7 +54,7 @@ export default function Wellness({
   };
 
   return (
-    <div className="h-screen flex flex-col">
+    <div className="h-[100dvh] flex flex-col">
       <OnboardingHeader
         onPrev={onPrev}
         currentStep={currentStepNumber}

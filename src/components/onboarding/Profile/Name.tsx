@@ -34,7 +34,7 @@ export default function Name({
   };
 
   return (
-    <div className="h-screen">
+    <div className="h-[100dvh]">
       <OnboardingHeader
         onPrev={onPrev}
         currentStep={currentStepNumber}
@@ -53,7 +53,7 @@ export default function Name({
             type="text"
             value={value}
             onChange={(e) => setValue(e.target.value.trim())}
-            rightIcon={<ResetIcon onClick={handleReset} />}
+            rightIcon={value ? <ResetIcon onClick={handleReset} /> : undefined}
           />
         </div>
 

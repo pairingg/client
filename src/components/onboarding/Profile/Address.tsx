@@ -1,3 +1,5 @@
+'use client';
+
 import { useState } from 'react';
 
 import AddressOption from '@/components/common/AddressOption';
@@ -34,7 +36,7 @@ export default function Address({
   };
 
   return (
-    <div className="h-screen">
+    <div className="h-[100dvh]">
       <OnboardingHeader
         onPrev={onPrev}
         currentStep={currentStepNumber}
@@ -49,16 +51,19 @@ export default function Address({
               totalStepsNumber={totalStepsNumber}
             />
           </div>
-          <input
-            type="button"
-            value={
-              address.city || address.district
-                ? `${address.city} ${address.district}`
-                : '주소를 선택해주세요'
-            }
-            onClick={() => setIsOpen(true)}
-            className="w-full h-[35px] outline-none border-b border-black text-gray-900 font-18-regular text-start pb-1"
-          />
+
+          <div className="border-b border-black">
+            <input
+              type="button"
+              value={
+                address.city || address.district
+                  ? `${address.city} ${address.district}`
+                  : '주소를 선택해주세요'
+              }
+              onClick={() => setIsOpen(true)}
+              className="w-full h-[35px] outline-none border-none appearance-none bg-transparent border-b border-black text-gray-900 font-18-regular text-start pb-1"
+            />
+          </div>
         </div>
 
         <AddressOption

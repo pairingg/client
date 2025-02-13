@@ -1,3 +1,5 @@
+'use client';
+
 import type { ComponentProps } from 'react';
 
 import { cn } from '@/utils/cn';
@@ -15,12 +17,16 @@ export default function OnboardingInput({
   className,
 }: OnboardingInputProps) {
   return (
-    <div className="relative border-b border-black w-full pb-2">
+    <div className="relative border-b border-black w-full pb-2 h-[40px]">
       <input
         type={type}
         value={value}
         onChange={onChange}
-        className={cn('w-full outline-none', className, rightIcon && 'w-[95%]')}
+        className={cn(
+          'w-full h-[80%] outline-none  border-none',
+          className,
+          rightIcon && 'w-[95%]',
+        )}
       />
       {rightIcon && <span className="absolute right-0">{rightIcon}</span>}
     </div>

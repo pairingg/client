@@ -3,7 +3,6 @@ import OnboardingHeader from '@/components/header/OnboardingHeader';
 import { useInput } from '@/hooks/useInput';
 import type { OnboardingProps } from '@/types/onboarding';
 
-import OnboardingInput from '../Input';
 import Title from '../Title';
 
 export default function BirthDay({
@@ -13,19 +12,20 @@ export default function BirthDay({
   currentStepNumber = 3,
   totalStepsNumber = 8,
 }: OnboardingProps) {
-  const { value, setValue } = useInput();
+  const today = new Date().toISOString().split('T')[0];
+  const { value, setValue } = useInput(today);
 
   const isButtonEnabled = value !== undefined;
 
   const handleNext = () => {
     if (!isButtonEnabled) return;
 
-    setContent((prev) => ({ ...prev, birth: value || '1990-01-01' }));
+    setContent((prev) => ({ ...prev, birth: value || today }));
     onNext?.();
   };
 
   return (
-    <div className="h-screen">
+    <div className="h-[100dvh]">
       <OnboardingHeader
         onPrev={onPrev}
         currentStep={currentStepNumber}
@@ -40,11 +40,13 @@ export default function BirthDay({
               totalStepsNumber={totalStepsNumber}
             />
           </div>
-          <div className="relative">
-            <OnboardingInput
+
+          <div className="relative border-b border-black w-full pb-2 h-[40px]">
+            <input
               type="date"
               value={value}
               onChange={(e) => setValue(e.target.value.trim())}
+              className="w-full outline-none border-none"
             />
           </div>
         </div>
