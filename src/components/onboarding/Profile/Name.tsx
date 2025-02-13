@@ -18,9 +18,13 @@ export default function Name({
   currentStepNumber = 1,
   totalStepsNumber = 8,
 }: OnboardingProps) {
-  const { value, setValue } = useInput();
+  const { value, setValue } = useInput('');
+
+  const isButtonEnabled = value !== '';
 
   const handleNext = () => {
+    if (!isButtonEnabled) return;
+
     setContent((prev) => ({ ...prev, name: value }));
     onNext?.();
   };
@@ -55,7 +59,7 @@ export default function Name({
 
         <Button
           shape="rectangle"
-          variant="filled"
+          variant={isButtonEnabled ? 'filled' : 'disabled'}
           width="w-full"
           height="55px"
           className=""

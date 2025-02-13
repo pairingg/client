@@ -15,17 +15,20 @@ export default function Address({
   totalStepsNumber = 8,
 }: OnboardingProps) {
   const [isOpen, setIsOpen] = useState(false);
-
   const [address, setAddress] = useState<{ city: string; district: string }>({
     city: '',
     district: '',
   });
+
+  const isButtonEnabled = address.city && address.district;
 
   const handleAddressSelect = (city: string, district: string) => {
     setAddress({ city, district });
   };
 
   const handleNext = () => {
+    if (!isButtonEnabled) return;
+
     setContent((prev) => ({ ...prev, address: address }));
     onNext?.();
   };
@@ -37,7 +40,7 @@ export default function Address({
         currentStep={currentStepNumber}
         totalSteps={totalStepsNumber}
       />
-      <div className="w-full px-5 py-8 flex flex-col h-[calc(100%-56px)] justify-between">
+      <div className="relative w-full px-5 py-8 flex flex-col h-[calc(100%-56px)] justify-between">
         <div>
           <div className="mb-10">
             <Title
@@ -66,7 +69,7 @@ export default function Address({
 
         <Button
           shape="rectangle"
-          variant="filled"
+          variant={isButtonEnabled ? 'filled' : 'disabled'}
           width="w-full"
           height="55px"
           className=""

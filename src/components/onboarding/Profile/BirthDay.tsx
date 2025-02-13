@@ -15,7 +15,11 @@ export default function BirthDay({
 }: OnboardingProps) {
   const { value, setValue } = useInput();
 
+  const isButtonEnabled = value !== undefined;
+
   const handleNext = () => {
+    if (!isButtonEnabled) return;
+
     setContent((prev) => ({ ...prev, birth: value || '1990-01-01' }));
     onNext?.();
   };
@@ -47,7 +51,7 @@ export default function BirthDay({
 
         <Button
           shape="rectangle"
-          variant="filled"
+          variant={isButtonEnabled ? 'filled' : 'disabled'}
           width="w-full"
           height="55px"
           className=""

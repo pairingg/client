@@ -28,6 +28,8 @@ export default function Hobby({
 }: OnboardingProps) {
   const [selectedHobbies, setSelectedHobbies] = useState<string[]>([]);
 
+  const isButtonEnabled = selectedHobbies.length > 0;
+
   const toggleHobby = (hobby: string) => {
     setSelectedHobbies((prev) =>
       prev.includes(hobby)
@@ -37,6 +39,8 @@ export default function Hobby({
   };
 
   const handleNext = () => {
+    if (!isButtonEnabled) return;
+
     setContent((prev) => ({ ...prev, hobby: selectedHobbies }));
     onNext?.();
   };
@@ -72,7 +76,7 @@ export default function Hobby({
 
         <Button
           shape="rectangle"
-          variant="filled"
+          variant={isButtonEnabled ? 'filled' : 'disabled'}
           width="w-full"
           height="55px"
           onClick={handleNext}

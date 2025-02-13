@@ -31,6 +31,8 @@ export default function Mbti({
     jp: '',
   });
 
+  const isButtonEnabled = Object.values(selections).every(Boolean);
+
   const handleSelect = (type: MbtiType, value: string) => {
     setSelections((prev) => ({ ...prev, [type]: value }));
   };
@@ -96,11 +98,10 @@ export default function Mbti({
 
         <Button
           shape="rectangle"
-          variant="filled"
+          variant={isComplete() ? 'filled' : 'disabled'}
           width="w-full"
           height="55px"
           onClick={handleNext}
-          disabled={!isComplete()}
         >
           다음
         </Button>

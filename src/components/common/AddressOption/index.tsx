@@ -61,13 +61,13 @@ export default function AddressOption({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
-      <div className="bg-white rounded-lg shadow-lg w-[600px] max-h-[80vh]">
-        <div className="p-4 border-b border-gray-200">
+    <div className="absolute inset-0 flex items-center justify-center bg-black/50 z-50">
+      <div className="bg-white rounded-lg shadow-lg w-full max-h-[80vh]">
+        <div className="p-4 border-b border-gray-200 flex justify-between items-center">
           <h2 className="text-lg font-semibold">주소 선택</h2>
           <button
             onClick={onClose}
-            className="absolute top-4 right-4 text-gray-500 hover:text-gray-700"
+            className="text-gray-500 hover:text-gray-700"
           >
             ✕
           </button>

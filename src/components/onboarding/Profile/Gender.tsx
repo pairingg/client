@@ -15,7 +15,11 @@ export default function Gender({
 }: OnboardingProps) {
   const { value, setValue } = useInput<'male' | 'female'>();
 
+  const isButtonEnabled = value !== undefined;
+
   const handleNext = () => {
+    if (!isButtonEnabled) return;
+
     setContent((prev) => ({ ...prev, gender: value }));
     onNext?.();
   };
@@ -59,7 +63,7 @@ export default function Gender({
 
         <Button
           shape="rectangle"
-          variant="filled"
+          variant={isButtonEnabled ? 'filled' : 'disabled'}
           width="w-full"
           height="55px"
           className=""
