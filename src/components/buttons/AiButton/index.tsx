@@ -1,6 +1,9 @@
+// AiButton 컴포넌트
 import AiModal from '@/components/modal/\bAiModal';
 import { useModal } from '@/hooks/useModal';
+
 import { useState } from 'react';
+
 import AiLogoIcon from '/public/assets/icons/ai_circle_logo.svg';
 
 export default function AiButton() {
@@ -14,7 +17,7 @@ export default function AiButton() {
   };
 
   return (
-    <div>
+    <div className="relative w-full h-full">
       {/* ai 대화 추천 받기 버튼 */}
       {isButtonVisible && (
         <button
@@ -30,9 +33,11 @@ export default function AiButton() {
       )}
 
       {/* ai 모달 */}
-      {aiModal.isOpen && (
-        <AiModal isOpen={aiModal.isOpen} isClose={aiModal.closeModal} />
-      )}
+      <div className="relative w-full h-full">
+        {aiModal.isOpen && (
+          <AiModal isOpen={aiModal.isOpen} isClose={aiModal.closeModal} />
+        )}
+      </div>
     </div>
   );
 }
