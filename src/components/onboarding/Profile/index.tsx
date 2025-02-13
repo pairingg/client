@@ -29,9 +29,8 @@ const steps = [
 ];
 
 export default function ProfileOnboarding() {
-  const { Funnel, Step, currentStep, currentStepNumber, totalStepsNumber } =
-    useFunnel(steps);
-  const [content, setContent] = useState<Content>({ name: 'd' });
+  const { Funnel, Step, currentStep } = useFunnel(steps);
+  const [content, setContent] = useState<Content>({ name: '' });
 
   console.log(content);
 
@@ -47,7 +46,7 @@ export default function ProfileOnboarding() {
     mbti: <Mbti setContent={setContent} />,
     wellness: <Wellness setContent={setContent} />,
     photo: <MyImage setContent={setContent} />,
-    complete: <Complete setContent={setContent} />,
+    complete: <Complete />,
   } as const;
 
   return (

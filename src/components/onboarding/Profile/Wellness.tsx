@@ -19,7 +19,7 @@ const DRINK_OPTIONS = [
 const SMOKE_OPTIONS = [
   { id: 'smoke1', text: '비흡연' },
   { id: 'smoke2', text: '가끔 피움' },
-  { id: 'smoke3', text: '메일 피움' },
+  { id: 'smoke3', text: '매일 피움' },
   { id: 'smoke4', text: '자주 마심' },
   { id: 'smoke5', text: '금연중' },
 ];

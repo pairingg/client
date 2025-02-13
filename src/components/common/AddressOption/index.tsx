@@ -19,8 +19,8 @@ export default function AddressOption({
   if (!isOpen) return null;
 
   return (
-    <div className="absolute inset-0 flex items-center justify-center bg-black/50 z-50">
-      <div className="bg-white rounded-lg shadow-lg w-full max-h-[80vh]">
+    <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
+      <div className="bg-white rounded-lg shadow-lg w-[90%] max-w-md max-h-[80vh] flex flex-col">
         <div className="p-4 border-b border-gray-200 flex justify-between items-center">
           <h2 className="text-lg font-semibold">주소 선택</h2>
           <button
@@ -31,7 +31,7 @@ export default function AddressOption({
           </button>
         </div>
 
-        <div className="flex h-[400px]">
+        <div className="flex flex-1 overflow-hidden">
           {/* 시/도 목록 */}
           <div className="w-1/2 border-r border-gray-200 overflow-y-auto">
             {cities.map((city) => (

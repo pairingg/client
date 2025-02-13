@@ -60,8 +60,11 @@ export default function Hobby({
               currentStepNumber={currentStepNumber}
               totalStepsNumber={totalStepsNumber}
             />
+            <div className="font-14-regular mt-[10px]">
+              최근 관심있는 취미를 0개 이상 선택해주세요.
+            </div>
           </div>
-          <div className="flex flex-wrap gap-4 font-18-regular">
+          <div className="flex flex-wrap gap-3 font-18-regular">
             {hobbies.map((hobby) => (
               <ChipButton
                 key={hobby}
