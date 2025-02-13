@@ -88,7 +88,7 @@ export default function ChatRoom() {
         </div>
       </div>
 
-      <div className="w-full bg-[#f9f9f9] p-3 pb-6">
+      <div className="w-full">
         <div className="w-full max-w-[520px] mx-auto">
           <ChatInput onSendMessage={handleSendMessage} />
         </div>

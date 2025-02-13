@@ -2,6 +2,7 @@ import ActionModal from '@/components/modal/ActionModal';
 import ListModal from '@/components/modal/ListModal';
 import { useModal } from '@/hooks/useModal';
 import Image from 'next/image';
+import Link from 'next/link';
 import CheckIcon from '/public/assets/icons/alert_checkMark.svg';
 import ExclamationIcon from '/public/assets/icons/alert_exclamationMark.svg';
 import BackIcon from '/public/assets/icons/header_back.svg';
@@ -22,9 +23,11 @@ export default function ChatRoomHeader({
 
   return (
     <div className="flex items-center p-4 bg-white shadow-md">
-      <button className="mr-5">
-        <BackIcon />
-      </button>
+      <Link href="/chat">
+        <button className="mr-5" aria-label="채팅방 목록">
+          <BackIcon />
+        </button>
+      </Link>
 
       <div className="flex items-center space-x-3">
         <Image
@@ -37,7 +40,7 @@ export default function ChatRoomHeader({
         <span className="text-20px font-semiBold">{name}</span>
       </div>
 
-      <button className="ml-auto">
+      <button className="ml-auto" aria-label="더보기">
         <MoreGrayIcon onClick={outModal.openModal} />
       </button>
 
