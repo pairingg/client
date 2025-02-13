@@ -3,6 +3,7 @@ import ListModal from '@/components/modal/ListModal';
 import { useModal } from '@/hooks/useModal';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import CheckIcon from '/public/assets/icons/alert_checkMark.svg';
 import ExclamationIcon from '/public/assets/icons/alert_exclamationMark.svg';
 import BackIcon from '/public/assets/icons/header_back.svg';
@@ -17,6 +18,7 @@ export default function ChatRoomHeader({
   profileImage,
   name,
 }: ChatRoomHeaderProps) {
+  const router = useRouter();
   const outModal = useModal(); // 채팅방 나가기 모달
   const outConfirmModal = useModal(); // 채팅방 나가기 여부 모달
   const outSuccessModal = useModal(); // 채팅방 나가기 완료 모달
@@ -90,7 +92,10 @@ export default function ChatRoomHeader({
         buttons={[
           {
             label: '닫기',
-            onClick: outSuccessModal.closeModal,
+            onClick: () => {
+              outSuccessModal.closeModal();
+              router.push('/chat');
+            },
             className: 'w-full',
           },
         ]}
