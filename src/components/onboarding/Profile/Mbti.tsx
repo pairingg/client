@@ -71,7 +71,7 @@ export default function Mbti({
             ][]
           ).map(([type, { title, options }]) => (
             <div key={type} className="mb-3">
-              <div className="mb-2">{title}</div>
+              <div className="mb-2 font-14-medium">{title}</div>
               <div className="flex gap-4">
                 {options.map(({ value }) => (
                   <ChipButton
