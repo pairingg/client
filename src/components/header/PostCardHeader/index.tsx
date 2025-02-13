@@ -13,7 +13,7 @@ export default function PostCardHeader({
   location,
 }: PostCardHeaderProps) {
   return (
-    <div className="flex items-center m-5">
+    <div className="relative flex items-center m-4">
       {/* 프로필 이미지 */}
       <div className="mr-3">
         <ProfileImage src="/images/profile.png" size={100} />
@@ -28,7 +28,7 @@ export default function PostCardHeader({
         </p>
       </div>
 
-      <button className="ml-auto">
+      <button className="absolute right-0 top-0 p-2">
         <MoreGrayIcon />
       </button>
     </div>
