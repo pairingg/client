@@ -1,10 +1,16 @@
+'use client';
+
 import BottomNavBar from '@/components/BottomNavBar';
 import ChatListItem from '@/components/chat/ChatListItem';
 import SearchInput from '@/components/SearchInput';
+import { useRouter } from 'next/navigation';
 
 export default function Chat() {
+  const router = useRouter();
+
   const chatListItems = [
     {
+      id: 1,
       name: '김이름',
       time: new Date(),
       message: '채팅방 리스트',
@@ -12,6 +18,7 @@ export default function Chat() {
       messageCnt: 2,
     },
     {
+      id: 2,
       name: '김이름',
       time: new Date(),
       message: '채팅방 리스트',
@@ -19,6 +26,7 @@ export default function Chat() {
       messageCnt: 2,
     },
     {
+      id: 3,
       name: '김이름',
       time: new Date(),
       message: '채팅방 리스트',
@@ -26,6 +34,7 @@ export default function Chat() {
       messageCnt: 2,
     },
     {
+      id: 4,
       name: '김이름',
       time: new Date(),
       message: '채팅방 리스트',
@@ -33,34 +42,7 @@ export default function Chat() {
       messageCnt: 2,
     },
     {
-      name: '김이름',
-      time: new Date(),
-      message: '채팅방 리스트',
-      profileImage: '/images/profile.png',
-      messageCnt: 2,
-    },
-    {
-      name: '김이름',
-      time: new Date(),
-      message: '채팅방 리스트',
-      profileImage: '/images/profile.png',
-      messageCnt: 2,
-    },
-    {
-      name: '김이름',
-      time: new Date(),
-      message: '채팅방 리스트',
-      profileImage: '/images/profile.png',
-      messageCnt: 2,
-    },
-    {
-      name: '김이름',
-      time: new Date(),
-      message: '채팅방 리스트',
-      profileImage: '/images/profile.png',
-      messageCnt: 2,
-    },
-    {
+      id: 5,
       name: '김이름',
       time: new Date(),
       message: '채팅방 리스트',
@@ -84,18 +66,22 @@ export default function Chat() {
         <SearchInput />
       </div>
       <div className="flex-grow overflow-y-auto">
-        {chatListItems.map((item, index) => (
-          <ChatListItem
-            key={index}
-            name={item.name}
-            time={item.time}
-            message={item.message}
-            profileImage={item.profileImage}
-            messageCnt={item.messageCnt}
-          />
+        {chatListItems.map((item) => (
+          <div
+            key={item.id}
+            onClick={() => router.push(`/chat/${item.id}`)}
+            className="cursor-pointer"
+          >
+            <ChatListItem
+              name={item.name}
+              time={item.time}
+              message={item.message}
+              profileImage={item.profileImage}
+              messageCnt={item.messageCnt}
+            />
+          </div>
         ))}
       </div>
-
       <BottomNavBar chatNotificationCount={totalMessageCount} />
     </div>
   );
