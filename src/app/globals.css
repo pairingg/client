@@ -96,11 +96,24 @@ input[type='date'] {
   border: none;
   background-color: white;
 }
-  
+
 input[type='date']::-webkit-calendar-picker-indicator {
   background: url('/assets/icons/callendar.svg') no-repeat center center;
+  position: absolute;
+  right: 0;
+  margin: 0;
+  width: 24px;
+  height: 24px;
 }
 
+input[type='date']::-webkit-datetime-edit {
+  display: none;
+}
+
+input[type='date']::-webkit-inner-spin-button,
+input[type='date']::-webkit-clear-button {
+  display: none;
+}
 
 body {
   -ms-overflow-style: none;

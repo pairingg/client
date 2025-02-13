@@ -46,7 +46,7 @@ export default function BirthDay({
               type="date"
               value={value}
               onChange={(e) => setValue(e.target.value.trim())}
-              className="w-full outline-none border-none peer text-transparent absolute inset-0 [&::-webkit-calendar-picker-indicator]:opacity-100"
+              className="w-full outline-none border-none peer text-transparent absolute inset-0 [&::-webkit-calendar-picker-indicator]:opacity-100 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-textfield-decoration-container]:appearance-none"
               placeholder="생년월일을 선택해주세요"
             />
             {!value && (
