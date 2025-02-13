@@ -1,6 +1,6 @@
 'use client';
 
-import AiButton from '@/components/buttons/AiButton/indexx';
+import AiButton from '@/components/buttons/AiButton/index';
 import ChatBubble from '@/components/chat/ChatBubble';
 import ChatInput from '@/components/chat/ChatInput';
 import ChatRoomHeader from '@/components/header/ChatRoomHeader';

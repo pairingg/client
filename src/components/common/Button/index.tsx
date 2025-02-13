@@ -3,8 +3,8 @@ import { ButtonHTMLAttributes } from 'react';
 import { cn } from '@/utils/cn';
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  shape?: 'rectangle' | 'circle';
-  variant?: 'filled' | 'outline' | 'disabled';
+  shape: 'rectangle' | 'circle';
+  variant: 'filled' | 'outline' | 'disabled';
   isSelected?: boolean;
   width?: number;
   height?: number;

@@ -54,7 +54,7 @@ export default function ChatRoomHeader({
             color: 'text-mainPink1',
           },
         ]}
-        oneButton={{ label: '취소', onClick: outConfirmModal.closeModal }}
+        oneButton={{ label: '취소', onClick: outModal.closeModal }}
       />
 
       {/* 채팅방 나가기 여부 모달 */}
