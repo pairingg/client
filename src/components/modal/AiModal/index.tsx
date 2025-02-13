@@ -88,7 +88,7 @@ export default function AiModal({ isOpen, isClose }: AiModalProps) {
           <Button
             shape="rectangle"
             variant="filled"
-            style={{ width: 470, height: 55 }}
+            className="w-[470px] h-[55px]"
             onClick={isClose}
           >
             닫기

@@ -6,8 +6,6 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   shape: 'rectangle' | 'circle';
   variant: 'filled' | 'outline' | 'disabled';
   isSelected?: boolean;
-  width?: number;
-  height?: number;
 }
 
 const SHAPES = {
@@ -24,8 +22,6 @@ const VARIANTS = {
 export default function Button({
   shape = 'rectangle',
   variant = 'disabled',
-  width = 60,
-  height = 30,
   isSelected = false,
   className,
   children,
@@ -36,13 +32,11 @@ export default function Button({
       type="button"
       className={cn(
         'font-16-medium flex items-center justify-center',
-        `w-[${width}px] h-[${height}px]`,
         SHAPES[shape],
         VARIANTS[variant],
         isSelected && 'ring-2 ring-mainPink1',
         className,
       )}
-      style={{ width, height }}
       {...restProps}
     >
       {children}
