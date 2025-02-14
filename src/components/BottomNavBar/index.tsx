@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+
 import ChatIcon from '/public/assets/icons/navBar_chat.svg';
 import ChatActiveIcon from '/public/assets/icons/navBar_chat_active.svg';
 import CommunityIcon from '/public/assets/icons/navBar_community.svg';
