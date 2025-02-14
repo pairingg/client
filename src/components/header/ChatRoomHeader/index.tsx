@@ -46,7 +46,7 @@ export default function ChatRoomHeader({
         <MoreGrayIcon onClick={outModal.openModal} />
       </button>
 
-      {/* 채팅방 나가기 모달 */}
+      {/* 채팅방 나가기 메뉴 모달 */}
       <ListModal
         isOpen={outModal.isOpen}
         buttonList={[
