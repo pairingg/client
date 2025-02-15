@@ -1,8 +1,8 @@
 import Button from '@/components/common/Button';
 import OnboardingHeader from '@/components/header/OnboardingHeader';
 import { useOnboarding } from '@/contexts/OnboardingContext';
+import type { StepChildProps } from '@/hooks/useFunnel';
 import { useInput } from '@/hooks/useInput';
-import type { OnboardingProps } from '@/types/onboarding';
 
 import Title from '../../Title';
 
@@ -11,7 +11,7 @@ export default function BirthDay({
   onPrev,
   currentStepNumber = 3,
   totalStepsNumber = 8,
-}: OnboardingProps) {
+}: StepChildProps) {
   const { data, updateData } = useOnboarding();
   const { value, setValue } = useInput(data?.profile?.birth || '');
 
@@ -38,7 +38,7 @@ export default function BirthDay({
             <Title
               title="생일은 언제인가요?"
               currentStepNumber={currentStepNumber}
-              totalStepsNumber={totalStepsNumber}
+              totalStepsNumber={totalStepsNumber - 1}
             />
           </div>
 

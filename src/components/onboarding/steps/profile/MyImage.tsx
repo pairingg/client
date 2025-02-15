@@ -6,7 +6,7 @@ import Button from '@/components/common/Button';
 import ImageUploader from '@/components/common/ImageUploader';
 import OnboardingHeader from '@/components/header/OnboardingHeader';
 import { useOnboarding } from '@/contexts/OnboardingContext';
-import type { OnboardingProps } from '@/types/onboarding';
+import type { StepChildProps } from '@/hooks/useFunnel';
 
 import Title from '../../Title';
 
@@ -15,7 +15,7 @@ export default function MyImage({
   onPrev,
   currentStepNumber = 8,
   totalStepsNumber = 8,
-}: OnboardingProps) {
+}: StepChildProps) {
   const { data, updateData } = useOnboarding();
   const [images, setImages] = useState<string[]>(data?.profile?.photo || []);
   const isButtonEnabled = images.length > 0;
@@ -53,7 +53,7 @@ export default function MyImage({
             <Title
               title="마지막 단계에요!"
               currentStepNumber={currentStepNumber}
-              totalStepsNumber={totalStepsNumber}
+              totalStepsNumber={totalStepsNumber - 1}
             />
             <Title title="최근에 찍은 사진을 추가해주세요." />
             <div className="font-14-regular mt-[10px]">

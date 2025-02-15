@@ -6,7 +6,7 @@ import AddressOption from '@/components/common/AddressOption';
 import Button from '@/components/common/Button';
 import OnboardingHeader from '@/components/header/OnboardingHeader';
 import { useOnboarding } from '@/contexts/OnboardingContext';
-import type { OnboardingProps } from '@/types/onboarding';
+import type { StepChildProps } from '@/hooks/useFunnel';
 
 import Title from '../../Title';
 
@@ -15,7 +15,7 @@ export default function Address({
   onPrev,
   currentStepNumber = 4,
   totalStepsNumber = 8,
-}: OnboardingProps) {
+}: StepChildProps) {
   const { data, updateData } = useOnboarding();
   const [isOpen, setIsOpen] = useState(false);
   const [address, setAddress] = useState(
@@ -47,7 +47,7 @@ export default function Address({
             <Title
               title="거주지는 어디인가요?"
               currentStepNumber={currentStepNumber}
-              totalStepsNumber={totalStepsNumber}
+              totalStepsNumber={totalStepsNumber - 1}
             />
           </div>
 

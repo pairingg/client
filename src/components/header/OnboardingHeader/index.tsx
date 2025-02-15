@@ -14,13 +14,20 @@ export default function OnboardingHeader({
   currentStep,
   totalSteps,
 }: Props) {
+  const getCurrentStage = () => {
+    if (totalSteps === 9) return 1; // profile
+    if (totalSteps === 6) return 2; // ideal
+    if (totalSteps === 3) return 3; // face auth
+    return 1;
+  };
+
   return (
     <div>
       <div className="w-full px-5 py-4 gap-6 flex justify-between">
         <div className="cursor-pointer flex items-center justify-center">
           <BackIcon onClick={onPrev} />
         </div>
-        <StageIndicator />
+        <StageIndicator currentStage={getCurrentStage()} />
       </div>
 
       <ProgressBar currentStep={currentStep} totalSteps={totalSteps} />

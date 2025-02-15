@@ -2,8 +2,8 @@ import Button from '@/components/common/Button';
 import ChipButton from '@/components/common/ChipButton';
 import OnboardingHeader from '@/components/header/OnboardingHeader';
 import { useOnboarding } from '@/contexts/OnboardingContext';
+import type { StepChildProps } from '@/hooks/useFunnel';
 import { useInput } from '@/hooks/useInput';
-import type { OnboardingProps } from '@/types/onboarding';
 
 import Title from '../../Title';
 
@@ -12,7 +12,7 @@ export default function Gender({
   onPrev,
   currentStepNumber = 2,
   totalStepsNumber = 8,
-}: OnboardingProps) {
+}: StepChildProps) {
   const { data, updateData } = useOnboarding();
   const { value, setValue } = useInput<'MALE' | 'FEMALE'>(
     data?.profile?.gender,
@@ -35,13 +35,13 @@ export default function Gender({
         currentStep={currentStepNumber}
         totalSteps={totalStepsNumber}
       />
-      <div className="w-full px-5 py-8 flex flex-col">
+      <div className="w-full px-5 py-8 flex flex-col justify-between">
         <div>
           <div className="mb-10">
             <Title
               title="성별은 무엇인가요?"
               currentStepNumber={currentStepNumber}
-              totalStepsNumber={totalStepsNumber}
+              totalStepsNumber={totalStepsNumber - 1}
             />
           </div>
           <div className="flex flex-col gap-4">

@@ -8,7 +8,7 @@ import OnboardingHeader from '@/components/header/OnboardingHeader';
 import type { DrinkStatusType, SmokeStatusType } from '@/constants/wellness';
 import { DRINK_STATUS, SMOKE_STATUS } from '@/constants/wellness';
 import { useOnboarding } from '@/contexts/OnboardingContext';
-import type { OnboardingProps } from '@/types/onboarding';
+import type { StepChildProps } from '@/hooks/useFunnel';
 
 import Title from '../../Title';
 
@@ -20,7 +20,7 @@ export default function Wellness({
   onPrev,
   currentStepNumber = 7,
   totalStepsNumber = 8,
-}: OnboardingProps) {
+}: StepChildProps) {
   const { data, updateData } = useOnboarding();
   const [selectedWellness, setSelectedWellness] = useState<{
     drink?: DrinkStatusType;
@@ -71,7 +71,7 @@ export default function Wellness({
               <Title
                 title="음주 흡연 습관은 어떤가요?"
                 currentStepNumber={currentStepNumber}
-                totalStepsNumber={totalStepsNumber}
+                totalStepsNumber={totalStepsNumber - 1}
               />
             </div>
             <div className="flex flex-col gap-10 font-18-regular">

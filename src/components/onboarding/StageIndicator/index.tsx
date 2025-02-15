@@ -1,11 +1,12 @@
-import { useOnboarding } from '@/contexts/OnboardingContext';
-
 import FistStageIcon from '/public/assets/icons/first_stage_indicator.svg';
 import SecondStageIcon from '/public/assets/icons/second_stage_indicator.svg';
 import ThirdStageIcon from '/public/assets/icons/third_stage_indicator.svg';
 
-export default function StageIndicator() {
-  const { currentStage } = useOnboarding();
+interface StageIndicatorProps {
+  currentStage: number;
+}
+
+export default function StageIndicator({ currentStage }: StageIndicatorProps) {
   return (
     <div>
       {currentStage === 1 && <FistStageIcon />}

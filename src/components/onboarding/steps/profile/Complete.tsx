@@ -2,19 +2,14 @@
 
 import Button from '@/components/common/Button';
 import ProgressBar from '@/components/ProgressBar';
-import { useOnboarding } from '@/contexts/OnboardingContext';
+import type { StepChildProps } from '@/hooks/useFunnel';
 
 import Title from '../../Title';
 
-export default function Complete() {
-  const { setCurrentStage } = useOnboarding();
-  const handleNext = () => {
-    setCurrentStage(2);
-  };
-
+export default function ProfileComplete({ onNext }: StepChildProps) {
   return (
     <div className="relative h-[100dvh]">
-      <div className="w-full pt-14">
+      <div className="w-full pt-16">
         <ProgressBar currentStep={9} totalSteps={8} />
       </div>
       <div className="w-full px-5 py-8 flex flex-col">
@@ -31,7 +26,7 @@ export default function Complete() {
           shape="rectangle"
           variant="filled"
           className="w-full h-[55px]"
-          onClick={handleNext}
+          onClick={onNext}
         >
           다음
         </Button>

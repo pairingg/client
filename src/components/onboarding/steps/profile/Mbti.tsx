@@ -6,7 +6,7 @@ import Button from '@/components/common/Button';
 import ChipButton from '@/components/common/ChipButton';
 import OnboardingHeader from '@/components/header/OnboardingHeader';
 import { useOnboarding } from '@/contexts/OnboardingContext';
-import type { OnboardingProps } from '@/types/onboarding';
+import type { StepChildProps } from '@/hooks/useFunnel';
 
 import Title from '../../Title';
 
@@ -25,7 +25,7 @@ export default function Mbti({
   onPrev,
   currentStepNumber = 6,
   totalStepsNumber = 8,
-}: OnboardingProps) {
+}: StepChildProps) {
   const { data, updateData } = useOnboarding();
   const [selections, setSelections] = useState<MbtiValue>({
     ei: data?.profile?.mbti?.split('')[0] || '',
@@ -61,7 +61,7 @@ export default function Mbti({
             <Title
               title="MBTI를 선택해주세요."
               currentStepNumber={currentStepNumber}
-              totalStepsNumber={totalStepsNumber}
+              totalStepsNumber={totalStepsNumber - 1}
             />
           </div>
 

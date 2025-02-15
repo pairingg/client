@@ -6,17 +6,18 @@ import Button from '@/components/common/Button';
 import OnboardingHeader from '@/components/header/OnboardingHeader';
 import { useOnboarding } from '@/contexts/OnboardingContext';
 import { useInput } from '@/hooks/useInput';
-import type { OnboardingProps } from '@/types/onboarding';
 
 import OnboardingInput from '../../Input';
 import Title from '../../Title';
+
+import type { StepChildProps } from '@/hooks/useFunnel';
 
 export default function Name({
   onNext,
   onPrev,
   currentStepNumber = 1,
   totalStepsNumber = 8,
-}: OnboardingProps) {
+}: StepChildProps) {
   const { data, updateData } = useOnboarding();
   const { value, setValue } = useInput(data?.profile?.name || '');
 
@@ -46,7 +47,7 @@ export default function Name({
             <Title
               title="이름이 무엇인가요?"
               currentStepNumber={currentStepNumber}
-              totalStepsNumber={totalStepsNumber}
+              totalStepsNumber={totalStepsNumber - 1}
             />
           </div>
           <OnboardingInput

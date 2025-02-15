@@ -1,12 +1,5 @@
 import type { DrinkStatusType, SmokeStatusType } from '@/constants/wellness';
 
-export interface OnboardingProps {
-  onNext?: () => void;
-  onPrev?: () => void;
-  currentStepNumber?: number;
-  totalStepsNumber?: number;
-}
-
 export interface ProfileContent {
   name?: string;
   gender?: 'MALE' | 'FEMALE';
@@ -31,8 +24,8 @@ export interface idalTypeContent {
     district: string;
   }[];
   age?: {
-    low: number;
-    high: number;
+    min: number;
+    max: number;
   };
   hobby?: string[];
   wellness?: {
@@ -47,6 +40,6 @@ export interface faceAuthContent {
 
 export interface OnboardingData {
   profile?: ProfileContent;
-  idalType?: idalTypeContent;
+  idealType?: idalTypeContent;
   faceAuth?: faceAuthContent;
 }

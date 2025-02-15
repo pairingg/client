@@ -6,7 +6,7 @@ import Button from '@/components/common/Button';
 import ChipButton from '@/components/common/ChipButton';
 import OnboardingHeader from '@/components/header/OnboardingHeader';
 import { useOnboarding } from '@/contexts/OnboardingContext';
-import type { OnboardingProps } from '@/types/onboarding';
+import type { StepChildProps } from '@/hooks/useFunnel';
 
 import Title from '../../Title';
 
@@ -27,7 +27,7 @@ export default function Hobby({
   onPrev,
   currentStepNumber = 5,
   totalStepsNumber = 8,
-}: OnboardingProps) {
+}: StepChildProps) {
   const { data, updateData } = useOnboarding();
   const [selectedHobbies, setSelectedHobbies] = useState<string[]>(
     data?.profile?.hobby || [],
@@ -55,15 +55,15 @@ export default function Hobby({
       <OnboardingHeader
         onPrev={onPrev}
         currentStep={currentStepNumber}
-        totalSteps={totalStepsNumber}
+        totalSteps={totalStepsNumber - 1}
       />
       <div className="w-full px-5 py-8 flex flex-col">
         <div>
           <div className="mb-10">
             <Title
               title="취미는 무엇인가요?"
-              currentStepNumber={currentStepNumber}
-              totalStepsNumber={totalStepsNumber}
+              currentStepNumber={5}
+              totalStepsNumber={8}
             />
             <div className="font-14-regular mt-[10px]">
               최근 관심있는 취미를 0개 이상 선택해주세요.

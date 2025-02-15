@@ -1,19 +1,25 @@
+'use client';
+
 import Button from '@/components/common/Button';
 import OnboardingHeader from '@/components/header/OnboardingHeader';
-import type { OnboardingProps } from '@/types/onboarding';
+import type { StepChildProps } from '@/hooks/useFunnel';
 
 import Title from '../../Title';
 
-export default function Start({
+export default function IdealTypeStart({
   onNext,
-  onPrev,
+  goToStep,
   currentStepNumber = 1,
   totalStepsNumber = 6,
-}: OnboardingProps) {
+}: StepChildProps) {
+  const handlePrev = () => {
+    goToStep?.('profile-photo');
+  };
+
   return (
     <div className="relative h-[100dvh]">
       <OnboardingHeader
-        onPrev={onPrev}
+        onPrev={handlePrev}
         currentStep={currentStepNumber}
         totalSteps={totalStepsNumber}
       />
@@ -21,11 +27,7 @@ export default function Start({
       <div className="w-full px-5 py-8 flex flex-col">
         <div>
           <div className="mb-10">
-            <Title
-              title="이상형 정보을 등록해주세요"
-              currentStepNumber={currentStepNumber}
-              totalStepsNumber={totalStepsNumber}
-            />
+            <Title title="이상형 정보을 등록해주세요" />
           </div>
         </div>
       </div>
