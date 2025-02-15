@@ -18,7 +18,7 @@ export default function MyImage({
 }: StepChildProps) {
   const { data, updateData } = useOnboarding();
   const [images, setImages] = useState<string[]>(data?.profile?.photo || []);
-  const isButtonEnabled = images.length > 0;
+  const isButtonEnabled = images.length >= 3;
 
   const handleImageUpload = (imageUrl: string) => {
     if (images.length >= 5) {
@@ -33,10 +33,12 @@ export default function MyImage({
   };
 
   const handleNext = () => {
-    if (images.length === 0) return;
-
-    updateData({ profile: { ...data?.profile, photo: images } });
-    onNext?.();
+    if (images.length >= 3) {
+      updateData({ profile: { ...data?.profile, photo: images } });
+      onNext?.();
+    } else {
+      alert('사진을 3장 이상 추가해주세요.');
+    }
   };
 
   return (

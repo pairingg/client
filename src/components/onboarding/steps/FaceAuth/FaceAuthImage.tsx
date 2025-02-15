@@ -25,6 +25,7 @@ export default function FaceAuthImage({ onNext, goToStep }: StepChildProps) {
 
   const handleNext = () => {
     if (!image) return;
+
     updateData({ faceAuth: { image } });
     onNext?.();
   };

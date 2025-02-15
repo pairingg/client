@@ -55,7 +55,7 @@ export default function Wellness({
   };
 
   return (
-    <div className="h-[100dvh] flex flex-col">
+    <div className="relative h-[100dvh] flex flex-col">
       <OnboardingHeader
         onPrev={onPrev}
         currentStep={currentStepNumber}

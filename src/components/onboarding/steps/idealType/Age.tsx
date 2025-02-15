@@ -61,7 +61,6 @@ export default function Age({
           <div className="flex flex-wrap gap-3 font-18-regular font-roboto">
             <div className="flex gap-3">
               <OnboardingInput
-                type="number"
                 className="w-8"
                 value={minAge}
                 maxLength={2}
@@ -72,7 +71,6 @@ export default function Age({
               />
               ~
               <OnboardingInput
-                type="number"
                 className="w-8"
                 value={maxAge}
                 maxLength={2}

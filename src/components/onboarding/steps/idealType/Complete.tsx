@@ -16,7 +16,7 @@ export default function Complete({ onNext }: StepChildProps) {
   };
 
   return (
-    <div className="h-[100dvh]">
+    <div className="relative h-[100dvh]">
       <div className="w-full mt-14">
         <ProgressBar currentStep={6} totalSteps={5} />
       </div>

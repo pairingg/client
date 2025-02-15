@@ -5,6 +5,8 @@ import { type ReactElement } from 'react';
 import type { StepChildProps } from '@/hooks/useFunnel';
 import { useFunnel } from '@/hooks/useFunnel';
 
+import FaceAuthCheckImage from './FaceAuth/CheckImage';
+import FaceAuthComplete from './FaceAuth/Complete';
 import FaceAuthImage from './FaceAuth/FaceAuthImage';
 import IdealTypeAddress from './idealType/Address';
 import IdealTypeAge from './idealType/Age';
@@ -12,6 +14,7 @@ import IdealTypeComplete from './idealType/Complete';
 import IdealTypeMbti from './idealType/Mbti';
 import IdealTypeStart from './idealType/Start';
 import IdealTypeWellness from './idealType/Wellness';
+import OnboardingComplete from './OnboardingComplete';
 import ProfileAddress from './profile/Address';
 import ProfileBirthDay from './profile/BirthDay';
 import ProfileComplete from './profile/Complete';
@@ -41,6 +44,7 @@ export const steps = [
   'face-auth-start',
   'face-auth-photo',
   'face-auth-complete',
+  'sign-in-complete',
 ] as const;
 
 export default function OnboardingFunnel() {
@@ -67,8 +71,9 @@ export default function OnboardingFunnel() {
     'ideal-wellness': <IdealTypeWellness />,
     'ideal-complete': <IdealTypeComplete />,
     'face-auth-start': <FaceAuthImage />,
-    'face-auth-photo': <FaceAuthImage />,
-    'face-auth-complete': <div>Face Auth Complete</div>,
+    'face-auth-photo': <FaceAuthCheckImage />,
+    'face-auth-complete': <FaceAuthComplete />,
+    'sign-in-complete': <OnboardingComplete />,
   } as const;
 
   return (
