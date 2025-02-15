@@ -5,12 +5,14 @@ interface PostCardHeaderProps {
   name: string;
   age: number;
   location: string;
+  onMoreClick: () => void;
 }
 
 export default function PostCardHeader({
   name,
   age,
   location,
+  onMoreClick,
 }: PostCardHeaderProps) {
   return (
     <div className="relative flex items-center m-4">
@@ -28,7 +30,7 @@ export default function PostCardHeader({
         </p>
       </div>
 
-      <button className="absolute right-0 top-0 p-2">
+      <button className="absolute right-0 top-0 p-2" onClick={onMoreClick}>
         <MoreGrayIcon />
       </button>
     </div>

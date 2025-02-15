@@ -6,13 +6,26 @@ interface PostCardProps {
   title: string;
   content: string;
   time: Date;
+  buttonText: string;
+  onMoreClick: () => void;
 }
 
-export default function PostCard({ title, content, time }: PostCardProps) {
+export default function PostCard({
+  title,
+  content,
+  time,
+  buttonText,
+  onMoreClick,
+}: PostCardProps) {
   return (
     <div className="bg-white rounded-lg shadow-md p-1 m-6">
       {/* 헤더 */}
-      <PostCardHeader name="김이름" age={20} location="서울시" />
+      <PostCardHeader
+        name="김이름"
+        age={20}
+        location="서울시"
+        onMoreClick={onMoreClick}
+      />
 
       <div className="m-4 border-t py-2">
         {/* 게시글 내용 */}
@@ -26,7 +39,7 @@ export default function PostCard({ title, content, time }: PostCardProps) {
           <p className="font-14-regular text-gray1">{formatTime(time)}</p>
           {/* 분홍색 버튼 (원형) */}
           <Button shape="circle" variant="filled">
-            버튼
+            {buttonText}
           </Button>
         </div>
       </div>

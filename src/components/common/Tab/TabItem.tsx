@@ -14,10 +14,10 @@ export default function TabItem({ value, children }: TabItemProps) {
   const handleTabItemClick = () => setActiveValue(value);
 
   return (
-    <div className="grow">
+    <div className="grow cursor-pointer">
       <li
         className={cn(
-          'w-full  h-[30px] flex justify-center items-center font-bold text-20px',
+          'w-full h-[30px] flex justify-center items-center font-bold text-20px',
           {
             'text-gray1': !isActive,
             'text-mainPink1': isActive,
