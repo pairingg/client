@@ -10,10 +10,8 @@ export interface ProfileContent {
   };
   hobby?: string[];
   mbti?: string;
-  wellness?: {
-    drink: DrinkStatusType;
-    smoke: SmokeStatusType;
-  };
+  drink?: DrinkStatusType;
+  smoke?: SmokeStatusType;
   photo?: string[];
 }
 
@@ -28,10 +26,8 @@ export interface idalTypeContent {
     max: number;
   };
   hobby?: string[];
-  wellness?: {
-    drink: DrinkStatusType;
-    smoke: SmokeStatusType;
-  };
+  drink?: DrinkStatusType;
+  smoke?: SmokeStatusType;
 }
 
 export interface faceAuthContent {

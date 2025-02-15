@@ -24,8 +24,8 @@ export default function Wellness({
     drink?: DrinkStatusType;
     smoke?: SmokeStatusType;
   }>({
-    drink: data?.idealType?.wellness?.drink,
-    smoke: data?.idealType?.wellness?.smoke,
+    drink: data?.idealType?.drink,
+    smoke: data?.idealType?.smoke,
   });
 
   const handleSelect = (
@@ -45,10 +45,8 @@ export default function Wellness({
     updateData({
       idealType: {
         ...data?.idealType,
-        wellness: selectedWellness as {
-          drink: DrinkStatusType;
-          smoke: SmokeStatusType;
-        },
+        drink: selectedWellness.drink,
+        smoke: selectedWellness.smoke,
       },
     });
     onNext?.();

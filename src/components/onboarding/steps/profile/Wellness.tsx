@@ -26,8 +26,8 @@ export default function Wellness({
     drink?: DrinkStatusType;
     smoke?: SmokeStatusType;
   }>({
-    drink: data?.profile?.wellness?.drink,
-    smoke: data?.profile?.wellness?.smoke,
+    drink: data?.profile?.drink,
+    smoke: data?.profile?.smoke,
   });
 
   const handleSelect = (
@@ -47,10 +47,8 @@ export default function Wellness({
     updateData({
       profile: {
         ...data?.profile,
-        wellness: selectedWellness as {
-          drink: DrinkStatusType;
-          smoke: SmokeStatusType;
-        },
+        drink: selectedWellness.drink,
+        smoke: selectedWellness.smoke,
       },
     });
     onNext?.();
