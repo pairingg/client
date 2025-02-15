@@ -2,11 +2,19 @@
 
 import Button from '@/components/common/Button';
 import ProgressBar from '@/components/ProgressBar';
+import { useOnboarding } from '@/contexts/OnboardingContext';
 import type { StepChildProps } from '@/hooks/useFunnel';
 
 import Title from '../../Title';
 
 export default function ProfileComplete({ onNext }: StepChildProps) {
+  const { setCurrentStage } = useOnboarding();
+
+  const handleNext = () => {
+    setCurrentStage(2);
+    onNext?.();
+  };
+
   return (
     <div className="relative h-[100dvh]">
       <div className="w-full pt-16">
@@ -26,7 +34,7 @@ export default function ProfileComplete({ onNext }: StepChildProps) {
           shape="rectangle"
           variant="filled"
           className="w-full h-[55px]"
-          onClick={onNext}
+          onClick={handleNext}
         >
           다음
         </Button>

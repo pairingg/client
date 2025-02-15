@@ -1,5 +1,6 @@
 import StageIndicator from '@/components/onboarding/StageIndicator';
 import ProgressBar from '@/components/ProgressBar';
+import { useOnboarding } from '@/contexts/OnboardingContext';
 
 import BackIcon from '/public/assets/icons/back_icon.svg';
 
@@ -14,12 +15,8 @@ export default function OnboardingHeader({
   currentStep,
   totalSteps,
 }: Props) {
-  const getCurrentStage = () => {
-    if (totalSteps === 9) return 1; // profile
-    if (totalSteps === 6) return 2; // ideal
-    if (totalSteps === 3) return 3; // face auth
-    return 1;
-  };
+  const { currentStage } = useOnboarding();
+  console.log(currentStage);
 
   return (
     <div>
@@ -27,7 +24,7 @@ export default function OnboardingHeader({
         <div className="cursor-pointer flex items-center justify-center">
           <BackIcon onClick={onPrev} />
         </div>
-        <StageIndicator currentStage={getCurrentStage()} />
+        <StageIndicator currentStage={currentStage} />
       </div>
 
       <ProgressBar currentStep={currentStep} totalSteps={totalSteps} />

@@ -3,11 +3,17 @@
 import Button from '@/components/common/Button';
 import ProgressBar from '@/components/ProgressBar';
 import { useOnboarding } from '@/contexts/OnboardingContext';
+import type { StepChildProps } from '@/hooks/useFunnel';
 
 import Title from '../../Title';
 
-export default function Complete() {
+export default function Complete({ onNext }: StepChildProps) {
   const { setCurrentStage } = useOnboarding();
+
+  const handleNext = () => {
+    setCurrentStage(3);
+    onNext?.();
+  };
 
   return (
     <div className="h-[100dvh]">
@@ -28,7 +34,7 @@ export default function Complete() {
           shape="rectangle"
           variant="filled"
           className="w-full h-[55px]"
-          onClick={() => setCurrentStage(3)}
+          onClick={handleNext}
         >
           다음
         </Button>
