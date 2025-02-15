@@ -77,7 +77,7 @@ export default function Community() {
 
           {/* 플로팅 버튼 */}
           <div className="absolute bottom-20 right-5 mb-6">
-            <Link href="#">
+            <Link href="/community/create">
               <PlusButton />
             </Link>
           </div>
@@ -111,7 +111,7 @@ export default function Community() {
                 </p>
               </div>
               <Button shape="circle" variant="outline">
-                글 작성
+                <Link href="/community/create">글 작성</Link>
               </Button>
             </div>
           )}

@@ -82,7 +82,7 @@ export default function BottomNavBar({ chatNotificationCount = 0 }: Props) {
       icon: <CommunityIcon />,
       activeIcon: <CommunityActiveIcon />,
       label: '커뮤니티',
-      isActive: pathname === '/community' && '/community/create',
+      isActive: pathname === '/community' || '/community/create',
     },
     {
       href: '#',

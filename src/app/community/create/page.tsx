@@ -2,20 +2,46 @@
 
 import BottomNavBar from '@/components/BottomNavBar';
 import Button from '@/components/common/Button';
+import ActionModal from '@/components/modal/ActionModal';
+import { useModal } from '@/hooks/useModal';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+import ExclamationIcon from '/public/assets/icons/alert_exclamationMark.svg';
 import BackIcon from '/public/assets/icons/header_back.svg';
 
 export default function PostCreate() {
   const [content, setContent] = useState(''); // 글자 수 상태 관리
   const maxLength = 80;
+  const outModal = useModal(false);
+  const router = useRouter();
 
   return (
     <div className="flex flex-col min-h-screen">
       {/* 헤더 */}
       <div className="flex flex-row items-center p-5 shadow-md">
-        <BackIcon />
+        <BackIcon onClick={outModal.openModal} />
         <h1 className="text-22px font-bold flex-1 text-center">글작성</h1>
       </div>
+
+      <ActionModal
+        isOpen={outModal.isOpen}
+        icon={<ExclamationIcon />}
+        message="현재 페이지를 나가시겠습니까?"
+        content="작성하신 글이 삭제됩니다."
+        buttons={[
+          {
+            label: '취소',
+            onClick: outModal.closeModal,
+          },
+          {
+            label: '확인',
+            onClick: () => {
+              router.push('/community');
+            },
+            className: 'text-mainPink1',
+          },
+        ]}
+      />
 
       {/* 글 작성 영역 */}
       <div className="flex flex-col p-5 space-y-4">
