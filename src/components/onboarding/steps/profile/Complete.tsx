@@ -1,7 +1,5 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
-
 import Button from '@/components/common/Button';
 import ProgressBar from '@/components/ProgressBar';
 import { useOnboarding } from '@/contexts/OnboardingContext';
@@ -10,7 +8,6 @@ import Title from '../../Title';
 
 export default function Complete() {
   const { setCurrentStage } = useOnboarding();
-  const router = useRouter();
   const handleNext = () => {
     setCurrentStage(2);
   };
@@ -29,17 +26,6 @@ export default function Complete() {
             </div>
           </div>
         </div>
-
-        {process.env.NODE_ENV === 'development' && (
-          <div className="mt-4">
-            <button onClick={() => router.push('/onboarding?step=faceAuth')}>
-              개발용: 직접 라우팅
-            </button>
-            <button onClick={() => router.push('/onboarding?step=profile')}>
-              개발용: 프로필로 돌아가기
-            </button>
-          </div>
-        )}
 
         <div className="absolute bottom-0 left-0 w-full px-5 py-8">
           <Button
