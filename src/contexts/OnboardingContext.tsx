@@ -8,6 +8,8 @@ interface OnboardingContextType {
   data: OnboardingData | null;
   updateData: (newData: Partial<OnboardingData>) => void;
   resetData: () => void;
+  currentStage: number;
+  setCurrentStage: (stage: number) => void;
 }
 
 const OnboardingContext = createContext<OnboardingContextType | undefined>(
@@ -20,6 +22,7 @@ export function OnboardingProvider({
   children: React.ReactNode;
 }) {
   const [data, setData] = useState<OnboardingData | null>(null);
+  const [currentStage, setCurrentStage] = useState(1);
 
   const updateData = (newData: Partial<OnboardingData>) => {
     setData((prev) =>
@@ -32,7 +35,15 @@ export function OnboardingProvider({
   };
 
   return (
-    <OnboardingContext.Provider value={{ data, updateData, resetData }}>
+    <OnboardingContext.Provider
+      value={{
+        data,
+        updateData,
+        resetData,
+        currentStage,
+        setCurrentStage,
+      }}
+    >
       {children}
     </OnboardingContext.Provider>
   );

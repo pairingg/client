@@ -1,3 +1,4 @@
+import StageIndicator from '@/components/onboarding/StageIndicator';
 import ProgressBar from '@/components/ProgressBar';
 
 import BackIcon from '/public/assets/icons/back_icon.svg';
@@ -15,9 +16,13 @@ export default function OnboardingHeader({
 }: Props) {
   return (
     <div>
-      <div className="w-full p-5 gap-6 flex flex-col">
-        <BackIcon onClick={onPrev} />
+      <div className="w-full px-5 py-4 gap-6 flex justify-between">
+        <div className="cursor-pointer flex items-center justify-center">
+          <BackIcon onClick={onPrev} />
+        </div>
+        <StageIndicator />
       </div>
+
       <ProgressBar currentStep={currentStep} totalSteps={totalSteps} />
     </div>
   );

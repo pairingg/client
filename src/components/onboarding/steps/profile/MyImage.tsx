@@ -40,14 +40,14 @@ export default function MyImage({
   };
 
   return (
-    <div className="h-[100dvh]">
+    <div className="relative h-[100dvh]">
       <OnboardingHeader
         onPrev={onPrev}
         currentStep={currentStepNumber}
         totalSteps={totalStepsNumber}
       />
 
-      <div className="w-full px-5 py-8 flex flex-col h-[calc(100%-56px)] justify-between">
+      <div className="w-full px-5 py-8 flex flex-col">
         <div>
           <div className="mb-10">
             <Title
@@ -75,14 +75,16 @@ export default function MyImage({
           </div>
         </div>
 
-        <Button
-          shape="rectangle"
-          variant={isButtonEnabled ? 'filled' : 'disabled'}
-          className="w-full h-[55px]"
-          onClick={handleNext}
-        >
-          다음
-        </Button>
+        <div className="absolute bottom-0 left-0 w-full px-5 py-8">
+          <Button
+            shape="rectangle"
+            variant={isButtonEnabled ? 'filled' : 'disabled'}
+            className="w-full h-[55px]"
+            onClick={handleNext}
+          >
+            다음
+          </Button>
+        </div>
       </div>
     </div>
   );

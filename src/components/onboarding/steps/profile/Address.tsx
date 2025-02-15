@@ -35,13 +35,13 @@ export default function Address({
   };
 
   return (
-    <div className="h-[100dvh]">
+    <div className="relative h-[100dvh]">
       <OnboardingHeader
         onPrev={onPrev}
         currentStep={currentStepNumber}
         totalSteps={totalStepsNumber}
       />
-      <div className="relative w-full px-5 py-8 flex flex-col h-[calc(100%-56px)] justify-between">
+      <div className="w-full px-5 py-8 flex flex-col">
         <div>
           <div className="mb-10">
             <Title
@@ -70,7 +70,9 @@ export default function Address({
           onClose={() => setIsOpen(false)}
           onSelect={handleAddressSelect}
         />
+      </div>
 
+      <div className="absolute bottom-0 left-0 w-full px-5 py-8">
         <Button
           shape="rectangle"
           variant={isButtonEnabled ? 'filled' : 'disabled'}
