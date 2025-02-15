@@ -45,14 +45,16 @@ export default function Community() {
         </Tab.Header>
 
         <Tab.Content value="tab1">
-          {posts.map((item, index) => (
-            <PostCard
-              key={index}
-              title={item.title}
-              content={item.content}
-              time={item.time}
-            />
-          ))}
+          <div className="flex flex-col pb-[200px] h-screen flex-grow overflow-y-auto">
+            {posts.map((item, index) => (
+              <PostCard
+                key={index}
+                title={item.title}
+                content={item.content}
+                time={item.time}
+              />
+            ))}
+          </div>
         </Tab.Content>
         <Tab.Content value="tab2">두 번째 탭 내용</Tab.Content>
       </Tab.Group>
