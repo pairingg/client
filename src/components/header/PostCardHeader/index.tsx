@@ -16,7 +16,7 @@ export default function PostCardHeader({
     <div className="relative flex items-center m-4">
       {/* 프로필 이미지 */}
       <div className="mr-3">
-        <ProfileImage src="/images/profile.png" size={100} />
+        <ProfileImage src="/images/profile.png" size={80} />
       </div>
 
       {/* 알림 내용 */}
