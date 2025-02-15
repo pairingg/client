@@ -2,7 +2,9 @@
 
 import BottomNavBar from '@/components/BottomNavBar';
 import Button from '@/components/common/Button';
+import ImageUploader from '@/components/common/ImageUploader';
 import ActionModal from '@/components/modal/ActionModal';
+
 import { useModal } from '@/hooks/useModal';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
@@ -14,6 +16,18 @@ export default function PostCreate() {
   const maxLength = 80;
   const outModal = useModal(false);
   const router = useRouter();
+  // 단일 이미지 상태로 변경합니다.
+  const [image, setImage] = useState<string>('');
+
+  // 단일 이미지 업로드 핸들러
+  const handleImageUpload = (imageUrl: string) => {
+    setImage(imageUrl);
+  };
+
+  // 단일 이미지 삭제 핸들러
+  const handleImageDelete = () => {
+    setImage('');
+  };
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -80,6 +94,11 @@ export default function PostCreate() {
       {/* 사진 등록 영역 */}
       <div className="flex flex-col p-5 space-y-4">
         <p className="text-18px font-medium pb-2">사진 등록</p>
+        <ImageUploader
+          onImageUpload={handleImageUpload}
+          onImageDelete={handleImageDelete}
+          imageUrl={image}
+        />
       </div>
 
       {/* 등록 버튼 */}
