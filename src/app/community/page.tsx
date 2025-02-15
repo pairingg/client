@@ -5,8 +5,10 @@ import PlusButton from '@/components/buttons/PlusButton';
 import Button from '@/components/common/Button';
 import Tab from '@/components/common/Tab';
 import ActionModal from '@/components/modal/ActionModal';
+import BottomSheetModal from '@/components/modal/BottomSheetModal';
 import ListModal from '@/components/modal/ListModal';
 import PostCard from '@/components/PostCard/page';
+import UserProfile from '@/components/profiles/UserProfile';
 import { useModal } from '@/hooks/useModal';
 import Link from 'next/link';
 import { useState } from 'react';
@@ -34,14 +36,23 @@ export default function Community() {
   const deleteConfirmModal = useModal();
   const deleteSuccessModal = useModal();
 
+  // "저요 목록" 모달
+  const bottomSheetModal = useModal();
+
   const posts = [
     {
+      name: '김이름',
+      age: 20,
+      location: '서울시',
       title: '제목 제목제목',
       content:
         '글 내용 가나다라마바사 아자차카타파하 가나 다라 마바사 아자차카 타파하 가나다라마 바사 아자차카 타파하가 나다라마바사.',
       time: new Date(),
     },
     {
+      name: '김이름',
+      age: 20,
+      location: '서울시',
       title: '제목 제목제목',
       content:
         '글 내용 가나다라마바사 아자차카타파하 가나 다라 마바사 아자차카 타파하 가나다라마 바사 아자차카 타파하가 나다라마바사.',
@@ -51,16 +62,21 @@ export default function Community() {
 
   const myPosts = [
     {
+      name: '김이름',
+      age: 20,
+      location: '서울시',
       title: '제목 제목제목',
       content:
         '글 내용 가나다라마바사 아자차카타파하 가나 다라 마바사 아자차카 타파하 가나다라마 바사 아자차카 타파하가 나다라마바사.',
       time: new Date(),
     },
+  ];
+
+  const meList = [
     {
-      title: '제목 제목제목',
-      content:
-        '글 내용 가나다라마바사 아자차카타파하 가나 다라 마바사 아자차카 타파하 가나다라마 바사 아자차카 타파하가 나다라마바사.',
-      time: new Date(),
+      name: '김이름',
+      age: 20,
+      location: '서울시',
     },
   ];
 
@@ -76,16 +92,21 @@ export default function Community() {
           <Tab.Item value="tab2">내가 쓴 글</Tab.Item>
         </Tab.Header>
 
+        {/* 글 목록 */}
         <Tab.Content value="tab1">
           <div className="flex flex-col pb-[200px] h-screen flex-grow overflow-y-auto">
             {posts.map((item, index) => (
               <PostCard
                 key={index}
+                name={item.name}
+                age={item.age}
+                location={item.location}
                 title={item.title}
                 content={item.content}
                 time={item.time}
                 buttonText="저요"
                 onMoreClick={reportcheckModal.openModal}
+                onButtonClick={() => console.log('저요 버튼 클릭')}
               />
             ))}
           </div>
@@ -175,6 +196,8 @@ export default function Community() {
           </div>
         </Tab.Content>
 
+        {/* ------------------------------------------------------------- */}
+        {/* 내가 쓴 글 목록 */}
         <Tab.Content value="tab2">
           {myPosts.length > 0 ? (
             <div className="flex flex-col pb-[200px] h-screen flex-grow overflow-y-auto">
@@ -182,18 +205,52 @@ export default function Community() {
               {myPosts.map((item, index) => (
                 <PostCard
                   key={index}
+                  name={item.name}
+                  age={item.age}
+                  location={item.location}
                   title={item.title}
                   content={item.content}
                   time={item.time}
                   buttonText="저요 목록 보기"
                   onMoreClick={myPostMenuModal.openModal}
+                  onButtonClick={bottomSheetModal.openModal}
                 />
               ))}
+
+              {/* 저요 목록 모달 */}
+              <BottomSheetModal
+                isOpen={bottomSheetModal.isOpen}
+                isClose={bottomSheetModal.closeModal}
+                title="저요 목록"
+              >
+                {meList.length > 0 ? (
+                  <div className="flex flex-col flex-grow overflow-y-auto">
+                    {meList.map((item, index) => (
+                      <UserProfile
+                        key={index}
+                        name={item.name}
+                        age={item.age}
+                        location={item.location}
+                        buttonComponent={
+                          <Button shape="circle" variant="filled">
+                            채팅하기
+                          </Button>
+                        }
+                      />
+                    ))}
+                  </div>
+                ) : (
+                  <div>
+                    <p>아직 저요 목록이 없습니다.</p>
+                    <p>저요를 남겨보세요.</p>
+                  </div>
+                )}
+              </BottomSheetModal>
             </div>
           ) : (
             <div className="flex flex-col items-center justify-center h-full">
               {/* 내가 작성한 글 없을 때 */}
-              <div className="-pb-10">
+              <div className="pb-10">
                 <GrayLogoIcon />
               </div>
               <div className="flex flex-col items-center justify-center pb-4">
@@ -204,6 +261,7 @@ export default function Community() {
                   새로운 글을 작성해보세요!
                 </p>
               </div>
+
               <Button shape="circle" variant="outline">
                 <Link href="/community/create">글 작성</Link>
               </Button>

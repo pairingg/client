@@ -1,30 +1,44 @@
 import formatTime from '@/utils/date';
 import Button from '../common/Button';
-import PostCardHeader from '../header/PostCardHeader';
+import UserProfile from '../profiles/UserProfile';
+import MoreGrayIcon from '/public/assets/icons/more_gray.svg';
 
 interface PostCardProps {
+  name: string;
+  age: number;
+  location: string;
   title: string;
   content: string;
   time: Date;
   buttonText: string;
   onMoreClick: () => void;
+  onButtonClick: () => void;
 }
 
 export default function PostCard({
+  name,
+  age,
+  location,
   title,
   content,
   time,
   buttonText,
   onMoreClick,
+  onButtonClick,
 }: PostCardProps) {
   return (
     <div className="bg-white rounded-lg shadow-md p-1 m-6">
       {/* 헤더 */}
-      <PostCardHeader
-        name="김이름"
-        age={20}
-        location="서울시"
-        onMoreClick={onMoreClick}
+      <UserProfile
+        name={name}
+        age={age}
+        location={location}
+        imageSize={80}
+        buttonComponent={
+          <button className="absolute right-0 top-0 p-2" onClick={onMoreClick}>
+            <MoreGrayIcon />
+          </button>
+        }
       />
 
       <div className="m-4 border-t py-2">
@@ -38,7 +52,7 @@ export default function PostCard({
         <div className="flex justify-between pt-6">
           <p className="font-14-regular text-gray1">{formatTime(time)}</p>
           {/* 분홍색 버튼 (원형) */}
-          <Button shape="circle" variant="filled">
+          <Button shape="circle" variant="filled" onClick={onButtonClick}>
             {buttonText}
           </Button>
         </div>
