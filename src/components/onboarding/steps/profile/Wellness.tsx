@@ -10,7 +10,7 @@ import { DRINK_STATUS, SMOKE_STATUS } from '@/constants/wellness';
 import { useOnboarding } from '@/contexts/OnboardingContext';
 import type { OnboardingProps } from '@/types/onboarding';
 
-import Title from '../Title';
+import Title from '../../Title';
 
 const DRINK_OPTIONS = Object.entries(DRINK_STATUS);
 const SMOKE_OPTIONS = Object.entries(SMOKE_STATUS);

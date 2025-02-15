@@ -8,7 +8,7 @@ import OnboardingHeader from '@/components/header/OnboardingHeader';
 import { useOnboarding } from '@/contexts/OnboardingContext';
 import type { OnboardingProps } from '@/types/onboarding';
 
-import Title from '../Title';
+import Title from '../../Title';
 
 type MbtiType = 'ei' | 'sn' | 'tf' | 'jp';
 type MbtiValue = Record<MbtiType, string>;

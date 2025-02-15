@@ -2,7 +2,6 @@
 
 import { type ReactElement } from 'react';
 
-import { useOnboarding } from '@/contexts/OnboardingContext';
 import type { StepChildProps } from '@/hooks/useFunnel';
 import { useFunnel } from '@/hooks/useFunnel';
 
@@ -30,8 +29,6 @@ const steps = [
 
 export default function ProfileOnboarding() {
   const { Funnel, Step, currentStep } = useFunnel(steps);
-  const { data } = useOnboarding();
-  console.log(data);
 
   const stepComponents: Record<
     (typeof steps)[number],

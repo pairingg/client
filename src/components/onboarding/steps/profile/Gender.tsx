@@ -5,7 +5,7 @@ import { useOnboarding } from '@/contexts/OnboardingContext';
 import { useInput } from '@/hooks/useInput';
 import type { OnboardingProps } from '@/types/onboarding';
 
-import Title from '../Title';
+import Title from '../../Title';
 
 export default function Gender({
   onNext,

@@ -4,13 +4,12 @@ import ResetIcon from '/public/assets/icons/text_reset.svg';
 
 import Button from '@/components/common/Button';
 import OnboardingHeader from '@/components/header/OnboardingHeader';
-import { useInput } from '@/hooks/useInput';
-
-import OnboardingInput from '../Input';
-import Title from '../Title';
-
 import { useOnboarding } from '@/contexts/OnboardingContext';
+import { useInput } from '@/hooks/useInput';
 import type { OnboardingProps } from '@/types/onboarding';
+
+import OnboardingInput from '../../Input';
+import Title from '../../Title';
 
 export default function Name({
   onNext,

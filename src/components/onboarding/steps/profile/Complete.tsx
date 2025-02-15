@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import Button from '@/components/common/Button';
 import ProgressBar from '@/components/ProgressBar';
 
-import Title from '../Title';
+import Title from '../../Title';
 
 export default function Complete() {
   const router = useRouter();
