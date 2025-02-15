@@ -5,22 +5,22 @@ import { useState } from 'react';
 import AddressOption from '@/components/common/AddressOption';
 import Button from '@/components/common/Button';
 import OnboardingHeader from '@/components/header/OnboardingHeader';
+import { useOnboarding } from '@/contexts/OnboardingContext';
 import type { OnboardingProps } from '@/types/onboarding';
 
 import Title from '../Title';
 
 export default function Address({
-  setContent,
   onNext,
   onPrev,
   currentStepNumber = 4,
   totalStepsNumber = 8,
 }: OnboardingProps) {
+  const { data, updateData } = useOnboarding();
   const [isOpen, setIsOpen] = useState(false);
-  const [address, setAddress] = useState<{ city: string; district: string }>({
-    city: '',
-    district: '',
-  });
+  const [address, setAddress] = useState(
+    data?.profile?.address || { city: '', district: '' },
+  );
 
   const isButtonEnabled = address.city && address.district;
 
@@ -30,8 +30,7 @@ export default function Address({
 
   const handleNext = () => {
     if (!isButtonEnabled) return;
-
-    setContent((prev) => ({ ...prev, address: address }));
+    updateData({ profile: { ...data?.profile, address } });
     onNext?.();
   };
 
@@ -75,9 +74,7 @@ export default function Address({
         <Button
           shape="rectangle"
           variant={isButtonEnabled ? 'filled' : 'disabled'}
-          width="w-full"
-          height="55px"
-          className=""
+          className="w-full h-[55px]"
           onClick={handleNext}
         >
           다음

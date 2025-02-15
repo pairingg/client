@@ -5,6 +5,7 @@ import { useState } from 'react';
 import Button from '@/components/common/Button';
 import ChipButton from '@/components/common/ChipButton';
 import OnboardingHeader from '@/components/header/OnboardingHeader';
+import { useOnboarding } from '@/contexts/OnboardingContext';
 import type { OnboardingProps } from '@/types/onboarding';
 
 import Title from '../Title';
@@ -22,13 +23,15 @@ const hobbies = [
 ];
 
 export default function Hobby({
-  setContent,
   onNext,
   onPrev,
   currentStepNumber = 5,
   totalStepsNumber = 8,
 }: OnboardingProps) {
-  const [selectedHobbies, setSelectedHobbies] = useState<string[]>([]);
+  const { data, updateData } = useOnboarding();
+  const [selectedHobbies, setSelectedHobbies] = useState<string[]>(
+    data?.profile?.hobby || [],
+  );
 
   const isButtonEnabled = selectedHobbies.length > 0;
 
@@ -43,7 +46,7 @@ export default function Hobby({
   const handleNext = () => {
     if (!isButtonEnabled) return;
 
-    setContent((prev) => ({ ...prev, hobby: selectedHobbies }));
+    updateData({ profile: { ...data?.profile, hobby: selectedHobbies } });
     onNext?.();
   };
 
@@ -82,8 +85,7 @@ export default function Hobby({
         <Button
           shape="rectangle"
           variant={isButtonEnabled ? 'filled' : 'disabled'}
-          width="w-full"
-          height="55px"
+          className="w-full h-[55px]"
           onClick={handleNext}
         >
           다음

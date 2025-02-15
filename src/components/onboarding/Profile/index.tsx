@@ -1,10 +1,10 @@
 'use client';
 
-import { useState, type ReactElement } from 'react';
+import { type ReactElement } from 'react';
 
+import { useOnboarding } from '@/contexts/OnboardingContext';
 import type { StepChildProps } from '@/hooks/useFunnel';
 import { useFunnel } from '@/hooks/useFunnel';
-import type { Content } from '@/types/onboarding';
 
 import Address from './Address';
 import BirthDay from './BirthDay';
@@ -30,22 +30,21 @@ const steps = [
 
 export default function ProfileOnboarding() {
   const { Funnel, Step, currentStep } = useFunnel(steps);
-  const [content, setContent] = useState<Content>({ name: '' });
-
-  console.log(content);
+  const { data } = useOnboarding();
+  console.log(data);
 
   const stepComponents: Record<
     (typeof steps)[number],
     ReactElement<StepChildProps>
   > = {
-    name: <Name setContent={setContent} />,
-    gender: <Gender setContent={setContent} />,
-    birth: <BirthDay setContent={setContent} />,
-    address: <Address setContent={setContent} />,
-    hobby: <Hobby setContent={setContent} />,
-    mbti: <Mbti setContent={setContent} />,
-    wellness: <Wellness setContent={setContent} />,
-    photo: <MyImage setContent={setContent} />,
+    name: <Name />,
+    gender: <Gender />,
+    birth: <BirthDay />,
+    address: <Address />,
+    hobby: <Hobby />,
+    mbti: <Mbti />,
+    wellness: <Wellness />,
+    photo: <MyImage />,
     complete: <Complete />,
   } as const;
 

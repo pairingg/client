@@ -33,9 +33,7 @@ export default function Complete() {
         <Button
           shape="rectangle"
           variant="filled"
-          width="w-full"
-          height="55px"
-          className=""
+          className="w-full h-[55px]"
           onClick={handleNext}
         >
           다음

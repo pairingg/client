@@ -1,18 +1,19 @@
 import Button from '@/components/common/Button';
 import OnboardingHeader from '@/components/header/OnboardingHeader';
+import { useOnboarding } from '@/contexts/OnboardingContext';
 import { useInput } from '@/hooks/useInput';
 import type { OnboardingProps } from '@/types/onboarding';
 
 import Title from '../Title';
 
 export default function BirthDay({
-  setContent,
   onNext,
   onPrev,
   currentStepNumber = 3,
   totalStepsNumber = 8,
 }: OnboardingProps) {
-  const { value, setValue } = useInput('');
+  const { data, updateData } = useOnboarding();
+  const { value, setValue } = useInput(data?.profile?.birth || '');
 
   const isButtonEnabled = value !== '';
 
@@ -20,7 +21,7 @@ export default function BirthDay({
     if (!isButtonEnabled) return;
 
     const today = new Date().toISOString().split('T')[0];
-    setContent((prev) => ({ ...prev, birth: value || today }));
+    updateData({ profile: { ...data?.profile, birth: value || today } });
     onNext?.();
   };
 
@@ -69,9 +70,7 @@ export default function BirthDay({
         <Button
           shape="rectangle"
           variant={isButtonEnabled ? 'filled' : 'disabled'}
-          width="w-full"
-          height="55px"
-          className=""
+          className="w-full h-[55px]"
           onClick={handleNext}
         >
           다음

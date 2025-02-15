@@ -5,18 +5,19 @@ import { useState } from 'react';
 import Button from '@/components/common/Button';
 import ImageUploader from '@/components/common/ImageUploader';
 import OnboardingHeader from '@/components/header/OnboardingHeader';
+import { useOnboarding } from '@/contexts/OnboardingContext';
 import type { OnboardingProps } from '@/types/onboarding';
 
 import Title from '../Title';
 
 export default function MyImage({
-  setContent,
   onNext,
   onPrev,
   currentStepNumber = 8,
   totalStepsNumber = 8,
 }: OnboardingProps) {
-  const [images, setImages] = useState<string[]>([]);
+  const { data, updateData } = useOnboarding();
+  const [images, setImages] = useState<string[]>(data?.profile?.photo || []);
   const isButtonEnabled = images.length > 0;
 
   const handleImageUpload = (imageUrl: string) => {
@@ -33,7 +34,8 @@ export default function MyImage({
 
   const handleNext = () => {
     if (images.length === 0) return;
-    setContent((prev) => ({ ...prev, images }));
+
+    updateData({ profile: { ...data?.profile, photo: images } });
     onNext?.();
   };
 
@@ -76,9 +78,7 @@ export default function MyImage({
         <Button
           shape="rectangle"
           variant={isButtonEnabled ? 'filled' : 'disabled'}
-          width="w-full"
-          height="55px"
-          className=""
+          className="w-full h-[55px]"
           onClick={handleNext}
         >
           다음

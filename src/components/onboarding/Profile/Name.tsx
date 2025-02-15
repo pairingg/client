@@ -9,23 +9,24 @@ import { useInput } from '@/hooks/useInput';
 import OnboardingInput from '../Input';
 import Title from '../Title';
 
+import { useOnboarding } from '@/contexts/OnboardingContext';
 import type { OnboardingProps } from '@/types/onboarding';
 
 export default function Name({
-  setContent,
   onNext,
   onPrev,
   currentStepNumber = 1,
   totalStepsNumber = 8,
 }: OnboardingProps) {
-  const { value, setValue } = useInput('');
+  const { data, updateData } = useOnboarding();
+  const { value, setValue } = useInput(data?.profile?.name || '');
 
   const isButtonEnabled = value !== '';
 
   const handleNext = () => {
     if (!isButtonEnabled) return;
 
-    setContent((prev) => ({ ...prev, name: value }));
+    updateData({ profile: { ...data?.profile, name: value } });
     onNext?.();
   };
 
@@ -60,9 +61,7 @@ export default function Name({
         <Button
           shape="rectangle"
           variant={isButtonEnabled ? 'filled' : 'disabled'}
-          width="w-full"
-          height="55px"
-          className=""
+          className="w-full h-[55px]"
           onClick={handleNext}
         >
           다음

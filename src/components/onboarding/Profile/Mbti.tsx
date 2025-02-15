@@ -5,6 +5,7 @@ import { useState } from 'react';
 import Button from '@/components/common/Button';
 import ChipButton from '@/components/common/ChipButton';
 import OnboardingHeader from '@/components/header/OnboardingHeader';
+import { useOnboarding } from '@/contexts/OnboardingContext';
 import type { OnboardingProps } from '@/types/onboarding';
 
 import Title from '../Title';
@@ -20,17 +21,17 @@ const MBTI_OPTIONS = {
 } as const;
 
 export default function Mbti({
-  setContent,
   onNext,
   onPrev,
   currentStepNumber = 6,
   totalStepsNumber = 8,
 }: OnboardingProps) {
+  const { data, updateData } = useOnboarding();
   const [selections, setSelections] = useState<MbtiValue>({
-    ei: '',
-    sn: '',
-    tf: '',
-    jp: '',
+    ei: data?.profile?.mbti?.split('')[0] || '',
+    sn: data?.profile?.mbti?.split('')[1] || '',
+    tf: data?.profile?.mbti?.split('')[2] || '',
+    jp: data?.profile?.mbti?.split('')[3] || '',
   });
 
   const isButtonEnabled = Object.values(selections).every(Boolean);
@@ -43,7 +44,7 @@ export default function Mbti({
     if (!isButtonEnabled) return;
 
     const mbtiValue = Object.values(selections).join('');
-    setContent((prev) => ({ ...prev, mbti: mbtiValue }));
+    updateData({ profile: { ...data?.profile, mbti: mbtiValue } });
     onNext?.();
   };
 
@@ -91,8 +92,7 @@ export default function Mbti({
         <Button
           shape="rectangle"
           variant={isButtonEnabled ? 'filled' : 'disabled'}
-          width="w-full"
-          height="55px"
+          className="w-full h-[55px]"
           onClick={handleNext}
         >
           다음

@@ -1,26 +1,29 @@
 import Button from '@/components/common/Button';
 import ChipButton from '@/components/common/ChipButton';
 import OnboardingHeader from '@/components/header/OnboardingHeader';
+import { useOnboarding } from '@/contexts/OnboardingContext';
 import { useInput } from '@/hooks/useInput';
 import type { OnboardingProps } from '@/types/onboarding';
 
 import Title from '../Title';
 
 export default function Gender({
-  setContent,
   onNext,
   onPrev,
   currentStepNumber = 2,
   totalStepsNumber = 8,
 }: OnboardingProps) {
-  const { value, setValue } = useInput<'male' | 'female'>();
+  const { data, updateData } = useOnboarding();
+  const { value, setValue } = useInput<'MALE' | 'FEMALE'>(
+    data?.profile?.gender,
+  );
 
   const isButtonEnabled = value !== undefined;
 
   const handleNext = () => {
     if (!isButtonEnabled) return;
 
-    setContent((prev) => ({ ...prev, gender: value }));
+    updateData({ profile: { ...data?.profile, gender: value } });
     onNext?.();
   };
 
@@ -45,16 +48,16 @@ export default function Gender({
             <ChipButton
               variant="wide"
               className="text-center font-18-medium pl-0"
-              onClick={() => setValue('male')}
-              isSelected={value === 'male'}
+              onClick={() => setValue('MALE')}
+              isSelected={value === 'MALE'}
             >
               남성
             </ChipButton>
             <ChipButton
               variant="wide"
               className="text-center font-18-medium pl-0"
-              onClick={() => setValue('female')}
-              isSelected={value === 'female'}
+              onClick={() => setValue('FEMALE')}
+              isSelected={value === 'FEMALE'}
             >
               여성
             </ChipButton>
@@ -64,9 +67,7 @@ export default function Gender({
         <Button
           shape="rectangle"
           variant={isButtonEnabled ? 'filled' : 'disabled'}
-          width="w-full"
-          height="55px"
-          className=""
+          className="w-full h-[55px]"
           onClick={handleNext}
         >
           다음
