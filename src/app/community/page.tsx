@@ -191,7 +191,7 @@ export default function Community() {
           {/* 플로팅 버튼 */}
           <div className="absolute bottom-20 right-5 mb-6">
             <Link href="/community/create">
-              <PlusButton />
+              <PlusButton aria-labelledby="게시물 생성 버튼" />
             </Link>
           </div>
         </Tab.Content>
@@ -240,9 +240,13 @@ export default function Community() {
                     ))}
                   </div>
                 ) : (
-                  <div>
-                    <p>아직 저요 목록이 없습니다.</p>
-                    <p>저요를 남겨보세요.</p>
+                  <div className="flex flex-col items-center justify-center">
+                    <p className="text-18px font-medium text-gray1 py-1">
+                      아직 저요 목록이 없습니다.
+                    </p>
+                    <p className="font-14-regular text-gray1">
+                      저요를 남겨보세요.
+                    </p>
                   </div>
                 )}
               </BottomSheetModal>
