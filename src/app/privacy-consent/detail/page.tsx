@@ -1,7 +1,7 @@
 'use client';
 
 import type { UIEvent } from 'react';
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
@@ -15,34 +15,13 @@ export default function PrivacyConsent() {
   const router = useRouter();
   const contentRef = useRef<HTMLDivElement>(null);
   const [isBottom, setIsBottom] = useState(false);
-  const [currentSection, setCurrentSection] = useState(0);
-
-  const SECTION_HEIGHT = window.innerHeight * 0.5; // 화면 높이의 50%씩 이동
-
-  const checkIsBottom = () => {
-    if (contentRef.current) {
-      const element = contentRef.current;
-      const isNearBottom =
-        element.scrollHeight - element.scrollTop <= element.clientHeight + 100;
-      setIsBottom(isNearBottom);
-    }
-  };
 
   const handleScroll = (e: UIEvent<HTMLDivElement>) => {
     const element = e.currentTarget;
     const isNearBottom =
       element.scrollHeight - element.scrollTop <= element.clientHeight + 100;
     setIsBottom(isNearBottom);
-
-    // 현재 섹션 계산
-    const currentSectionNum = Math.floor(element.scrollTop / SECTION_HEIGHT);
-    setCurrentSection(currentSectionNum);
   };
-
-  // 초기 로드 시 스크롤 위치 확인
-  useEffect(() => {
-    checkIsBottom();
-  }, []);
 
   const handleButtonClick = () => {
     if (isBottom) {
@@ -52,9 +31,10 @@ export default function PrivacyConsent() {
 
     // 다음 섹션으로 스크롤
     if (contentRef.current) {
-      const nextScrollTop = (currentSection + 1) * SECTION_HEIGHT;
+      const currentScroll = contentRef.current.scrollTop;
+      const scrollHeight = window.innerHeight - 68 - 120; // 전체 높이 - 헤더(68px) - 버튼영역(120px)
       contentRef.current.scrollTo({
-        top: nextScrollTop,
+        top: currentScroll + scrollHeight,
         behavior: 'smooth',
       });
     }
