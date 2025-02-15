@@ -6,8 +6,8 @@ import BackIcon from '/public/assets/icons/back_icon.svg';
 
 interface Props {
   onPrev?: () => void;
-  currentStep: number;
-  totalSteps: number;
+  currentStep?: number;
+  totalSteps?: number;
 }
 
 export default function OnboardingHeader({
@@ -16,7 +16,6 @@ export default function OnboardingHeader({
   totalSteps,
 }: Props) {
   const { currentStage } = useOnboarding();
-  console.log(currentStage);
 
   return (
     <div>
@@ -27,7 +26,9 @@ export default function OnboardingHeader({
         <StageIndicator currentStage={currentStage} />
       </div>
 
-      <ProgressBar currentStep={currentStep} totalSteps={totalSteps} />
+      {currentStep && totalSteps && (
+        <ProgressBar currentStep={currentStep} totalSteps={totalSteps} />
+      )}
     </div>
   );
 }

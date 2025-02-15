@@ -70,6 +70,7 @@ export default function MyImage({
                 onImageUpload={handleImageUpload}
                 onImageDelete={() => handleImageDelete(index)}
                 imageUrl={images[index]}
+                wide={false}
               />
             ))}
           </div>

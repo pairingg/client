@@ -5,6 +5,7 @@ import { type ReactElement } from 'react';
 import type { StepChildProps } from '@/hooks/useFunnel';
 import { useFunnel } from '@/hooks/useFunnel';
 
+import FaceAuthImage from './FaceAuth/FaceAuthImage';
 import IdealTypeAddress from './idealType/Address';
 import IdealTypeAge from './idealType/Age';
 import IdealTypeComplete from './idealType/Complete';
@@ -65,8 +66,8 @@ export default function OnboardingFunnel() {
     'ideal-age': <IdealTypeAge />,
     'ideal-wellness': <IdealTypeWellness />,
     'ideal-complete': <IdealTypeComplete />,
-    'face-auth-start': <div>Face Auth Start</div>,
-    'face-auth-photo': <div>Face Auth Photo</div>,
+    'face-auth-start': <FaceAuthImage />,
+    'face-auth-photo': <FaceAuthImage />,
     'face-auth-complete': <div>Face Auth Complete</div>,
   } as const;
 
