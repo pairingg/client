@@ -50,9 +50,16 @@ export default function PostCard({
 
         {/* 하단 */}
         <div className="flex justify-between pt-6">
-          <p className="font-14-regular text-gray1">{formatTime(time)}</p>
+          <p className="font-14-regular font-roboto text-gray1">
+            {formatTime(time)}
+          </p>
           {/* 분홍색 버튼 (원형) */}
-          <Button shape="circle" variant="filled" onClick={onButtonClick}>
+          <Button
+            shape="circle"
+            variant="filled"
+            className="px-[16px] py-[6px]"
+            onClick={onButtonClick}
+          >
             {buttonText}
           </Button>
         </div>

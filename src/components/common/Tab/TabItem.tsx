@@ -14,7 +14,7 @@ export default function TabItem({ value, children }: TabItemProps) {
   const handleTabItemClick = () => setActiveValue(value);
 
   return (
-    <div className="grow cursor-pointer">
+    <div className="cursor-pointer w-[100px] font-20-bold">
       <li
         className={cn(
           'w-full h-[30px] flex justify-center items-center font-bold text-20px',
@@ -27,12 +27,14 @@ export default function TabItem({ value, children }: TabItemProps) {
       >
         {children}
       </li>
-      <div
-        className={cn('w-full h-[2px] rounded-[32px]', {
-          'bg-gray1': !isActive,
-          'bg-mainPink1': isActive,
-        })}
-      />
+
+      <div className="w-full flex justify-center">
+        <div
+          className={cn('w-[80%] h-[2px] rounded-[32px] mt-[6px]', {
+            'bg-mainPink1': isActive,
+          })}
+        />
+      </div>
     </div>
   );
 }

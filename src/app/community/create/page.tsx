@@ -101,15 +101,15 @@ export default function PostCreate() {
         />
       </div>
 
+      {/* 하단 바 */}
+      <BottomNavBar />
+
       {/* 등록 버튼 */}
       <div className="p-5">
         <Button shape="rectangle" variant="filled" className="w-full py-3">
           등록
         </Button>
       </div>
-
-      {/* 하단 바 */}
-      <BottomNavBar />
     </div>
   );
 }
