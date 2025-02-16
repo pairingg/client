@@ -44,7 +44,6 @@ export default function Notifications() {
 
   //  알림 있음, 없음 여부 확인
   const isEmpty = notificationList.length === 0;
-
   return (
     <div className="flex flex-col h-screen pb-[90px]">
       <div className="shadow-[0px_3px_3px_rgba(0,0,0,0.05)]">
@@ -87,6 +86,34 @@ export default function Notifications() {
           })}
         </div>
       )}
+
+      <div className="flex-1 overflow-y-auto">
+        {notificationList.map((item, index) => {
+          const isNewDay =
+            index === 0 ||
+            formatDate(notificationList[index - 1].time) !==
+              formatDate(item.time);
+
+          return (
+            <div key={index}>
+              {isNewDay && (
+                <div className="font-14-medium font-roboto m-5">
+                  {formatDate(item.time)}
+                </div>
+              )}
+              <NotificationCard
+                profileImg={item.profileImg}
+                name={item.name}
+                age={item.age}
+                location={item.location}
+                time={item.time}
+                isHeart={item.isHeart}
+                isMe={item.isMe}
+              />
+            </div>
+          );
+        })}
+      </div>
 
       <BottomNavBar />
     </div>
