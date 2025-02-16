@@ -39,6 +39,7 @@ export default function Community() {
   // "저요 목록" 모달
   const bottomSheetModal = useModal();
 
+  // 글 목록
   const posts = [
     {
       name: '김이름',
@@ -60,6 +61,7 @@ export default function Community() {
     },
   ];
 
+  // 내가 쓴 글 목록
   const myPosts = [
     {
       name: '김이름',
@@ -72,7 +74,13 @@ export default function Community() {
     },
   ];
 
+  // 저요 목록
   const meList = [
+    {
+      name: '김이름',
+      age: 20,
+      location: '서울시',
+    },
     {
       name: '김이름',
       age: 20,
@@ -232,7 +240,11 @@ export default function Community() {
                         age={item.age}
                         location={item.location}
                         buttonComponent={
-                          <Button shape="circle" variant="filled">
+                          <Button
+                            shape="circle"
+                            variant="filled"
+                            className="px-[20px] py-[8px]"
+                          >
                             채팅하기
                           </Button>
                         }

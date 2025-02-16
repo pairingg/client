@@ -20,7 +20,7 @@ export default function BottomSheetModal({
       {/* 배경 오버레이 */}
       <div className="fixed inset-0 bg-black bg-opacity-50" onClick={isClose} />
       {/* 바텀시트 컨텐츠 */}
-      <div className="relative bg-white rounded-t-2xl overflow-hidden min-h-[300px]">
+      <div className="relative bg-white rounded-t-2xl overflow-hidden min-h-[300px] overflow-y-auto">
         {/* 바텀시트 핸들 */}
         <div className="flex justify-center pt-3 pb-2">
           <div className="w-10 h-1 bg-gray2 rounded-full" />

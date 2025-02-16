@@ -18,7 +18,7 @@ export default function UserProfile({
   buttonComponent,
 }: UserProfileProps) {
   return (
-    <div className="relative flex items-center m-4">
+    <div className="relative flex items-center m-2">
       {/* 프로필 이미지 */}
       <div className="mr-3 rounded-full">
         <ProfileImage src={imageSrc} size={imageSize} />
@@ -27,7 +27,7 @@ export default function UserProfile({
       {/* 이름, 나이, 위치 정보 */}
       <div className="flex-1">
         <p className="font-18-medium pb-1">{name}</p>
-        <p className="pb-3">
+        <p>
           <span>{age}, </span>
           <span>{location}</span>
         </p>

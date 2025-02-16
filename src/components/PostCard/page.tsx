@@ -27,7 +27,7 @@ export default function PostCard({
   onButtonClick,
 }: PostCardProps) {
   return (
-    <div className="bg-white rounded-lg shadow-md p-1 m-6">
+    <div className="bg-white rounded-lg shadow-md p-1 m-5 items-center">
       {/* 헤더 */}
       <UserProfile
         name={name}
@@ -35,7 +35,10 @@ export default function PostCard({
         location={location}
         imageSize={80}
         buttonComponent={
-          <button className="absolute right-0 top-0 p-2" onClick={onMoreClick}>
+          <button
+            className="absolute right-0 top-0 p-2 pt-4"
+            onClick={onMoreClick}
+          >
             <MoreGrayIcon />
           </button>
         }
