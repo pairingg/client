@@ -172,7 +172,6 @@ export default function Community() {
               {
                 label: '확인',
                 onClick: () => {
-                  console.log('신고 처리 완료:', reportMessage);
                   reportConfirmModal.closeModal();
                   reportModal.closeModal();
                   reportSuccessModal.openModal();
