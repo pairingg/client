@@ -1,3 +1,5 @@
-export default function EditImage() {
-  return <div>EditImage</div>;
+import EditImage from '@/components/mypage/EditImage';
+
+export default function EditImagePage() {
+  return <EditImage />;
 }
