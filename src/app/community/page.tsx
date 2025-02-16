@@ -102,7 +102,7 @@ export default function Community() {
 
         {/* 글 목록 */}
         <Tab.Content value="tab1">
-          <div className="flex flex-col pb-[200px] h-screen flex-grow overflow-y-auto">
+          <div className="flex flex-col pb-[200px] h-screen flex-grow overflow-y-auto bg-[#f9f9f9]">
             {posts.map((item, index) => (
               <PostCard
                 key={index}
@@ -207,7 +207,7 @@ export default function Community() {
         {/* 내가 쓴 글 목록 */}
         <Tab.Content value="tab2">
           {myPosts.length > 0 ? (
-            <div className="flex flex-col pb-[200px] h-screen flex-grow overflow-y-auto">
+            <div className="flex flex-col pb-[200px] h-screen flex-grow overflow-y-auto bg-[#f9f9f9]">
               {/* 내가 작성한 글 있을 때 */}
               {myPosts.map((item, index) => (
                 <PostCard

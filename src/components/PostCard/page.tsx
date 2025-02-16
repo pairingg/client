@@ -27,7 +27,10 @@ export default function PostCard({
   onButtonClick,
 }: PostCardProps) {
   return (
-    <div className="bg-white rounded-lg shadow-md p-1 m-5 items-center">
+    <div
+      className="bg-white rounded-lg p-1 m-5 items-center
+    shadow-[0px_3px_3px_rgba(0,0,0,0.05),_0px_-3px_3px_rgba(0,0,0,0.05),_3px_0px_3px_rgba(0,0,0,0.05),_-3px_0px_3px_rgba(0,0,0,0.05)]"
+    >
       {/* 헤더 */}
       <UserProfile
         name={name}
