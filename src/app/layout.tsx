@@ -43,6 +43,10 @@ export default function RootLayout({
         <meta property="og:type" content="website" />
         <meta property="og:url" content="웹 페이지 주소 들어갈 예정" />
         <title>pAIring</title>
+        <script
+          defer
+          src="https://cdn.swygbro.com/public/widget/swyg-widget.js"
+        ></script>
       </head>
       <body
         className={`${roboto.variable} ${noto.variable} antialiased relative overscroll-y-none min-h-[100dvh] scrollbar-hide`}
