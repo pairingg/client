@@ -9,8 +9,11 @@ import ActionModal from '@/components/modal/ActionModal';
 import BottomSheetModal from '@/components/modal/BottomSheetModal';
 import ListModal from '@/components/modal/ListModal';
 import PostCard from '@/components/PostCard/page';
+
 import UserProfile from '@/components/profiles/UserProfile';
+
 import { useModal } from '@/hooks/useModal';
+
 import Link from 'next/link';
 import { useState } from 'react';
 import CheckIcon from '/public/assets/icons/alert_checkMark.svg';

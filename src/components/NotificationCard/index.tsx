@@ -1,8 +1,10 @@
 'use client';
 
 import { useModal } from '@/hooks/useModal';
+
 import formatTime from '@/utils/date';
 import ProfileImage from '../common/ProfileImage';
+
 import ActionModal from '../modal/ActionModal';
 import CheckIcon from '/public/assets/icons/alert_checkMark.svg';
 import ExclamationIcon from '/public/assets/icons/alert_exclamationMark.svg';

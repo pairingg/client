@@ -50,71 +50,44 @@ export default function Notifications() {
         <PageHeader title="알림" />
       </div>
 
-      {isEmpty ? (
-        //  알림이 없을 때의 화면
-        <div className="flex-1 flex flex-col items-center justify-center">
-          <LogoIcon />
-          <p className="font-18-medium text-gray1">새로운 알림이 없습니다.</p>
-        </div>
-      ) : (
-        // 알림이 있을 때의 화면
-        <div className="flex-1 overflow-y-auto">
-          {notificationList.map((item, index) => {
-            const isNewDay =
-              index === 0 ||
-              formatDate(notificationList[index - 1].time) !==
-                formatDate(item.time);
+      <div className="flex flex-col h-screen  bg-[#f9f9f9]">
+        {isEmpty ? (
+          //  알림이 없을 때의 화면
+          <div className="flex-1 flex flex-col items-center justify-center">
+            <LogoIcon />
+            <p className="font-18-medium text-gray1">새로운 알림이 없습니다.</p>
+          </div>
+        ) : (
+          // 알림이 있을 때의 화면
+          <div className="flex-1 overflow-y-auto">
+            {notificationList.map((item, index) => {
+              const isNewDay =
+                index === 0 ||
+                formatDate(notificationList[index - 1].time) !==
+                  formatDate(item.time);
 
-            return (
-              <div key={index}>
-                {isNewDay && (
-                  <div className="font-14-medium font-roboto m-5">
-                    {formatDate(item.time)}
-                  </div>
-                )}
-                <NotificationCard
-                  profileImg={item.profileImg}
-                  name={item.name}
-                  age={item.age}
-                  location={item.location}
-                  time={item.time}
-                  isHeart={item.isHeart}
-                  isMe={item.isMe}
-                />
-              </div>
-            );
-          })}
-        </div>
-      )}
-
-      <div className="flex-1 overflow-y-auto">
-        {notificationList.map((item, index) => {
-          const isNewDay =
-            index === 0 ||
-            formatDate(notificationList[index - 1].time) !==
-              formatDate(item.time);
-
-          return (
-            <div key={index}>
-              {isNewDay && (
-                <div className="font-14-medium font-roboto m-5">
-                  {formatDate(item.time)}
+              return (
+                <div key={index}>
+                  {isNewDay && (
+                    <div className="font-14-medium font-roboto m-5">
+                      {formatDate(item.time)}
+                    </div>
+                  )}
+                  <NotificationCard
+                    profileImg={item.profileImg}
+                    name={item.name}
+                    age={item.age}
+                    location={item.location}
+                    time={item.time}
+                    isHeart={item.isHeart}
+                    isMe={item.isMe}
+                  />
                 </div>
-              )}
-              <NotificationCard
-                profileImg={item.profileImg}
-                name={item.name}
-                age={item.age}
-                location={item.location}
-                time={item.time}
-                isHeart={item.isHeart}
-                isMe={item.isMe}
-              />
-            </div>
-          );
-        })}
+              );
+            })}
+          </div>
+        )}
       </div>
-
       <BottomNavBar />
     </div>
   );
