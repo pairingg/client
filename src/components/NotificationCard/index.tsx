@@ -1,5 +1,11 @@
+'use client';
+
+import { useModal } from '@/hooks/useModal';
 import formatTime from '@/utils/date';
 import ProfileImage from '../common/ProfileImage';
+import ActionModal from '../modal/ActionModal';
+import CheckIcon from '/public/assets/icons/alert_checkMark.svg';
+import ExclamationIcon from '/public/assets/icons/alert_exclamationMark.svg';
 import DeleteIcon from '/public/assets/icons/delete_small_gray.svg';
 
 interface NotificationCardProps {
@@ -35,6 +41,10 @@ export default function NotificationCard({
     buttonText = '저요 목록 보기';
   }
 
+  // 삭제 확인 모달 & 삭제 완료 모달
+  const deleteConfirmModal = useModal();
+  const deleteSuccessModal = useModal();
+
   return (
     <div
       className="relative flex items-center bg-white rounded-xl m-4 
@@ -42,7 +52,10 @@ export default function NotificationCard({
     >
       <div className="flex m-4">
         {/* 삭제 버튼 */}
-        <button className="absolute top-2 right-2 m-1">
+        <button
+          className="absolute top-2 right-2 m-1"
+          onClick={deleteConfirmModal.openModal}
+        >
           <DeleteIcon />
         </button>
 
@@ -68,6 +81,40 @@ export default function NotificationCard({
           </button>
         )}
       </div>
+
+      <ActionModal
+        isOpen={deleteConfirmModal.isOpen}
+        icon={<ExclamationIcon />}
+        message="이 알림을 삭제하시겠습니까?"
+        buttons={[
+          {
+            label: '취소',
+            onClick: deleteConfirmModal.closeModal,
+          },
+          {
+            label: '확인',
+            onClick: () => {
+              deleteConfirmModal.closeModal();
+              deleteSuccessModal.openModal();
+            },
+            className: 'text-mainPink1',
+          },
+        ]}
+      />
+
+      {/* 삭제 완료 모달 */}
+      <ActionModal
+        isOpen={deleteSuccessModal.isOpen}
+        icon={<CheckIcon fill="#FF85A2" />}
+        message="알림이 삭제 되었습니다."
+        buttons={[
+          {
+            label: '닫기',
+            onClick: deleteSuccessModal.closeModal,
+            className: 'w-full',
+          },
+        ]}
+      />
     </div>
   );
 }
