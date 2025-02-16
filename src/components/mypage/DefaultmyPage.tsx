@@ -33,7 +33,7 @@ export default function DefaultMyPage({ name, age }: DefaultInfoProps) {
   const withdrawalConfirmModal = useModal();
 
   const handleEdit = () => {
-    router.push('/mypage/edit');
+    router.push('/mypage/edit/info');
   };
 
   // TODO : 로그아웃, 회원탈퇴 로직 추가

@@ -41,7 +41,7 @@ export default function EditImage() {
 
   return (
     <div className="h-[100dvh] flex flex-col">
-      <div className="relative w-full px-5 py-4 gap-6 h-[68px] flex justify-center items-center">
+      <div className="relative w-full px-5 py-4 gap-6 h-[68px] flex justify-center items-center shadow-md">
         <div className="absolute left-[20px]">
           <BackIcon onClick={handlePrev} />
         </div>
@@ -69,7 +69,7 @@ export default function EditImage() {
           className="w-full h-[55px]"
           onClick={handleSave}
         >
-          저장
+          수정 완료
         </Button>
       </div>
     </div>
