@@ -17,7 +17,14 @@ const keywords = [
   { icon: <BeerIcon />, title: '음주 스타일' },
 ];
 
-const profileCardList = [
+// 추천 리스트
+const recommendationList = [
+  { name: '김이름', age: '20', location: '서울시 용산구' },
+  { name: '김이름', age: '20', location: '서울시 용산구' },
+];
+
+// 맞춤 추천 리스트
+const keywordRecommendationList = [
   { name: '김이름', age: '20', location: '서울시 용산구' },
   { name: '김이름', age: '20', location: '서울시 용산구' },
 ];
@@ -37,7 +44,7 @@ export default function MainPage() {
 
             {/* 프로필카드 영역 */}
             <div className="flex flex-col items-center gap-5">
-              {profileCardList.map((item, index) => (
+              {recommendationList.map((item, index) => (
                 <ProfileCard
                   key={index}
                   name={item.name}
@@ -53,6 +60,20 @@ export default function MainPage() {
             <p className="font-24-bold mb-5">맞춤 추천</p>
             <div className="flex justify-center">
               <KeywordRecommendation keywords={keywords} />
+            </div>
+          </div>
+
+          <div className="flex flex-col pt-8">
+            <div className="flex flex-col items-center gap-5">
+              {keywordRecommendationList &&
+                keywordRecommendationList.map((item, index) => (
+                  <ProfileCard
+                    key={index}
+                    name={item.name}
+                    age={item.age}
+                    location={item.location}
+                  />
+                ))}
             </div>
           </div>
         </div>
