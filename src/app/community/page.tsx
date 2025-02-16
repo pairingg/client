@@ -45,19 +45,19 @@ export default function Community() {
       name: '김이름',
       age: 20,
       location: '서울시',
-      title: '제목 제목제목',
       content:
         '글 내용 가나다라마바사 아자차카타파하 가나 다라 마바사 아자차카 타파하 가나다라마 바사 아자차카 타파하가 나다라마바사.',
-      time: new Date(),
+      imageUrl:
+        'https://upload.wikimedia.org/wikipedia/ko/4/4a/%EC%8B%A0%EC%A7%B1%EA%B5%AC.png',
+      createdAt: new Date(),
     },
     {
       name: '김이름',
       age: 20,
       location: '서울시',
-      title: '제목 제목제목',
       content:
         '글 내용 가나다라마바사 아자차카타파하 가나 다라 마바사 아자차카 타파하 가나다라마 바사 아자차카 타파하가 나다라마바사.',
-      time: new Date(),
+      createdAt: new Date(),
     },
   ];
 
@@ -67,10 +67,11 @@ export default function Community() {
       name: '김이름',
       age: 20,
       location: '서울시',
-      title: '제목 제목제목',
+      imageUrl:
+        'https://upload.wikimedia.org/wikipedia/ko/4/4a/%EC%8B%A0%EC%A7%B1%EA%B5%AC.png',
       content:
         '글 내용 가나다라마바사 아자차카타파하 가나 다라 마바사 아자차카 타파하 가나다라마 바사 아자차카 타파하가 나다라마바사.',
-      time: new Date(),
+      createdAt: new Date(),
     },
   ];
 
@@ -109,9 +110,9 @@ export default function Community() {
                 name={item.name}
                 age={item.age}
                 location={item.location}
-                title={item.title}
                 content={item.content}
-                time={item.time}
+                imageUrl={item.imageUrl}
+                time={item.createdAt}
                 buttonText="저요"
                 onMoreClick={reportcheckModal.openModal}
                 onButtonClick={() => console.log('저요 버튼 클릭')}
@@ -216,9 +217,9 @@ export default function Community() {
                   name={item.name}
                   age={item.age}
                   location={item.location}
-                  title={item.title}
                   content={item.content}
-                  time={item.time}
+                  imageUrl={item.imageUrl}
+                  time={item.createdAt}
                   buttonText="저요 목록 보기"
                   onMoreClick={myPostMenuModal.openModal}
                   onButtonClick={bottomSheetModal.openModal}

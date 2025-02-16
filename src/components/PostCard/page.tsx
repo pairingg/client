@@ -7,8 +7,8 @@ interface PostCardProps {
   name: string;
   age: number;
   location: string;
-  title: string;
   content: string;
+  imageUrl?: string;
   time: Date;
   buttonText: string;
   onMoreClick: () => void;
@@ -19,8 +19,8 @@ export default function PostCard({
   name,
   age,
   location,
-  title,
   content,
+  imageUrl,
   time,
   buttonText,
   onMoreClick,
@@ -47,13 +47,20 @@ export default function PostCard({
       <div className="m-4 border-t py-2">
         {/* 게시글 내용 */}
         <div className="flex flex-col">
-          <h1 className="font-18-medium py-2">{title}</h1>
           <p className="font-16-regular py-1">{content}</p>
+          {/* 이미지 내용 */}
+          {imageUrl && (
+            <img
+              src={imageUrl}
+              alt="게시글 image"
+              className="mt-2 w-full object-cover"
+            />
+          )}
         </div>
 
         {/* 하단 */}
         <div className="flex justify-between pt-6">
-          <p className="font-14-regular font-roboto text-gray1">
+          <p className="flex font-14-regular font-roboto text-gray1 items-center justify-center">
             {formatTime(time)}
           </p>
           {/* 분홍색 버튼 (원형) */}
