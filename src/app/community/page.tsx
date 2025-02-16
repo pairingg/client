@@ -184,7 +184,7 @@ export default function Community() {
           {/* 신고 완료 모달 */}
           <ActionModal
             isOpen={reportSuccessModal.isOpen}
-            icon={<CheckIcon />}
+            icon={<CheckIcon fill="#FF85A2" />}
             message="신고 되었습니다."
             buttons={[
               {
@@ -330,7 +330,7 @@ export default function Community() {
           {/* 삭제 완료 모달 */}
           <ActionModal
             isOpen={deleteSuccessModal.isOpen}
-            icon={<CheckIcon />}
+            icon={<CheckIcon fill="#FF85A2" />}
             message="삭제 되었습니다."
             buttons={[
               {

@@ -87,7 +87,7 @@ export default function KeywordList({ keywords }: KeywordListProps) {
       {/* (2) 키워드 선택 완료 모달 */}
       <ActionModal
         isOpen={checkModalSuccessModal.isOpen}
-        icon={<CheckIcon />}
+        icon={<CheckIcon fill="#FF85A2" />}
         message="추천이 완료되었습니다."
         buttons={[
           {
