@@ -34,8 +34,9 @@ export default function MainPage() {
                 <LogoIcon />
               </Link>
             </div>
+
             {/* 프로필카드 영역 */}
-            <div className="flex flex-col items-center gap-3">
+            <div className="flex flex-col items-center gap-5">
               {profileCardList.map((item, index) => (
                 <ProfileCard
                   key={index}
