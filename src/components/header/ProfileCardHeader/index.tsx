@@ -36,7 +36,7 @@ export default function ProfileCardHeader({
   };
 
   return (
-    <div className="m-7">
+    <div className="m-1">
       <div className="flex items-center">
         <div className="flex items-center space-x-3">
           <span className="text-20px font-semiBold">{name}</span>
@@ -44,7 +44,11 @@ export default function ProfileCardHeader({
           <FaceAuthIcon />
         </div>
 
-        <button className="ml-auto" onClick={checkModal.openModal}>
+        <button
+          className="ml-auto"
+          aria-label="더보기"
+          onClick={checkModal.openModal}
+        >
           <MoreBlackIcon />
         </button>
       </div>
