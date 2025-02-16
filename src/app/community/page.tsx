@@ -4,6 +4,7 @@ import BottomNavBar from '@/components/BottomNavBar';
 import PlusButton from '@/components/buttons/PlusButton';
 import Button from '@/components/common/Button';
 import Tab from '@/components/common/Tab';
+import PageHeader from '@/components/header/PageHeader';
 import ActionModal from '@/components/modal/ActionModal';
 import BottomSheetModal from '@/components/modal/BottomSheetModal';
 import ListModal from '@/components/modal/ListModal';
@@ -91,9 +92,7 @@ export default function Community() {
 
   return (
     <div className="flex flex-col pb-[70px] h-screen overflow-hidden relative">
-      <div className="px-7 pt-3 py-3">
-        <p className="text-24px font-bold">커뮤니티</p>
-      </div>
+      <PageHeader title="커뮤니티" />
 
       <Tab.Group initialTab="tab1">
         <Tab.Header>
