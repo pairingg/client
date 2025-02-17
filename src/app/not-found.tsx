@@ -19,7 +19,7 @@ export default function NotFound() {
 
         <div className="flex flex-col items-center mt-0">
           <p className="font-18-medium text-mainPink1 pb-1">
-            일시적인 오류입니다.
+            페이지를 찾을 수 없습니다.
           </p>
           <p className="font-14-regular text-gray1 pb-2">
             잠시 후에 다시 시도해 주세요.
