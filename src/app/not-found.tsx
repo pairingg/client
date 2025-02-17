@@ -4,7 +4,7 @@ import Button from '@/components/common/Button';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 
-export default function Error() {
+export default function NotFound() {
   const router = useRouter();
 
   return (
