@@ -9,15 +9,15 @@ import ActionModal from '@/components/modal/ActionModal';
 import BottomSheetModal from '@/components/modal/BottomSheetModal';
 import ListModal from '@/components/modal/ListModal';
 import PostCard from '@/components/PostCard/page';
-
 import UserProfile from '@/components/profiles/UserProfile';
-
 import { useModal } from '@/hooks/useModal';
 
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+
 import { useState } from 'react';
+
 import CheckIcon from '/public/assets/icons/alert_checkMark.svg';
 import ExclamationIcon from '/public/assets/icons/alert_exclamationMark.svg';
 
@@ -54,8 +54,8 @@ export default function Community() {
       location: '서울시',
       content:
         '글 내용 가나다라마바사 아자차카타파하 가나 다라 마바사 아자차카 타파하 가나다라마 바사 아자차카 타파하가 나다라마바사.',
-      imageUrl:
-        'https://upload.wikimedia.org/wikipedia/ko/4/4a/%EC%8B%A0%EC%A7%B1%EA%B5%AC.png',
+      // imageUrl:
+      //   'https://upload.wikimedia.org/wikipedia/ko/4/4a/%EC%8B%A0%EC%A7%B1%EA%B5%AC.png',
       createdAt: new Date(),
     },
     {
@@ -74,8 +74,8 @@ export default function Community() {
       name: '김이름',
       age: 20,
       location: '서울시',
-      imageUrl:
-        'https://upload.wikimedia.org/wikipedia/ko/4/4a/%EC%8B%A0%EC%A7%B1%EA%B5%AC.png',
+      // imageUrl:
+      //   'https://upload.wikimedia.org/wikipedia/ko/4/4a/%EC%8B%A0%EC%A7%B1%EA%B5%AC.png',
       content:
         '글 내용 가나다라마바사 아자차카타파하 가나 다라 마바사 아자차카 타파하 가나다라마 바사 아자차카 타파하가 나다라마바사.',
       createdAt: new Date(),
@@ -116,7 +116,7 @@ export default function Community() {
                 age={item.age}
                 location={item.location}
                 content={item.content}
-                imageUrl={item.imageUrl}
+                // 없애면 안됨 imageUrl={item.imageUrl}
                 time={item.createdAt}
                 buttonText="저요"
                 onMoreClick={reportcheckModal.openModal}
@@ -222,7 +222,7 @@ export default function Community() {
                   age={item.age}
                   location={item.location}
                   content={item.content}
-                  imageUrl={item.imageUrl}
+                  // 없애면 안됨 imageUrl={item.imageUrl}
                   time={item.createdAt}
                   buttonText="저요 목록 보기"
                   onMoreClick={myPostMenuModal.openModal}

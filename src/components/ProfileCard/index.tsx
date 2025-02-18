@@ -7,8 +7,6 @@ import LocationIcon from '/public/assets/icons/location.svg';
 
 import {
   Carousel,
-  CarouselContent,
-  CarouselItem,
   CarouselNext,
   CarouselPrevious,
 } from '@/components/ui/Carousel';
@@ -17,7 +15,7 @@ interface ProfileCardProps {
   name: string;
   age?: React.ReactNode;
   location: string;
-  images: string[];
+  images?: string[];
 }
 
 export default function ProfileCard({
@@ -30,17 +28,19 @@ export default function ProfileCard({
     <div className="relative w-full aspect-square rounded-xl shadow-lg overflow-hidden">
       {/* 이미지 캐러셀 */}
       <Carousel>
-        <CarouselContent>
+        {/* 삭제 하면 안됨 */}
+
+        {/* <CarouselContent>
           {images.map((imgUrl, index) => (
             <CarouselItem key={index}>
-              <img
+              <Image
                 src={imgUrl}
                 alt={`Profile image ${index + 1}`}
                 className="object-cover w-full h-full"
               />
             </CarouselItem>
           ))}
-        </CarouselContent>
+        </CarouselContent> */}
         {/* 좌우 이동 버튼 */}
         <CarouselPrevious />
         <CarouselNext />

@@ -3,7 +3,6 @@
 import BottomNavBar from '@/components/BottomNavBar';
 import Button from '@/components/common/Button';
 import ImageUploader from '@/components/common/ImageUploader';
-
 import { useModal } from '@/hooks/useModal';
 
 import { useRouter } from 'next/navigation';
@@ -11,6 +10,7 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
 import ActionModal from '../../../components/modal/ActionModal/index';
+
 import ExclamationIcon from '/public/assets/icons/alert_exclamationMark.svg';
 import BackIcon from '/public/assets/icons/header_back.svg';
 

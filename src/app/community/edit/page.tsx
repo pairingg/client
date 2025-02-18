@@ -3,15 +3,16 @@
 import BottomNavBar from '@/components/BottomNavBar';
 import Button from '@/components/common/Button';
 import ImageUploader from '@/components/common/ImageUploader';
-import { useModal } from '@/hooks/useModal';
+
 import { useRouter } from 'next/navigation';
+
 import { useState } from 'react';
+
 import BackIcon from '/public/assets/icons/header_back.svg';
 
 export default function PostEdit() {
   const [content, setContent] = useState(''); // 글자 수 상태 관리
   const maxLength = 80;
-  const outModal = useModal(false);
   const router = useRouter();
 
   // 단일 이미지 상태
