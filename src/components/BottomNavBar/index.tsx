@@ -41,7 +41,7 @@ const NavItem: React.FC<NavItemProps> = ({
       isActive ? 'text-mainPink1 font-semiBold' : 'text-black'
     }`}
   >
-    {notificationCount && notificationCount > 0 && (
+    {notificationCount !== undefined && notificationCount > 0 && (
       <div className="absolute -top-2.5 -right-3 min-w-[17px] h-[17px] px-[3px] bg-mainPink1 rounded-full flex justify-center items-center shadow-md">
         <span className="text-white text-[12px] font-bold flex justify-center items-center">
           {notificationCount > 99 ? '99+' : notificationCount}
