@@ -52,14 +52,14 @@ export default function MainOnboarding() {
   const { title, content, description, image } = pages[currentIndex];
 
   return (
-    <div className="relative min-h-screen px-6">
-      {/* 상단 영역 */}
-      <div className="w-full py-4 gap-6 h-[68px] flex justify-between items-center cursor-pointer">
-        <BackIcon onClick={handlePrev} />
+    <div className="relative w-full h-screen flex flex-col overflow-hidden">
+      {/* 상단 영역: 뒤로가기 버튼 */}
+      <div className="h-[68px] flex items-center px-5 py-4">
+        <BackIcon onClick={handlePrev} className="cursor-pointer" />
       </div>
 
-      {/* 메인 텍스트 영역 */}
-      <div className="mt-6 mb-4 pb-10">
+      {/* 중앙 영역 */}
+      <div className="flex-1 flex flex-col px-6">
         {/* 큰 제목 부분 */}
         <h1 className="text-24px font-bold">
           <span className="text-mainPink1">{title}</span>
@@ -67,18 +67,31 @@ export default function MainOnboarding() {
         </h1>
 
         {/* 설명 부분 */}
-        <p className="mt-3 font-14-regular text-gray1 whitespace-pre-line">
+        <p className="mt-3 font-14-regular text-gray1 whitespace-pre-line pb-10">
           {description}
         </p>
+
+        {/* 이미지 */}
+        <div className="flex mt-6 items-center justify-center">
+          <Image src={image} alt="온보딩 이미지" width={250} height={200} />
+        </div>
       </div>
 
-      {/* 이미지 영역 */}
-      <div className="mb-8 flex items-center justify-center">
-        <Image src={image} alt="온보딩 이미지" width={250} height={200} />
-      </div>
+      {/* 하단 영역 */}
+      <div className="pb-8 px-5 flex flex-col items-center gap-4">
+        {/* 인디케이터 */}
+        <div className="flex items-center justify-center pb-3">
+          {pages.map((_, idx) => (
+            <div
+              key={idx}
+              className={`w-2 h-2 rounded-full mx-1 ${
+                idx === currentIndex ? 'bg-mainPink1' : 'bg-gray2'
+              }`}
+            />
+          ))}
+        </div>
 
-      {/* 하단 버튼 영역 */}
-      <div className="absolute bottom-0 left-0 w-full px-5 py-8">
+        {/* 버튼 */}
         <Button
           shape="rectangle"
           variant="filled"
