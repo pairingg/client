@@ -5,7 +5,7 @@ import Tab from '@/components/common/Tab';
 import MyPostsTab from '@/components/community/MyPostsTab';
 import PostsListTab from '@/components/community/PostsListTab';
 import PageHeader from '@/components/header/PageHeader';
-import type { MeListItem, Post } from '@/types/community';
+import type { MeListItem, MyPost, Post } from '@/types/community';
 
 export default function Community() {
   const posts: Post[] = [
@@ -31,9 +31,10 @@ export default function Community() {
     },
   ];
 
-  const myPosts: Post[] = [
+  const myPosts: MyPost[] = [
     {
-      id: 2,
+      id: 3,
+      userId: 2222,
       name: '김이름',
       age: 20,
       city: '서울시',
@@ -50,11 +51,17 @@ export default function Community() {
       name: '김이름',
       age: 20,
       city: '서울시',
+      participantId: 1,
+      userId: 2222,
+      postId: 1,
     },
     {
       name: '김이름',
       age: 20,
       city: '서울시',
+      participantId: 1,
+      userId: 2222,
+      postId: 1,
     },
   ];
 

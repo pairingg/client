@@ -47,7 +47,7 @@ export default function ProfileCard({
       </Carousel>
 
       {/* 그라데이션 오버레이 */}
-      <div className="absolute inset-0 bg-gradient-to-t from-mainPink2 via-transparent to-transparent rounded-xl z-10" />
+      <div className="absolute inset-0 bg-gradient-to-t from-mainPink2 via-transparent to-transparent rounded-xl z-5" />
 
       {/* 사용자 정보 */}
       <div className="absolute left-5 bottom-6 z-20">

@@ -13,10 +13,10 @@ import ListModal from '@/components/modal/ListModal';
 import PostCard from '@/components/PostCard/page';
 import UserProfile from '@/components/profiles/UserProfile';
 import { useModal } from '@/hooks/useModal';
-import type { MeListItem, Post } from '@/types/community';
+import type { MeListItem, MyPost } from '@/types/community';
 
 interface MyPostsTabProps {
-  myPosts: Post[];
+  myPosts: MyPost[];
   meList: MeListItem[];
 }
 
@@ -30,7 +30,7 @@ const MyPostsTab: React.FC<MyPostsTabProps> = ({ myPosts, meList }) => {
   return (
     <>
       {myPosts.length > 0 ? (
-        <div className="flex flex-col pb-[200px] h-screen flex-grow overflow-y-auto bg-[#f9f9f9]">
+        <div className="flex flex-col pb-[200px] h-screen flex-grow overflow-y-auto bg-white">
           {myPosts.map((item) => (
             <PostCard
               key={item.id}
@@ -53,7 +53,7 @@ const MyPostsTab: React.FC<MyPostsTabProps> = ({ myPosts, meList }) => {
             title="저요 목록"
           >
             {meList.length > 0 ? (
-              <div className="flex flex-col flex-grow overflow-y-auto">
+              <div className="flex flex-col flex-grow pb-[70px]">
                 {meList.map((item, index) => (
                   <UserProfile
                     key={index}
