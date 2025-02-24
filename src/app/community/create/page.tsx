@@ -19,7 +19,7 @@ export default function PostCreate() {
   const maxLength = 80;
   const outModal = useModal(false);
   const router = useRouter();
-  // 단일 이미지 상태로 변경합니다.
+
   const [image, setImage] = useState<string>('');
 
   // 단일 이미지 업로드 핸들러
