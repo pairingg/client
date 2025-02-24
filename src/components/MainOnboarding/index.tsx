@@ -38,6 +38,8 @@ export default function MainOnboarding() {
   const handlePrev = () => {
     if (currentIndex > 0) {
       setCurrentIndex(currentIndex - 1);
+    } else {
+      window.location.href = '/';
     }
   };
 
