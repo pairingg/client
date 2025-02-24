@@ -19,6 +19,9 @@ const noto = Noto_Sans_KR({
 export const metadata: Metadata = {
   title: 'pAIring',
   description: 'pAIring',
+  icons: {
+    icon: '/images/favicon_pairing.png',
+  },
 };
 
 export default function RootLayout({
@@ -28,6 +31,27 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <meta
+          name="format-detection"
+          content="telephone=no, address=no, email=no"
+        />
+        <meta name="description" content="AI를 활용한 소개팅 서비스" />
+        <meta name="keywords" content="pAIring,소개팅,AI" />
+        <meta property="og:site_name" content="pAIring" />
+        <meta
+          property="og:title"
+          content="pAIring | AI를 활용한 소개팅 서비스"
+        />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="웹 페이지 주소 들어갈 예정" />
+        <meta property="og:image" content="/public/images/og-image.png" />
+        <title>pAIring</title>
+        <script
+          defer
+          src="https://cdn.swygbro.com/public/widget/swyg-widget.js"
+        ></script>
+      </head>
       <body
         className={`${roboto.variable} ${noto.variable} antialiased relative overscroll-y-none min-h-[100dvh] scrollbar-hide`}
       >

@@ -1,19 +1,20 @@
-import Login from '@/components/login';
+'use client';
 
-export default function Home({
-  searchParams,
-}: {
-  searchParams: { code?: string };
-}) {
-  const { code } = searchParams;
+import { useEffect, useState } from 'react';
 
-  if (code) {
-    console.log('Authorization code:', code);
-  }
+import MainOnboarding from '@/components/MainOnboarding';
+import Splash from '@/components/Splash';
 
-  return (
-    <div className="h-full px-5 py-10">
-      <Login code={code} />
-    </div>
-  );
+export default function HomePage() {
+  const [showSplash, setShowSplash] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowSplash(false);
+    }, 2000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  return <>{showSplash ? <Splash /> : <MainOnboarding />}</>;
 }
