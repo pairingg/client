@@ -89,7 +89,7 @@ const PostsListTab: React.FC<PostsListTabProps> = ({ posts }) => {
       {/* 신고 확인 모달 */}
       <ActionModal
         isOpen={reportConfirmModal.isOpen}
-        icon={<ExclamationIcon />}
+        icon={<ExclamationIcon fill="#FF4F75" />}
         message={reportMessage}
         buttons={[
           { label: '취소', onClick: reportConfirmModal.closeModal },

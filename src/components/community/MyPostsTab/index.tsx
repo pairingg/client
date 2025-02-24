@@ -126,7 +126,7 @@ const MyPostsTab: React.FC<MyPostsTabProps> = ({ myPosts, meList }) => {
       {/* 삭제 확인 모달 */}
       <ActionModal
         isOpen={deleteConfirmModal.isOpen}
-        icon={<ExclamationIcon />}
+        icon={<ExclamationIcon fill="#FF4F75" />}
         message="게시물을 삭제하시겠습니까?"
         buttons={[
           { label: '취소', onClick: deleteConfirmModal.closeModal },

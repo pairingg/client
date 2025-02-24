@@ -44,7 +44,7 @@ export default function PostCreate() {
 
       <ActionModal
         isOpen={outModal.isOpen}
-        icon={<ExclamationIcon />}
+        icon={<ExclamationIcon fill="#FF4F75" />}
         message="현재 페이지를 나가시겠습니까?"
         description="작성하신 글이 삭제됩니다."
         buttons={[

@@ -50,7 +50,7 @@ export default function ProfileCard({
       <div className="absolute inset-0 bg-gradient-to-t from-mainPink2 via-transparent to-transparent rounded-xl z-5" />
 
       {/* 사용자 정보 */}
-      <div className="absolute left-5 bottom-6 z-20">
+      <div className="absolute left-5 bottom-6">
         <div className="pb-2">
           <FaceAuthIcon />
         </div>

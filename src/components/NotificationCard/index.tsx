@@ -86,7 +86,7 @@ export default function NotificationCard({
 
       <ActionModal
         isOpen={deleteConfirmModal.isOpen}
-        icon={<ExclamationIcon />}
+        icon={<ExclamationIcon fill="#FF4F75" />}
         message="이 알림을 삭제하시겠습니까?"
         buttons={[
           {
