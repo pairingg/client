@@ -63,7 +63,10 @@ export default function NotificationCard({
 
         {/* 프로필 이미지 */}
         <div className="mr-2">
-          <ProfileImage src="/images/profile.png" size={90} />
+          <ProfileImage
+            src={profileImg ?? '/images/pairing_logo.png'}
+            size={90}
+          />
         </div>
 
         {/* 알림 내용 */}

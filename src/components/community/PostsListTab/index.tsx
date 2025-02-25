@@ -40,8 +40,8 @@ const PostsListTab: React.FC<PostsListTabProps> = ({ posts }) => {
             age={item.age}
             city={item.city}
             content={item.content}
-            imageUrl={item.imageUrl}
-            time={item.createdAt}
+            imageUrl={item.imageUrl ?? '/images/pairing_logo.png'}
+            time={new Date(item.createdAt)}
             buttonText="저요"
             onMoreClick={reportcheckModal.openModal}
             onButtonClick={() => console.log('저요 버튼 클릭')}

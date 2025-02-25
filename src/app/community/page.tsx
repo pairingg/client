@@ -18,7 +18,7 @@ export default function Community() {
         '글 내용 가나다라마바사 아자차카타파하 가나 다라 마바사 아자차카 타파하 가나다라마 바사 아자차카 타파하가 나다라마바사.',
       imageUrl:
         'https://upload.wikimedia.org/wikipedia/ko/4/4a/%EC%8B%A0%EC%A7%B1%EA%B5%AC.png',
-      createdAt: new Date(),
+      createdAt: new Date('2025-01-31T09:01:00'),
     },
     {
       id: 2,
@@ -27,7 +27,7 @@ export default function Community() {
       city: '서울시',
       content:
         '글 내용 가나다라마바사 아자차카타파하 가나 다라 마바사 아자차카 타파하 가나다라마 바사 아자차카 타파하가 나다라마바사.',
-      createdAt: new Date(),
+      createdAt: new Date('2025-01-31T09:01:00'),
     },
   ];
 
@@ -42,7 +42,7 @@ export default function Community() {
         'https://upload.wikimedia.org/wikipedia/ko/4/4a/%EC%8B%A0%EC%A7%B1%EA%B5%AC.png',
       content:
         '글 내용 가나다라마바사 아자차카타파하 가나 다라 마바사 아자차카 타파하 가나다라마 바사 아자차카 타파하가 나다라마바사.',
-      createdAt: new Date(),
+      createdAt: new Date('2025-01-31T09:01:00'),
     },
   ];
 
