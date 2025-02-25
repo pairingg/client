@@ -16,6 +16,8 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from '@/components/ui/Carousel';
+import type { DrinkStatusType, SmokeStatusType } from '@/constants/wellness';
+import { DRINK_STATUS, SMOKE_STATUS } from '@/constants/wellness';
 
 import Image from 'next/image';
 
@@ -26,8 +28,8 @@ export default function UserProfileCard() {
     gender: 'MALE',
     birth: '2025-02-15',
     mbti: 'INFP',
-    drink: '전혀 안마심',
-    smoking: '비흡연',
+    drink: 'atAllNothing',
+    smoking: 'never',
     city: '서울시',
     district: '강남구',
     hobby: ['운동', '독서', '맛집탐방'],
@@ -36,6 +38,12 @@ export default function UserProfileCard() {
       'https://upload.wikimedia.org/wikipedia/ko/4/4a/%EC%8B%A0%EC%A7%B1%EA%B5%AC.png',
     ],
   };
+
+  // 음주/흡연 상태 변환
+  const drinkStatus: DrinkStatusType =
+    DRINK_STATUS[profile.drink as keyof typeof DRINK_STATUS];
+  const smokeStatus: SmokeStatusType =
+    SMOKE_STATUS[profile.smoking as keyof typeof SMOKE_STATUS];
 
   // 프로필 정보 배열 (거주지, 취미, MBTI, 음주/흡연)
   const profileInfoItems = [
@@ -57,7 +65,7 @@ export default function UserProfileCard() {
     {
       icon: <BeerIcon />,
       title: '음주 흡연 여부',
-      tags: [profile.drink, profile.smoking],
+      tags: [drinkStatus, smokeStatus],
     },
   ];
 
@@ -70,11 +78,14 @@ export default function UserProfileCard() {
   };
 
   return (
-    <div className="relative min-h-screen pb-24 p-5">
+    <div className="relative min-h-screen pb-24 p-5 bg-[#f9f9f9]">
       <ProfileCardHeader name={profile.name} age={profile.age} />
 
-      {/* ProfileCard를 가운데 정렬 */}
-      <div className="flex justify-center my-4 aspect-square rounded-xl overflow-hidden">
+      {/* 프로필 카드 */}
+      <div
+        className="flex justify-center my-4 aspect-square rounded-xl overflow-hidden bg-white
+      shadow-[0px_3px_3px_rgba(0,0,0,0.05),_0px_-3px_3px_rgba(0,0,0,0.05),_3px_0px_3px_rgba(0,0,0,0.05),_-3px_0px_3px_rgba(0,0,0,0.05)]"
+      >
         {/* 이미지 캐러셀 */}
         <Carousel>
           <CarouselContent>

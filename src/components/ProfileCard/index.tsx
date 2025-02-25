@@ -18,14 +18,16 @@ import {
 interface ProfileCardProps {
   name: string;
   age?: React.ReactNode;
-  location: string;
+  city: string;
+  district: string;
   images?: string[];
 }
 
 export default function ProfileCard({
   name,
   age,
-  location,
+  city,
+  district,
   images,
 }: ProfileCardProps) {
   return (
@@ -66,7 +68,9 @@ export default function ProfileCard({
         </div>
         <div className="flex items-center space-x-2">
           <LocationIcon />
-          <span className="text-14px font-medium text-white">{location}</span>
+          <span className="text-14px font-medium text-white">
+            {city} {district}
+          </span>
         </div>
       </div>
 
