@@ -1,11 +1,11 @@
 import Login from '@/components/login';
 
-export default function LoginPage({
+export default async function LoginPage({
   searchParams,
 }: {
   searchParams: { code?: string };
 }) {
-  const { code } = searchParams;
+  const { code } = await searchParams;
 
   if (code) {
     console.log('Authorization code:', code);
