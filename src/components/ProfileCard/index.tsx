@@ -32,8 +32,6 @@ export default function ProfileCard({
     <div className="relative w-full aspect-square rounded-xl shadow-lg overflow-hidden">
       {/* 이미지 캐러셀 */}
       <Carousel>
-        {/* 삭제 하면 안됨 */}
-
         <CarouselContent>
           {images?.map((imgUrl, index) => (
             <CarouselItem key={index}>
@@ -48,6 +46,7 @@ export default function ProfileCard({
             </CarouselItem>
           ))}
         </CarouselContent>
+
         {/* 좌우 이동 버튼 */}
         <CarouselPrevious />
         <CarouselNext />

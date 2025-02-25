@@ -11,11 +11,15 @@ import PerconalityIcon from '/src/assets/icons/profilecard_user_pink.svg';
 
 import {
   Carousel,
+  CarouselContent,
+  CarouselItem,
   CarouselNext,
   CarouselPrevious,
 } from '@/components/ui/Carousel';
 
-export default function UserProfileRegister() {
+import Image from 'next/image';
+
+export default function UserProfileCard() {
   const profile = {
     name: '김이름',
     age: 20,
@@ -27,7 +31,10 @@ export default function UserProfileRegister() {
     city: '서울시',
     district: '강남구',
     hobby: ['운동', '독서', '맛집탐방'],
-    images: ['img1.png', 'img2.png'],
+    images: [
+      'https://placehold.co/600x400',
+      'https://upload.wikimedia.org/wikipedia/ko/4/4a/%EC%8B%A0%EC%A7%B1%EA%B5%AC.png',
+    ],
   };
 
   // 프로필 정보 배열 (거주지, 취미, MBTI, 음주/흡연)
@@ -67,22 +74,23 @@ export default function UserProfileRegister() {
       <ProfileCardHeader name={profile.name} age={profile.age} />
 
       {/* ProfileCard를 가운데 정렬 */}
-      <div className="flex justify-center my-4">
+      <div className="flex justify-center my-4 aspect-square rounded-xl overflow-hidden">
         {/* 이미지 캐러셀 */}
         <Carousel>
-          {/* 삭제 하면 안됨 */}
-
-          {/* <CarouselContent>
-                  {images.map((imgUrl, index) => (
-                    <CarouselItem key={index}>
-                      <Image
-                        src={imgUrl}
-                        alt={`Profile image ${index + 1}`}
-                        className="object-cover w-full h-full"
-                      />
-                    </CarouselItem>
-                  ))}
-                </CarouselContent> */}
+          <CarouselContent>
+            {profile.images.map((imgUrl, index) => (
+              <CarouselItem key={index}>
+                <Image
+                  src={imgUrl}
+                  alt={`Profile image ${index + 1}`}
+                  className="object-contain w-full h-full"
+                  width={200}
+                  height={200}
+                  unoptimized={true}
+                />
+              </CarouselItem>
+            ))}
+          </CarouselContent>
           {/* 좌우 이동 버튼 */}
           <CarouselPrevious />
           <CarouselNext />
