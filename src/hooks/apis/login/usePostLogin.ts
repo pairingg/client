@@ -17,7 +17,7 @@ interface LoginRequest {
 
 // OAuth 로그인 요청 함수
 const postOAuthLogin = async (data: LoginRequest): Promise<LoginResponse> => {
-  return api.post<LoginResponse>('/api/v1/auth/oauth/login', data);
+  return api.post<LoginResponse>('/member/oauth/login', data);
 };
 
 export const usePostOAuthLogin = () => {
