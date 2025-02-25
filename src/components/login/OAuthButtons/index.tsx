@@ -16,7 +16,13 @@ interface LoginConfig {
 }
 
 export default function OAuthButtons() {
-  const REDIRECT_URI = process.env.NEXT_PUBLIC_REDIRECT_URI;
+  // 개발 환경에서는 localhost:3000 사용, 프로덕션에서는 환경 변수 사용
+  const baseRedirectUri =
+    process.env.NODE_ENV === 'development'
+      ? 'http://localhost:3000'
+      : process.env.NEXT_PUBLIC_REDIRECT_URI;
+
+  const REDIRECT_URI = `${baseRedirectUri}/login/auth-loading`;
 
   const loginConfigs: Record<'naver' | 'kakao', LoginConfig> = {
     naver: {
@@ -24,14 +30,14 @@ export default function OAuthButtons() {
       text: '네이버 로그인',
       bgColor: 'bg-[#03CF5D]',
       textColor: 'text-white',
-      url: `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${process.env.NEXT_PUBLIC_NAVER_CLIENT_ID}&redirect_uri=${REDIRECT_URI}&state=1234567890`,
+      url: `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${process.env.NEXT_PUBLIC_NAVER_CLIENT_ID}&redirect_uri=${REDIRECT_URI}&state=naver_login`,
     },
     kakao: {
       icon: <KakaoLogo />,
       text: '카카오 로그인',
       bgColor: 'bg-[#FFE812]',
       textColor: 'text-[#181600]',
-      url: `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.NEXT_PUBLIC_KAKAO_REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`,
+      url: `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.NEXT_PUBLIC_KAKAO_REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code&state=kakao_login`,
     },
   };
 
