@@ -2,9 +2,10 @@
 
 import { useCallback } from 'react';
 
+import KakaoLogo from '@/assets/icons/kakao_logo.svg';
+import NaverLogo from '@/assets/icons/naver_logo.svg';
+
 import OAuthButton from '../OAuthButton';
-import KakaoLogo from '/public/assets/icons/kakao_logo.svg';
-import NaverLogo from '/public/assets/icons/naver_logo.svg';
 
 interface LoginConfig {
   icon: React.ReactNode;

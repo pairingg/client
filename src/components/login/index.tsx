@@ -19,15 +19,17 @@ export default function Login({ code }: LoginProps) {
   }, [code]);
 
   return (
-    <div className="relative flex flex-col items-center justify-center h-full">
+    <div className="relative flex flex-col items-center justify-center h-screen overflow-hidden">
       <Image
-        className="mb-44"
+        className="mb-56"
         src="/images/login_pairing_logo.png"
         alt="login"
         width={343}
         height={339}
       />
-      <LoginButtons />
+      <div className="absolute bottom-20 w-full">
+        <LoginButtons />
+      </div>
     </div>
   );
 }
