@@ -39,7 +39,7 @@ jobs:
             if (prTitle.startsWith("setting:")) {
               labels.push("setting");
             }
-            if (prTitle.startsWith("CI:")) {
+            if (prTitle.startsWith("ci:")) {
               labels.push("CI");
             }
 
