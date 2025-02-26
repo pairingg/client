@@ -3,7 +3,7 @@
 import Link from 'next/link';
 
 import PlusButton from '@/components/buttons/PlusButton';
-import PostCard from '@/components/PostCard/page';
+import PostCard from '@/components/PostCard';
 import type { Post } from '@/types/community';
 
 interface PostsListTabProps {
