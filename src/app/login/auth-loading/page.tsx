@@ -29,11 +29,7 @@ export default function AuthLoadingPage() {
       provider = 'KAKAO';
     }
 
-    const timer = setTimeout(() => {
-      loginMutate({ code: authCode, type: provider });
-    });
-
-    return () => clearTimeout(timer);
+    loginMutate({ code: authCode, type: provider });
   }, [router, searchParams, loginMutate]);
 
   return (
