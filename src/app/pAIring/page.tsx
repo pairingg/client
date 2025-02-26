@@ -80,7 +80,7 @@ export default function MainPage() {
             </div>
 
             {/* 프로필카드 영역 */}
-            <div className="flex flex-col items-center gap-5">
+            <div className="flex flex-col justify-center items-center gap-5">
               {recommendationList.map((item, index) => (
                 <ProfileCard
                   key={index}

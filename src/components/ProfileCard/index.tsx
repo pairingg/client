@@ -31,7 +31,7 @@ export default function ProfileCard({
   images,
 }: ProfileCardProps) {
   return (
-    <div className="relative w-full aspect-square rounded-xl shadow-lg overflow-hidden">
+    <div className="relative w-full aspect-square rounded-xl overflow-hidden shadow-[0px_3px_3px_rgba(0,0,0,0.05),_0px_-3px_3px_rgba(0,0,0,0.05),_3px_0px_3px_rgba(0,0,0,0.05),_-3px_0px_3px_rgba(0,0,0,0.05)]">
       {/* 이미지 캐러셀 */}
       <Carousel>
         <CarouselContent>
