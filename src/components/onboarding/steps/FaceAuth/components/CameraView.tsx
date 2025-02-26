@@ -70,6 +70,10 @@ export function CameraView({
           className="hidden"
           onChange={handleFileChange}
         />
+
+        <div className="font-14-regular mt-4 w-full text-center">
+          얼굴이 정확하게 나온 정면 사진을 <br /> 촬영해주세요.
+        </div>
       </div>
     );
   }
@@ -99,6 +103,10 @@ export function CameraView({
       >
         촬영하기
       </Button>
+
+      <div className="font-14-regular mt-4 w-full text-center">
+        얼굴이 정확하게 나온 정면 사진을 <br /> 촬영해주세요.
+      </div>
     </div>
   );
 }
