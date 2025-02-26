@@ -47,7 +47,7 @@ export default function Notifications() {
   const isEmpty = notificationList.length === 0;
   return (
     <div className="flex flex-col h-screen pb-[90px]">
-      <div className="shadow-[0px_3px_3px_rgba(0,0,0,0.05)]">
+      <div className="shadow-md">
         <PageHeader title="알림" />
       </div>
 

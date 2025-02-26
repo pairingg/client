@@ -3,6 +3,7 @@
 import { useModal } from '@/hooks/useModal';
 import formatTime from '@/utils/date';
 
+import Button from '../common/Button';
 import ProfileImage from '../common/ProfileImage';
 import ActionModal from '../modal/ActionModal';
 
@@ -81,9 +82,13 @@ export default function NotificationCard({
 
         {/* 버튼 (messageText가 있을 때만 표시) */}
         {messageText && (
-          <button className="absolute bottom-3 right-4 text-14px font-bold text-gray1 bg-gray2 rounded-3xl px-3 py-1">
+          <Button
+            shape="circle"
+            variant="filled"
+            className="absolute bottom-3 right-4 text-14px font-bold text-white rounded-3xl px-3 py-1.5"
+          >
             {buttonText}
-          </button>
+          </Button>
         )}
       </div>
 
