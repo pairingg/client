@@ -18,7 +18,7 @@ export default function Notifications() {
       profileImg: 'https://placehold.co/600x400',
       name: '김이름',
       age: 20,
-      location: '서울시',
+      city: '서울시',
       time: new Date('2025-02-02T10:15:00'),
       isHeart: true,
       isMe: false,
@@ -27,7 +27,7 @@ export default function Notifications() {
       profileImg: 'https://placehold.co/600x400',
       name: '김이름',
       age: 20,
-      location: '서울시',
+      city: '서울시',
       time: new Date('2025-02-02T11:00:00'),
       isHeart: true,
       isMe: false,
@@ -36,7 +36,7 @@ export default function Notifications() {
       profileImg: 'https://placehold.co/600x400',
       name: '김이름',
       age: 20,
-      location: '서울시',
+      city: '서울시',
       time: new Date('2025-02-03T09:00:00'),
       isHeart: false,
       isMe: true,
@@ -83,7 +83,7 @@ export default function Notifications() {
                     profileImg={item.profileImg ?? '/images/pairing_logo.png'}
                     name={item.name}
                     age={item.age}
-                    location={item.location}
+                    city={item.city}
                     time={item.time}
                     isHeart={item.isHeart}
                     isMe={item.isMe}

@@ -12,7 +12,6 @@ export default function HomePage() {
   const [hasSeenOnboarding, setHasSeenOnboarding] = useState(false);
 
   useEffect(() => {
-    // localStorage에서 온보딩 여부 확인
     const seen = localStorage.getItem('hasSeenOnboarding');
     if (seen) {
       setHasSeenOnboarding(true);
