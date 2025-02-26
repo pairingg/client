@@ -1,4 +1,4 @@
-import type { DrinkStatusType, SmokeStatusType } from '@/constants/wellness';
+import type { DrinkStatusKey, SmokeStatusKey } from '@/constants/wellness';
 
 export interface myProfile {
   name: string;
@@ -6,8 +6,8 @@ export interface myProfile {
   gender: 'MALE' | 'FEMALE';
   birth: Date;
   mbti: string;
-  drink?: DrinkStatusType;
-  smoke?: SmokeStatusType;
+  drink?: DrinkStatusKey;
+  smoke?: SmokeStatusKey;
   city: string;
   district: string;
   hobby: string[];

@@ -41,7 +41,6 @@ const MyPostsTab: React.FC<MyPostsTabProps> = ({ myPosts, meList }) => {
               imageUrl={item.imageUrl}
               time={new Date(item.createdAt)}
               buttonText="저요 목록 보기"
-              onMoreClick={myPostMenuModal.openModal}
               onButtonClick={bottomSheetModal.openModal}
             />
           ))}

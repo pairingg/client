@@ -6,6 +6,8 @@ const profiles: myProfile[] = [
   {
     name: '김이름',
     age: 20,
+    gender: 'MALE',
+    birth: new Date('2000-01-01'),
     mbti: 'ESFJ',
     drink: 'atAllNothing',
     smoke: 'never',

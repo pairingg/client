@@ -3,7 +3,6 @@
 import { useRouter } from 'next/navigation';
 
 import ProfileCardInfoContainer from '@/components/ProfileCardInfoContainer';
-import type { DrinkStatusType, SmokeStatusType } from '@/constants/wellness';
 import { DRINK_STATUS, SMOKE_STATUS } from '@/constants/wellness';
 import { useModal } from '@/hooks/useModal';
 import type { myProfile } from '@/types/member/mypage';
@@ -50,11 +49,12 @@ export default function DefaultMyPage({
     withdrawalModal.openModal();
   };
 
-  // 음주/흡연 상태 변환
-  const drinkStatus: DrinkStatusType =
-    DRINK_STATUS[drink as keyof typeof DRINK_STATUS];
-  const smokeStatus: SmokeStatusType =
-    SMOKE_STATUS[smoke as keyof typeof SMOKE_STATUS];
+  // 음주/흡연 "키" -> "값" 변환
+  const drinkStatus = drink && DRINK_STATUS[drink];
+  const smokeStatus = smoke && SMOKE_STATUS[smoke];
+
+  // undefined 등 falsy 값 제거
+  const drinkSmokeTags = [drinkStatus, smokeStatus].filter(Boolean) as string[];
 
   // 프로필 정보 배열 (거주지, 취미, MBTI, 음주/흡연)
   const profileInfoItems = [
@@ -76,7 +76,7 @@ export default function DefaultMyPage({
     {
       icon: <BeerIcon />,
       title: '음주 흡연 여부',
-      tags: [drinkStatus, smokeStatus],
+      tags: drinkSmokeTags,
     },
   ];
 
