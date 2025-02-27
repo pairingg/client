@@ -20,8 +20,10 @@ jobs:
         with:
           fetch-depth: 0  # 전체 히스토리를 가져옴
       
-      - name: Install mustache (to update the date)
-        run: apk add ruby && gem install mustache
+      - name: Install dependencies
+        run: |
+          apk add --no-cache git ruby diffutils
+          gem install mustache
       
       - name: creates output
         run: sh ./build.sh
@@ -77,7 +79,7 @@ jobs:
           destination-github-username: y00eunji
           destination-repository-name: pairing
           user-email: ${{ secrets.PAIRING_ACCOUNT_EMAIL }}
-          commit-message: "[Sync] ${{ github.event.commits[0].message }} (Source: ${{ env.SRC_COMMIT }})"
+          commit-message: "[Sync] ${{ github.event.commits[0].message || 'Update from source repository' }} (Source: ${{ env.SRC_COMMIT }})"
           target-branch: ${{ github.ref_name }}
       
       - name: Sync status
