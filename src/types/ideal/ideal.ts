@@ -7,6 +7,7 @@ export interface idealRecommendList {
 }
 
 export interface keywordRecommendList {
+  keywordId: number;
   name: string;
   age: number;
   city: string;
