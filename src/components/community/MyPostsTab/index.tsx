@@ -34,6 +34,7 @@ const MyPostsTab: React.FC<MyPostsTabProps> = ({ myPosts, meList }) => {
           {myPosts.map((item) => (
             <PostCard
               key={item.id}
+              profileImg={item.profileImg}
               name={item.name}
               age={item.age}
               city={item.city}
@@ -56,6 +57,7 @@ const MyPostsTab: React.FC<MyPostsTabProps> = ({ myPosts, meList }) => {
                 {meList.map((item, index) => (
                   <UserProfile
                     key={index}
+                    imageSrc={item.profileImg}
                     name={item.name}
                     age={item.age}
                     city={item.city}

@@ -65,13 +65,13 @@ export default function ProfileCard({
         <div className="pb-2">
           <FaceAuthIcon />
         </div>
-        <div className="font-24-medium text-white space-x-3 pb-2">
+        <div className="font-24-bold text-white space-x-3 pb-2">
           <span>{name}</span>
           <span>{age}</span>
         </div>
         <div className="flex items-center space-x-2">
           <LocationIcon />
-          <span className="text-14px font-medium text-white">
+          <span className="text-16px font-regular text-white">
             {city} {district}
           </span>
         </div>
