@@ -1,8 +1,9 @@
 'use client';
 
-import { useModal } from '@/hooks/useModal';
-
 import { useState } from 'react';
+
+import { useModal } from '@/hooks/useModal';
+import type { keywordsList } from '@/types/ideal/ideal';
 
 import Button from '../common/Button';
 import ActionModal from '../modal/ActionModal';
@@ -11,19 +12,21 @@ import CheckIcon from '/src/assets/icons/alert_checkMark.svg';
 import ExclamationIcon from '/src/assets/icons/alert_exclamationMark.svg';
 
 interface KeywordListProps {
-  keywords: { icon: React.ReactNode; title: string }[];
+  keywords: keywordsList[];
 }
 
 export default function KeywordList({ keywords }: KeywordListProps) {
-  // 모달 훅들
-  const checkModal = useModal(); // 키워드 선택 전 여부 모달
-  const checkModalSuccessModal = useModal(); // 선택 후 "완료" 모달
-  const alreadyUsedModal = useModal(); // 버튼을 사용한 뒤 클릭 시 모달
+  const checkModal = useModal();
+  const checkModalSuccessModal = useModal();
+  const alreadyUsedModal = useModal();
 
-  // 상태들
   const [keywordMessage, setKeywordMessage] = useState('');
   // "모든 버튼을 이미 눌렀는지" 여부 (true면 모든 버튼 비활성화)
   const [hasUsed, setHasUsed] = useState(false);
+  // 선택한 키워드(텍스트)를 저장
+  const [selectedKeyword, setSelectedKeyword] = useState<string>('');
+  // 선택 전 대기중인 키워드(텍스트)
+  const [pendingKeyword, setPendingKeyword] = useState<string>('');
 
   // 키워드 버튼 클릭 시
   const handleKeywordClick = (keyword: string) => {
@@ -35,18 +38,27 @@ export default function KeywordList({ keywords }: KeywordListProps) {
     }
 
     // 아직 한 번도 안 눌렀다면 확인 모달 열기
+    setPendingKeyword(keyword);
     setKeywordMessage(`${keyword} 키워드의 맞춤 추천을 받으시겠습니까?`);
     checkModal.openModal();
   };
 
   return (
-    <div className="space-y-3">
+    <div className="space-y-4">
       {keywords.map((item, index) => (
         <div key={index} className="flex items-center justify-between pb-1">
           {/* 키워드 정보 */}
           <div className="flex items-center space-x-3">
             <span>{item.icon}</span>
-            <span>{item.title}</span>
+            <span
+              className={
+                hasUsed && item.title === selectedKeyword
+                  ? 'font-18-medium text-mainPink1'
+                  : 'font-18-regular text-black'
+              }
+            >
+              {item.title}
+            </span>
           </div>
 
           {/* 버튼: hasUsed가 true라면 disabledColor 스타일 */}
@@ -75,8 +87,9 @@ export default function KeywordList({ keywords }: KeywordListProps) {
           {
             label: '확인',
             onClick: () => {
-              // '확인'을 누르면, 모든 버튼을 막는다.
+              // '확인'을 누르면, 모든 버튼을 막고 선택한 키워드를 저장
               setHasUsed(true);
+              setSelectedKeyword(pendingKeyword);
               checkModal.closeModal();
               checkModalSuccessModal.openModal();
             },

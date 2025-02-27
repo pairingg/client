@@ -1,7 +1,9 @@
+import type { keywordsList } from '@/types/ideal/ideal';
+
 import KeywordList from './KeywordList';
 
 interface KeywordRecommendationProps {
-  keywords: { icon: React.ReactNode; title: string }[];
+  keywords: keywordsList[];
 }
 
 export default function KeywordRecommendation({

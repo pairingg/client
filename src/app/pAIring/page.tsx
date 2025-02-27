@@ -1,27 +1,37 @@
+import Link from 'next/link';
+
 import BottomNavBar from '@/components/BottomNavBar';
 import KeywordRecommendation from '@/components/KeywordRecommendation';
 import ProfileCard from '@/components/ProfileCard';
 
-import Link from 'next/link';
-
-import AgeIcon from '/src/assets/icons/keyword_age.svg';
-import BeerIcon from '/src/assets/icons/keyword_beer.svg';
+import SameHobbyIcon from '/src/assets/icons/keyword_hobby.svg';
 import LocationIcon from '/src/assets/icons/keyword_location.svg';
-import PersonalityIcon from '/src/assets/icons/keyword_personality.svg';
+import SameAgeIcon from '/src/assets/icons/keyword_sameAge.svg';
+import SameGenderIcon from '/src/assets/icons/keyword_sameGender.svg';
+import UnderAgeIcon from '/src/assets/icons/keyword_underAge.svg';
+import UpAgeIcon from '/src/assets/icons/keyword_upAge.svg';
 import LogoIcon from '/src/assets/icons/logo_letter.svg';
 
-const keywords = [
-  { icon: <PersonalityIcon />, title: '성격' },
-  { icon: <LocationIcon />, title: '상대의 위치' },
-  { icon: <AgeIcon />, title: '나이' },
-  { icon: <BeerIcon />, title: '음주 스타일' },
+import type {
+  idealRecommendList,
+  keywordRecommendList,
+  keywordsList,
+} from '@/types/ideal/ideal';
+
+const keywords: keywordsList[] = [
+  { keywordId: 1, icon: <SameHobbyIcon />, title: '같은 취미' },
+  { keywordId: 2, icon: <LocationIcon />, title: '같은 위치' },
+  { keywordId: 3, icon: <UpAgeIcon />, title: '연상' },
+  { keywordId: 4, icon: <UnderAgeIcon />, title: '연하' },
+  { keywordId: 5, icon: <SameAgeIcon />, title: '동갑' },
+  { keywordId: 6, icon: <SameGenderIcon />, title: '같은 성별' },
 ];
 
 // 추천 리스트
-const recommendationList = [
+const recommendationList: idealRecommendList[] = [
   {
     name: '김이름',
-    age: '20',
+    age: 20,
     city: '서울시',
     district: '용산구',
     images: [
@@ -32,7 +42,7 @@ const recommendationList = [
   },
   {
     name: '김이름',
-    age: '20',
+    age: 20,
     city: '서울시',
     district: '강남구',
     images: [
@@ -43,10 +53,10 @@ const recommendationList = [
 ];
 
 // 맞춤 추천 리스트
-const keywordRecommendationList = [
+const keywordRecommendationList: keywordRecommendList[] = [
   {
     name: '김이름',
-    age: '20',
+    age: 20,
     city: '서울시',
     district: '용산구',
     images: [
@@ -57,7 +67,7 @@ const keywordRecommendationList = [
   },
   {
     name: '김이름',
-    age: '20',
+    age: 20,
     city: '서울시',
     district: '강남구',
     images: [
