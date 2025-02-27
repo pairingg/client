@@ -68,20 +68,21 @@ jobs:
           # 임시 디렉토리 정리
           rm -rf temp_repo
       
-      - name: Pushes to another repository
-        id: push_directory
-        if: env.SHOULD_SYNC == 'true'
-        uses: cpina/github-action-push-to-another-repository@main
-        env:
-          API_TOKEN_GITHUB: ${{ secrets.PAIRING_GITHUB_TOKEN }}
-        with:
-          source-directory: 'output'
-          destination-github-username: y00eunji
-          destination-repository-name: pairing
-          user-email: ${{ secrets.PAIRING_ACCOUNT_EMAIL }}
-          commit-message: "[Sync] ${{ github.event.commits[0].message || 'Update from source repository' }} (Source: ${{ env.SRC_COMMIT }})"
-          target-branch: ${{ github.ref_name }}
-      
+
+      - name: Force push to personal repository
+        run: |
+          cd output
+          git init
+          git config user.name "GitHub Actions Bot"
+          git config user.email "${{ secrets.PAIRING_ACCOUNT_EMAIL }}"
+          git add -A
+          git commit -m "[Sync] ${{ github.event.commits[0].message || 'Update from source repository' }} (Source: ${{ github.sha }})" || echo "No changes to commit"
+          git push -f https://x-access-token:${{ secrets.PAIRING_GITHUB_TOKEN }}@github.com/y00eunji/pairing.git HEAD:${{ github.ref_name }}
+          
+      - name: Sync status
+        run: |
+          echo "강제 동기화가 완료되었습니다."
+          echo "Source Commit: ${{ github.sha }}"
       - name: Sync status
         run: |
           if [[ "${{ env.SHOULD_SYNC }}" == "true" ]]; then
