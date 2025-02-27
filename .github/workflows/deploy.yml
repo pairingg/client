@@ -3,13 +3,6 @@ name: git push into another repo to deploy to vercel
 on:
   push:
     branches: [main, develop]
-  workflow_dispatch:
-    inputs:
-      force_sync:
-        description: '변경사항이 없어도 강제로 동기화'
-        required: false
-        default: 'false'
-        type: boolean
 
 jobs:
   build:
@@ -17,78 +10,21 @@ jobs:
     container: pandoc/latex
     steps:
       - uses: actions/checkout@v2
-        with:
-          fetch-depth: 0  # 전체 히스토리를 가져옴
-      
-      - name: Install dependencies
-        run: |
-          apk add --no-cache git ruby diffutils
-          gem install mustache
-      
+      - name: Install mustache (to update the date)
+        run: apk add ruby && gem install mustache
       - name: creates output
         run: sh ./build.sh
-      
-      - name: Check destination repository state
-        id: check_repo
-        run: |
-          # 대상 레포지토리 클론
-          git clone https://x-access-token:${{ secrets.PAIRING_GITHUB_TOKEN }}@github.com/y00eunji/pairing.git temp_repo
-          cd temp_repo
-          
-          # 현재 브랜치 확인
-          git checkout ${{ github.ref_name }} || git checkout -b ${{ github.ref_name }}
-          
-          # 대상 레포지토리의 최신 커밋 ID 저장
-          DEST_COMMIT=$(git rev-parse HEAD || echo "no_commit")
-          echo "DEST_COMMIT=$DEST_COMMIT" >> $GITHUB_ENV
-          
-          cd ..
-          
-          # 소스 레포지토리의 최신 커밋 ID 저장
-          SRC_COMMIT=${{ github.sha }}
-          echo "SRC_COMMIT=$SRC_COMMIT" >> $GITHUB_ENV
-          
-          # 강제 동기화 옵션이 활성화되었는지 확인
-          if [[ "${{ github.event.inputs.force_sync }}" == "true" ]]; then
-            echo "SHOULD_SYNC=true" >> $GITHUB_ENV
-            echo "강제 동기화가 활성화되었습니다."
-          else
-            # output 디렉토리와 대상 레포지토리의 파일 차이 확인
-            DIFF_COUNT=$(diff -r output temp_repo | wc -l)
-            
-            if [[ $DIFF_COUNT -gt 0 ]]; then
-              echo "SHOULD_SYNC=true" >> $GITHUB_ENV
-              echo "변경된 파일이 있어 동기화를 진행합니다."
-            else
-              echo "SHOULD_SYNC=false" >> $GITHUB_ENV
-              echo "변경된 파일이 없습니다. 동기화를 건너뜁니다."
-            fi
-          fi
-          
-          # 임시 디렉토리 정리
-          rm -rf temp_repo
-      
-
-      - name: Force push to personal repository
-        run: |
-          cd output
-          git init
-          git config user.name "GitHub Actions Bot"
-          git config user.email "${{ secrets.PAIRING_ACCOUNT_EMAIL }}"
-          git add -A
-          git commit -m "[Sync] ${{ github.event.commits[0].message || 'Update from source repository' }} (Source: ${{ github.sha }})" || echo "No changes to commit"
-          git push -f https://x-access-token:${{ secrets.PAIRING_GITHUB_TOKEN }}@github.com/y00eunji/pairing.git HEAD:${{ github.ref_name }}
-          
-      - name: Sync status
-        run: |
-          echo "강제 동기화가 완료되었습니다."
-          echo "Source Commit: ${{ github.sha }}"
-      - name: Sync status
-        run: |
-          if [[ "${{ env.SHOULD_SYNC }}" == "true" ]]; then
-            echo "레포지토리 동기화가 완료되었습니다."
-            echo "Source Commit: ${{ env.SRC_COMMIT }}"
-            echo "Previous Destination Commit: ${{ env.DEST_COMMIT }}"
-          else
-            echo "변경사항이 없어 동기화를 건너뛰었습니다."
-          fi
+      - name: Pushes to another repository
+        id: push_directory
+        uses: cpina/github-action-push-to-another-repository@main
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.PAIRING_GITHUB_TOKEN }}
+        with:
+          source-directory: 'output'
+          destination-github-username: y00eunji
+          destination-repository-name: pairing
+          user-email: ${{ secrets.PAIRING_ACCOUNT_EMAIL }}
+          commit-message: "${{ github.event.commits[0].message }}"
+          target-branch: ${{ github.ref_name }}
+      - name: Test get variable exported by push-to-another-repository
+        run: echo $DESTINATION_CLONED_DIRECTORY
