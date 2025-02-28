@@ -39,6 +39,7 @@ export async function middleware(request: NextRequest) {
     '/',
     '/login/auth-loading',
     '/privacy-consent',
+    '/onboarding',
   ];
 
   if (
