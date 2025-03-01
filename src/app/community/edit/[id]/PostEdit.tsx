@@ -1,40 +1,70 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { useRouter } from 'next/navigation';
 
+import axios from 'axios';
+
+import { api } from '@/api';
 import BottomNavBar from '@/components/BottomNavBar';
 import Button from '@/components/common/Button';
 import ImageUploader from '@/components/common/ImageUploader';
 import ActionModal from '@/components/modal/ActionModal';
-import type { PostUpdateWithFile } from '@/hooks/apis/community/usePutPost';
-import { useUpdatePostWithS3 } from '@/hooks/apis/community/usePutPost';
+import { useGetMyPostList } from '@/hooks/apis/community/useGetMyPostList';
+import { useUpdatePost } from '@/hooks/apis/community/usePutPost';
 import { useModal } from '@/hooks/useModal';
 
 import ExclamationIcon from '/src/assets/icons/alert_exclamationMark.svg';
 import BackIcon from '/src/assets/icons/header_back.svg';
 
-interface PostEditProps {
-  postId: number;
-  initialContent: string;
-  initialImageUrl: string;
+interface GetPresignedUrlResponse {
+  url: string;
 }
 
-export default function PostEdit({
-  postId,
-  initialContent,
-  initialImageUrl,
-}: PostEditProps) {
+export const uploadImageToNcloud = async ({
+  presignedUrl,
+  file,
+}: {
+  presignedUrl: string;
+  file: File | null;
+}): Promise<void> => {
+  if (!file) throw new Error('File is required');
+  return axios.put(presignedUrl, file, {
+    headers: {
+      'Content-Type': file.type,
+      'x-amz-acl': 'public-read',
+    },
+  });
+};
+
+interface PostEditProps {
+  postId: number;
+}
+
+export default function PostEdit({ postId }: PostEditProps) {
   const router = useRouter();
   const outModal = useModal(false);
+  const { data: myPosts, isLoading, isError } = useGetMyPostList();
 
-  const [content, setContent] = useState(initialContent);
-
+  // 내 게시물 목록에서 해당 postId의 게시글을 찾아 초기값 설정
+  const [content, setContent] = useState('');
+  const [initialImageUrl, setInitialImageUrl] = useState('');
   const [file, setFile] = useState<File | null>(null);
-
   const maxLength = 80;
-  const { mutate: updatePost } = useUpdatePostWithS3();
+
+  // PUT 요청
+  const { mutate: updatePost } = useUpdatePost();
+
+  useEffect(() => {
+    if (myPosts) {
+      const post = myPosts.find((p) => p.id === postId);
+      if (post) {
+        setContent(post.content);
+        setInitialImageUrl(post.imageUrl);
+      }
+    }
+  }, [myPosts, postId]);
 
   const handleImageUpload = (selectedFile: File) => {
     setFile(selectedFile);
@@ -44,16 +74,32 @@ export default function PostEdit({
     setFile(null);
   };
 
-  // 수정 완료 버튼 클릭 시
-  const handleSubmit = () => {
-    const updateData: PostUpdateWithFile = {
-      content,
-      imageUrl: initialImageUrl,
-      file: file ?? undefined,
-    };
+  const handleSubmit = async () => {
+    try {
+      let imageUrl = initialImageUrl;
 
-    updatePost({ postId, data: updateData });
+      if (file) {
+        const response = await api.get<GetPresignedUrlResponse>(
+          `/community/presigned-url?fileName=${encodeURIComponent(file.name)}&contentType=${encodeURIComponent(file.type)}`,
+        );
+        const { url } = response;
+        await uploadImageToNcloud({ presignedUrl: url, file });
+        imageUrl = url;
+      }
+
+      const updateData = {
+        content,
+        imageUrl,
+      };
+
+      updatePost({ postId, data: updateData });
+    } catch (error) {
+      console.error('게시글 수정 실패:', error);
+    }
   };
+
+  if (isLoading) return <p>게시물을 불러오는 중...</p>;
+  if (isError) return <p>게시물을 불러오지 못했습니다.</p>;
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -83,7 +129,6 @@ export default function PostEdit({
 
       {/* 글 수정 영역 */}
       <div className="flex flex-col p-5 space-y-4">
-        {/* 내용 입력 */}
         <div className="relative">
           <p className="text-18px font-medium pb-2">내용</p>
           <textarea

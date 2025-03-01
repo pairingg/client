@@ -46,6 +46,7 @@ const MyPostsTab = () => {
       onSuccess: () => {
         deleteConfirmModal.closeModal();
         deleteSuccessModal.openModal();
+        window.location.href = '/community';
       },
     });
   };
@@ -74,7 +75,11 @@ const MyPostsTab = () => {
               buttonComponent={
                 <button
                   className="absolute right-0 top-0 p-2 pt-4"
-                  onClick={myPostMenuModal.openModal}
+                  onClick={() => {
+                    setSelectedPostId(item.id);
+                    console.log('선택된 게시글 ID:', item.id);
+                    myPostMenuModal.openModal();
+                  }}
                 >
                   <MoreGrayIcon />
                 </button>
@@ -157,27 +162,10 @@ const MyPostsTab = () => {
       <ListModal
         isOpen={myPostMenuModal.isOpen}
         buttonList={[
-          { label: '수정하기', onClick: () => router.push('/community/edit') },
-          {
-            label: '삭제하기',
-            onClick: () => {
-              myPostMenuModal.closeModal();
-              deleteConfirmModal.openModal();
-            },
-            color: 'text-mainPink1',
-          },
-        ]}
-        oneButton={{ label: '취소', onClick: myPostMenuModal.closeModal }}
-      />
-
-      {/* 수정/삭제 메뉴 모달 */}
-      <ListModal
-        isOpen={myPostMenuModal.isOpen}
-        buttonList={[
           {
             label: '수정하기',
             onClick: () => {
-              router.push(`/community/edit?id=${myPosts && myPosts[0]?.id}`);
+              router.push(`/community/edit/${selectedPostId}`);
               myPostMenuModal.closeModal();
             },
           },
@@ -203,6 +191,10 @@ const MyPostsTab = () => {
           {
             label: '확인',
             onClick: () => {
+              console.log(
+                '삭제 확인 버튼 클릭, selectedPostId:',
+                selectedPostId,
+              );
               if (selectedPostId) {
                 handleDeletePost(selectedPostId);
               }

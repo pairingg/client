@@ -4,29 +4,48 @@ import { useState } from 'react';
 
 import { useRouter } from 'next/navigation';
 
+import axios from 'axios';
+
+import { api } from '@/api';
 import BottomNavBar from '@/components/BottomNavBar';
 import Button from '@/components/common/Button';
 import ImageUploader from '@/components/common/ImageUploader';
 import ActionModal from '@/components/modal/ActionModal';
 import { usePostCreatePosts } from '@/hooks/apis/community/usePostCreatePost';
+import { useModal } from '@/hooks/useModal';
 
 import ExclamationIcon from '/src/assets/icons/alert_exclamationMark.svg';
 import BackIcon from '/src/assets/icons/header_back.svg';
 
-import { uploadImageToNcloud } from '@/hooks/apis/community/useUploadImageToNcloud';
-import { useModal } from '@/hooks/useModal';
+interface GetPresignedUrlResponse {
+  url: string;
+}
+
+export const uploadImageToNcloud = async ({
+  presignedUrl,
+  file,
+}: {
+  presignedUrl: string;
+  file: File | null;
+}): Promise<void> => {
+  if (!file) throw new Error('File is required');
+
+  return axios.put(presignedUrl, file, {
+    headers: {
+      'Content-Type': file.type,
+      'x-amz-acl': 'public-read',
+    },
+  });
+};
 
 export default function PostCreate() {
+  const { mutate: createPost } = usePostCreatePosts();
   const router = useRouter();
   const outModal = useModal(false);
 
   const [content, setContent] = useState('');
-
   const [image, setImage] = useState<File | null>(null);
-
   const maxLength = 80;
-
-  const { mutate: createPost } = usePostCreatePosts();
 
   const handleImageUpload = (file: File) => {
     setImage(file);
@@ -42,7 +61,14 @@ export default function PostCreate() {
 
       // 이미지 S3 업로드
       if (image) {
-        imageUrl = await uploadImageToNcloud({ file: image });
+        const response = await api.get<GetPresignedUrlResponse>(
+          `/community/presigned-url?fileName=${encodeURIComponent(image.name)}&contentType=${encodeURIComponent(image.type)}`,
+        );
+        const { url } = response;
+
+        await uploadImageToNcloud({ presignedUrl: url, file: image });
+
+        imageUrl = url;
       }
 
       // 게시글 생성 API 호출
@@ -50,9 +76,12 @@ export default function PostCreate() {
         content,
         imageUrl,
       };
+
+      console.log('보내려는 데이터:', postData);
+
       createPost(postData);
     } catch (error) {
-      console.error('이미지 업로드 or 게시글 생성 실패:', error);
+      console.error('게시글 생성 실패:', error);
     }
   };
 
@@ -94,8 +123,7 @@ export default function PostCreate() {
                 setContent(e.target.value);
               }
             }}
-            className="w-full h-36 p-3 border border-gray2 rounded-xl text-14px font-medium resize-none
-              focus:outline-none focus:border-mainPink1 pr-10"
+            className="w-full h-36 p-3 border border-gray2 rounded-xl text-14px font-medium resize-none focus:outline-none focus:border-mainPink1 pr-10"
           />
           <p className="absolute bottom-3 right-3 text-gray1 text-12px">
             {content.length}/{maxLength}

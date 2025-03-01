@@ -4,7 +4,7 @@ import { api } from '@/api';
 import type { MeListItem } from '@/types/community';
 
 const getMeList = async (postId: number): Promise<MeListItem[]> => {
-  return await api.get<MeListItem[]>(`/community/${postId}/particiations`);
+  return await api.get<MeListItem[]>(`/community/${postId}/participations`);
 };
 
 export const useGetMeList = (postId: number) => {
