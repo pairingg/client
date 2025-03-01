@@ -1,5 +1,7 @@
 'use client';
 
+import { useState } from 'react';
+
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
@@ -12,15 +14,22 @@ import BottomSheetModal from '@/components/modal/BottomSheetModal';
 import ListModal from '@/components/modal/ListModal';
 import PostCard from '@/components/PostCard';
 import UserProfile from '@/components/profiles/UserProfile';
+import { useGetMeList } from '@/hooks/apis/community/useGetMeList';
+import { useGetMyPostList } from '@/hooks/apis/community/useGetMyPostList';
 import { useModal } from '@/hooks/useModal';
-import type { MeListItem, MyPost } from '@/types/community';
 
-interface MyPostsTabProps {
-  myPosts: MyPost[];
-  meList: MeListItem[];
-}
+const MyPostsTab = () => {
+  const { data: myPosts, isLoading, isError } = useGetMyPostList();
 
-const MyPostsTab: React.FC<MyPostsTabProps> = ({ myPosts, meList }) => {
+  // 선택된 게시글 ID를 관리
+  const [selectedPostId, setSelectedPostId] = useState<number | null>(null);
+  // 선택된 postId를 이용해 저요 목록을 불러옴. postId가 없으면 API 호출 안 함.
+  const {
+    data: meList,
+    isLoading: isMeListLoading,
+    isError: isMeListError,
+  } = useGetMeList(selectedPostId ?? 0);
+
   const router = useRouter();
   const myPostMenuModal = useModal();
   const deleteConfirmModal = useModal();
@@ -29,7 +38,9 @@ const MyPostsTab: React.FC<MyPostsTabProps> = ({ myPosts, meList }) => {
 
   return (
     <>
-      {myPosts.length > 0 ? (
+      {isLoading && <p>데이터 로딩 중</p>}
+      {isError && <p>데이터를 불러오지 못했습니다.</p>}
+      {myPosts && myPosts.length > 0 ? (
         <div className="flex flex-col pb-[200px] h-screen flex-grow overflow-y-auto bg-[#f9f9f9]">
           {myPosts.map((item) => (
             <PostCard
@@ -42,7 +53,10 @@ const MyPostsTab: React.FC<MyPostsTabProps> = ({ myPosts, meList }) => {
               imageUrl={item.imageUrl}
               time={new Date(item.createdAt)}
               buttonText="저요 목록 보기"
-              onButtonClick={bottomSheetModal.openModal}
+              onButtonClick={() => {
+                setSelectedPostId(item.id); // 클릭한 게시글의 ID를 상태에 저장
+                bottomSheetModal.openModal();
+              }}
             />
           ))}
 
@@ -52,7 +66,12 @@ const MyPostsTab: React.FC<MyPostsTabProps> = ({ myPosts, meList }) => {
             isClose={bottomSheetModal.closeModal}
             title="저요 목록"
           >
-            {meList.length > 0 ? (
+            {isMeListLoading && <p>데이터 로딩 중</p>}
+            {isMeListError && <p>데이터를 불러오지 못했습니다.</p>}
+            {!isMeListLoading &&
+            !isMeListError &&
+            meList &&
+            meList.length > 0 ? (
               <div className="flex flex-col flex-grow pb-[70px]">
                 {meList.map((item, index) => (
                   <UserProfile
@@ -74,12 +93,17 @@ const MyPostsTab: React.FC<MyPostsTabProps> = ({ myPosts, meList }) => {
                 ))}
               </div>
             ) : (
-              <div className="flex flex-col items-center justify-center">
-                <p className="text-18px font-medium text-gray1 py-1">
-                  아직 저요 목록이 없습니다.
-                </p>
-                <p className="font-14-regular text-gray1">저요를 남겨보세요.</p>
-              </div>
+              !isMeListLoading &&
+              !isMeListError && (
+                <div className="flex flex-col items-center justify-center">
+                  <p className="text-18px font-medium text-gray1 py-1">
+                    아직 저요 목록이 없습니다.
+                  </p>
+                  <p className="font-14-regular text-gray1">
+                    저요를 남겨보세요.
+                  </p>
+                </div>
+              )
             )}
           </BottomSheetModal>
         </div>

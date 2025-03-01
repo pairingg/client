@@ -9,7 +9,7 @@ const getPostList = async (): Promise<Post[]> => {
 
 export const useGetPostList = () => {
   return useQuery<Post[], Error>({
-    queryKey: ['idealRecommend'],
+    queryKey: ['getPostList'],
     queryFn: getPostList,
   });
 };
