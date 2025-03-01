@@ -4,7 +4,7 @@ import KeywordList from './KeywordList';
 
 interface KeywordRecommendationProps {
   keywords: keywordsList[];
-  onKeywordSelected: (keywordId: number) => void; // ▼ 추가
+  onKeywordSelected: (keywordId: number) => void;
 }
 
 export default function KeywordRecommendation({

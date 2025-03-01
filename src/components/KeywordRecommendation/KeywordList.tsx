@@ -40,7 +40,7 @@ export default function KeywordList({
     }
 
     setPendingKeyword(keywordId);
-    setKeywordMessage(`${title} 키워드의 맞춤 추천을 받으시겠습니까?`);
+    setKeywordMessage(`${title} 키워드의 맞춤 추천을\n받으시겠습니까?`);
     checkModal.openModal();
   };
 
@@ -62,7 +62,7 @@ export default function KeywordList({
             </span>
           </div>
 
-          {/* 버튼: hasUsed가 true라면 disabledColor 스타일 */}
+          {/* 버튼: hasUsed가 true, disabledColor */}
           <Button
             shape="circle"
             variant={hasUsed ? 'disabledColor' : 'filled'}
@@ -79,7 +79,7 @@ export default function KeywordList({
         isOpen={checkModal.isOpen}
         icon={<ExclamationIcon fill="#FF4F75" />}
         message={keywordMessage}
-        description="맞춤 추천 키워드는 하루 한번만 선택이 가능합니다."
+        description={`맞춤 추천 키워드는 하루 한번만\n 선택이 가능합니다.`}
         buttons={[
           {
             label: '취소',
@@ -117,8 +117,8 @@ export default function KeywordList({
       <ActionModal
         isOpen={alreadyUsedModal.isOpen}
         icon={<ExclamationIcon fill="#FF4F75" />}
-        message="오늘 추천 횟수를 모두 받으셨습니다."
-        description="내일 다시 사용자를 추천 받으실 수 있습니다."
+        message={`오늘 추천 횟수를\n 모두 받으셨습니다.`}
+        description={`내일 다시 사용자를 추천\n 받으실 수 있습니다.`}
         buttons={[
           {
             label: '닫기',
