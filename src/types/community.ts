@@ -35,3 +35,8 @@ export interface PostCreate {
   content: string;
   imageUrl: string;
 }
+
+export interface PostUpdate {
+  content: string;
+  imageUrl: string;
+}
