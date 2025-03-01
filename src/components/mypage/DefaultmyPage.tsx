@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation';
 
 import ProfileCardInfoContainer from '@/components/ProfileCardInfoContainer';
 import { DRINK_STATUS, SMOKE_STATUS } from '@/constants/wellness';
+import { useDeleteUser } from '@/hooks/apis/mypage/useDeleteUser';
 import { useGetIdeal } from '@/hooks/apis/mypage/useGetIdeal';
 import { useGetMyPageProfile } from '@/hooks/apis/mypage/useGetMyPageProfile';
 import { useModal } from '@/hooks/useModal';
@@ -30,6 +31,7 @@ export default function DefaultMyPage() {
   const withdrawalConfirmModal = useModal();
   const { data: myPageProfileData } = useGetMyPageProfile();
   const { data: idealData } = useGetIdeal();
+  const { mutate: deleteUser } = useDeleteUser();
 
   const handleEdit = () => {
     router.push('/mypage/edit/info');
@@ -180,6 +182,7 @@ export default function DefaultMyPage() {
               onClick: () => {
                 withdrawalModal.closeModal();
                 withdrawalConfirmModal.openModal();
+                deleteUser();
               },
               className: 'text-mainPink1',
             },
