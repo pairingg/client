@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation';
 
 import ProfileCardInfoContainer from '@/components/ProfileCardInfoContainer';
 import { DRINK_STATUS, SMOKE_STATUS } from '@/constants/wellness';
+import { useGetMyPageProfile } from '@/hooks/apis/mypage/useGetMyPageProfile';
 import { useModal } from '@/hooks/useModal';
 import type { myProfile } from '@/types/member/mypage';
 
@@ -36,6 +37,7 @@ export default function DefaultMyPage({
   const logoutConfirmModal = useModal();
   const withdrawalModal = useModal();
   const withdrawalConfirmModal = useModal();
+  const { data: myPageProfileData } = useGetMyPageProfile();
 
   const handleEdit = () => {
     router.push('/mypage/edit/info');
@@ -87,8 +89,8 @@ export default function DefaultMyPage({
 
         <div className="flex flex-col items-center mb-8">
           <div className="flex mt-5 mb-2 font-24-bold gap-3 items-center justify-center">
-            <div>{name}</div>
-            <div>{age}</div>
+            <div>{myPageProfileData?.name}</div>
+            <div>{myPageProfileData?.age}</div>
             <NameStarIcon />
           </div>
 
