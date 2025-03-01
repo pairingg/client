@@ -8,6 +8,7 @@ import { useDeleteUser } from '@/hooks/apis/mypage/useDeleteUser';
 import { useGetIdeal } from '@/hooks/apis/mypage/useGetIdeal';
 import { useGetMyPageProfile } from '@/hooks/apis/mypage/useGetMyPageProfile';
 import { useModal } from '@/hooks/useModal';
+import { logout } from '@/utils/auth';
 
 import BottomNavBar from '../BottomNavBar';
 import Button from '../common/Button';
@@ -29,8 +30,9 @@ export default function DefaultMyPage() {
   const logoutConfirmModal = useModal();
   const withdrawalModal = useModal();
   const withdrawalConfirmModal = useModal();
-  const { data: myPageProfileData } = useGetMyPageProfile();
-  const { data: idealData } = useGetIdeal();
+  const { data: myPageProfileData, isLoading: isProfileLoading } =
+    useGetMyPageProfile();
+  const { data: idealData, isLoading: isIdealLoading } = useGetIdeal();
   const { mutate: deleteUser } = useDeleteUser();
 
   const handleEdit = () => {
@@ -61,17 +63,19 @@ export default function DefaultMyPage() {
     {
       icon: <LocationIcon />,
       title: '거주지',
-      description: `${idealData?.address?.[0]?.city} ${idealData?.address?.[0]?.district}`,
+      description: idealData?.address?.[0]
+        ? `${idealData.address[0].city} ${idealData.address[0].district}`
+        : '정보 없음',
     },
     {
       icon: <HobbyIcon />,
       title: '취미',
-      tags: idealData?.hobby,
+      tags: idealData?.hobby || [],
     },
     {
       icon: <PerconalityIcon />,
       title: '성격(MBTI)',
-      description: idealData?.mbti,
+      description: idealData?.mbti?.[0] || '정보 없음',
     },
     {
       icon: <BeerIcon />,
@@ -80,6 +84,10 @@ export default function DefaultMyPage() {
     },
   ];
 
+  if (isProfileLoading || isIdealLoading) {
+    return <div>로딩중...</div>;
+  }
+
   return (
     <div className="flex flex-col items-center overflow-y-auto">
       <div className="flex flex-col items-center w-full overflow-y-auto p-5">
@@ -87,8 +95,8 @@ export default function DefaultMyPage() {
 
         <div className="flex flex-col items-center mb-8">
           <div className="flex mt-5 mb-2 font-24-bold gap-3 items-center justify-center">
-            <div>{myPageProfileData?.name}</div>
-            <div>{myPageProfileData?.age}</div>
+            <div>{myPageProfileData?.name || '이름 없음'}</div>
+            <div>{myPageProfileData?.age || '-'}</div>
             <NameStarIcon />
           </div>
 
@@ -106,7 +114,7 @@ export default function DefaultMyPage() {
               key={index}
               icon={item.icon}
               title={item.title}
-              description={item.description as string}
+              description={item.description}
               tags={item.tags}
             />
           ))}
@@ -160,7 +168,7 @@ export default function DefaultMyPage() {
               label: '닫기',
               onClick: () => {
                 logoutConfirmModal.closeModal();
-                router.push('/');
+                logout();
               },
               className: 'w-full',
             },

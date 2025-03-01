@@ -2,22 +2,61 @@ import { useQuery } from '@tanstack/react-query';
 
 import { api } from '@/api';
 
-export interface idealTypeContent {
-  mbti?: string[];
-  address?: {
+export interface idealResponse {
+  idealTypeId: number;
+  mbti: string[];
+  address: [
+    {
+      city: string;
+      district: string;
+    },
+  ];
+  ageStart: number;
+  ageEnd: number;
+  hobby: string[];
+  drink: string;
+  smoke: string;
+  member: {
+    userId: number;
+    name: string;
+    age: number;
+    heart: number;
+    gender: string;
+    email: string;
+    birth: string;
+    mbti: string;
+    drink: string;
+    smoking: string;
+    joinAt: string;
     city: string;
     district: string;
-  }[];
-  age?: {
-    min: number;
-    max: number;
+    claimCount: number;
+    enrolled: boolean;
+    hobby: {
+      hobbyId: number;
+      hobby: string[];
+      member: string;
+    };
+    photo: {
+      photoId: number;
+      photo: string[];
+      member: string;
+    };
+    posts: [
+      {
+        postId: number;
+        member: string;
+        content: string;
+        imageUrl: string;
+        createdAt: string;
+        claimCount: number;
+      },
+    ];
   };
-  hobby?: string[];
-  drink?: string;
-  smoke?: string;
 }
+
 const getIdeal = async () => {
-  return api.get<idealTypeContent>('/ideal');
+  return api.get<idealResponse>('/ideal');
 };
 
 export const useGetIdeal = () => {
