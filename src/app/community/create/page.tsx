@@ -8,59 +8,51 @@ import BottomNavBar from '@/components/BottomNavBar';
 import Button from '@/components/common/Button';
 import ImageUploader from '@/components/common/ImageUploader';
 import ActionModal from '@/components/modal/ActionModal';
-import { useModal } from '@/hooks/useModal';
-
-// 1) 게시글 생성 훅
-import { usePostCreatePosts } from '@/hooks/apis/community/usePostCreatePosts';
-
-// 2) 이미지 업로드 훅
-import { uploadImageToNcloud } from '@/hooks/apis/upload/useUploadImageToNcloud';
+import { usePostCreatePosts } from '@/hooks/apis/community/usePostCreatePost';
 
 import ExclamationIcon from '/src/assets/icons/alert_exclamationMark.svg';
 import BackIcon from '/src/assets/icons/header_back.svg';
+
+import { uploadImageToNcloud } from '@/hooks/apis/community/useUploadImageToNcloud';
+import { useModal } from '@/hooks/useModal';
 
 export default function PostCreate() {
   const router = useRouter();
   const outModal = useModal(false);
 
-  // 글 내용 상태
   const [content, setContent] = useState('');
-  // 선택된 파일 상태 (ImageUploader 컴포넌트에서 File 객체를 받아온다고 가정)
-  const [file, setFile] = useState<File | null>(null);
+
+  const [image, setImage] = useState<File | null>(null);
 
   const maxLength = 80;
 
-  // 게시글 생성 mutation 훅
-  const { mutate: createPost, isLoading } = usePostCreatePosts();
+  const { mutate: createPost } = usePostCreatePosts();
 
-  // ImageUploader에서 파일 선택 시 호출되는 핸들러
-  const handleImageUpload = (selectedFile: File) => {
-    setFile(selectedFile);
+  const handleImageUpload = (file: File) => {
+    setImage(file);
   };
 
-  // ImageUploader에서 파일 삭제 시 호출되는 핸들러
   const handleImageDelete = () => {
-    setFile(null);
+    setImage(null);
   };
 
-  // 등록 버튼 클릭 시
   const handleSubmit = async () => {
     try {
       let imageUrl = '';
 
-      // 1) 파일이 존재하면 먼저 S3에 업로드
-      if (file) {
-        imageUrl = await uploadImageToNcloud({ file });
+      // 이미지 S3 업로드
+      if (image) {
+        imageUrl = await uploadImageToNcloud({ file: image });
       }
 
-      // 2) 게시글 생성 API 호출
+      // 게시글 생성 API 호출
       const postData = {
         content,
-        imageUrl, // 업로드한 이미지 주소
+        imageUrl,
       };
-      createPost(postData); // 성공 시 내부 onSuccess에서 router.push('/community') 처리
+      createPost(postData);
     } catch (error) {
-      console.error('이미지 업로드 또는 게시글 생성 실패:', error);
+      console.error('이미지 업로드 or 게시글 생성 실패:', error);
     }
   };
 
@@ -115,8 +107,9 @@ export default function PostCreate() {
       <div className="flex flex-col p-5 space-y-4">
         <p className="text-18px font-medium pb-2">사진 등록</p>
         <ImageUploader
-          onImageUpload={handleImageUpload} // File 객체를 받아옴
+          onImageUpload={handleImageUpload}
           onImageDelete={handleImageDelete}
+          image={image}
         />
       </div>
 
@@ -131,9 +124,8 @@ export default function PostCreate() {
             variant="filled"
             className="w-full py-3"
             onClick={handleSubmit}
-            disabled={isLoading}
           >
-            {isLoading ? '등록 중...' : '등록'}
+            등록
           </Button>
         </div>
       </div>
