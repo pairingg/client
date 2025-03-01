@@ -4,9 +4,9 @@ import { useRouter } from 'next/navigation';
 
 import ProfileCardInfoContainer from '@/components/ProfileCardInfoContainer';
 import { DRINK_STATUS, SMOKE_STATUS } from '@/constants/wellness';
+import { useGetIdeal } from '@/hooks/apis/mypage/useGetIdeal';
 import { useGetMyPageProfile } from '@/hooks/apis/mypage/useGetMyPageProfile';
 import { useModal } from '@/hooks/useModal';
-import type { myProfile } from '@/types/member/mypage';
 
 import BottomNavBar from '../BottomNavBar';
 import Button from '../common/Button';
@@ -21,16 +21,7 @@ import HobbyIcon from '/src/assets/icons/profilecard_heart_pink.svg';
 import LocationIcon from '/src/assets/icons/profilecard_location_pink.svg';
 import PerconalityIcon from '/src/assets/icons/profilecard_user_pink.svg';
 
-export default function DefaultMyPage({
-  name,
-  age,
-  mbti,
-  drink,
-  smoke,
-  city,
-  district,
-  hobby,
-}: myProfile) {
+export default function DefaultMyPage() {
   const router = useRouter();
 
   const logoutModal = useModal();
@@ -38,6 +29,7 @@ export default function DefaultMyPage({
   const withdrawalModal = useModal();
   const withdrawalConfirmModal = useModal();
   const { data: myPageProfileData } = useGetMyPageProfile();
+  const { data: idealData } = useGetIdeal();
 
   const handleEdit = () => {
     router.push('/mypage/edit/info');
@@ -52,8 +44,12 @@ export default function DefaultMyPage({
   };
 
   // 음주/흡연 "키" -> "값" 변환
-  const drinkStatus = drink && DRINK_STATUS[drink];
-  const smokeStatus = smoke && SMOKE_STATUS[smoke];
+  const drinkStatus =
+    idealData?.drink &&
+    DRINK_STATUS[idealData.drink as keyof typeof DRINK_STATUS];
+  const smokeStatus =
+    idealData?.smoke &&
+    SMOKE_STATUS[idealData.smoke as keyof typeof SMOKE_STATUS];
 
   // undefined 등 falsy 값 제거
   const drinkSmokeTags = [drinkStatus, smokeStatus].filter(Boolean) as string[];
@@ -63,17 +59,17 @@ export default function DefaultMyPage({
     {
       icon: <LocationIcon />,
       title: '거주지',
-      description: `${city} ${district}`,
+      description: `${idealData?.address?.[0]?.city} ${idealData?.address?.[0]?.district}`,
     },
     {
       icon: <HobbyIcon />,
       title: '취미',
-      tags: hobby,
+      tags: idealData?.hobby,
     },
     {
       icon: <PerconalityIcon />,
       title: '성격(MBTI)',
-      description: mbti,
+      description: idealData?.mbti,
     },
     {
       icon: <BeerIcon />,
@@ -108,7 +104,7 @@ export default function DefaultMyPage({
               key={index}
               icon={item.icon}
               title={item.title}
-              description={item.description}
+              description={item.description as string}
               tags={item.tags}
             />
           ))}
