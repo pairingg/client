@@ -1,5 +1,4 @@
 'use client';
-
 import { useState } from 'react';
 
 import Image from 'next/image';
@@ -14,9 +13,12 @@ import BottomSheetModal from '@/components/modal/BottomSheetModal';
 import ListModal from '@/components/modal/ListModal';
 import PostCard from '@/components/PostCard';
 import UserProfile from '@/components/profiles/UserProfile';
+import { useDeletePost } from '@/hooks/apis/community/useDeletePost';
 import { useGetMeList } from '@/hooks/apis/community/useGetMeList';
 import { useGetMyPostList } from '@/hooks/apis/community/useGetMyPostList';
 import { useModal } from '@/hooks/useModal';
+
+import MoreGrayIcon from '/src/assets/icons/more_gray.svg';
 
 const MyPostsTab = () => {
   const { data: myPosts, isLoading, isError } = useGetMyPostList();
@@ -35,6 +37,18 @@ const MyPostsTab = () => {
   const deleteConfirmModal = useModal();
   const deleteSuccessModal = useModal();
   const bottomSheetModal = useModal();
+
+  const deletePost = useDeletePost();
+
+  // 게시물 삭제
+  const handleDeletePost = (postId: number) => {
+    deletePost.mutate(postId, {
+      onSuccess: () => {
+        deleteConfirmModal.closeModal();
+        deleteSuccessModal.openModal();
+      },
+    });
+  };
 
   return (
     <>
@@ -57,6 +71,14 @@ const MyPostsTab = () => {
                 setSelectedPostId(item.id); // 클릭한 게시글의 ID를 상태에 저장
                 bottomSheetModal.openModal();
               }}
+              buttonComponent={
+                <button
+                  className="absolute right-0 top-0 p-2 pt-4"
+                  onClick={myPostMenuModal.openModal}
+                >
+                  <MoreGrayIcon />
+                </button>
+              }
             />
           ))}
 
@@ -148,6 +170,29 @@ const MyPostsTab = () => {
         oneButton={{ label: '취소', onClick: myPostMenuModal.closeModal }}
       />
 
+      {/* 수정/삭제 메뉴 모달 */}
+      <ListModal
+        isOpen={myPostMenuModal.isOpen}
+        buttonList={[
+          {
+            label: '수정하기',
+            onClick: () => {
+              router.push(`/community/edit?id=${myPosts && myPosts[0]?.id}`);
+              myPostMenuModal.closeModal();
+            },
+          },
+          {
+            label: '삭제하기',
+            onClick: () => {
+              myPostMenuModal.closeModal();
+              deleteConfirmModal.openModal();
+            },
+            color: 'text-mainPink1',
+          },
+        ]}
+        oneButton={{ label: '취소', onClick: myPostMenuModal.closeModal }}
+      />
+
       {/* 삭제 확인 모달 */}
       <ActionModal
         isOpen={deleteConfirmModal.isOpen}
@@ -158,9 +203,9 @@ const MyPostsTab = () => {
           {
             label: '확인',
             onClick: () => {
-              deleteConfirmModal.closeModal();
-              myPostMenuModal.closeModal();
-              deleteSuccessModal.openModal();
+              if (selectedPostId) {
+                handleDeletePost(selectedPostId);
+              }
             },
             className: 'text-mainPink1',
           },
