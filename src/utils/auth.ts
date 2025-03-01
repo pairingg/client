@@ -1,12 +1,10 @@
 import Cookies from 'js-cookie';
 
 // 쿠키 설정 옵션
-export const COOKIE_OPTIONS = {
+const COOKIE_OPTIONS = {
   expires: 7, // 7일 후 만료
   //   secure: process.env.NODE_ENV === 'production', // HTTPS에서만 쿠키 전송
-  sameSite: 'lax' as const, // strict에서 lax로 변경
-  path: '/', // 모든 경로에서 접근 가능하도록
-  secure: false,
+  sameSite: 'strict' as const, // CSRF 방지
 };
 
 // 토큰 저장
