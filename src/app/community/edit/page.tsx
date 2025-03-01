@@ -1,31 +1,58 @@
 'use client';
 
-import BottomNavBar from '@/components/BottomNavBar';
-import Button from '@/components/common/Button';
-import ImageUploader from '@/components/common/ImageUploader';
+import { useState } from 'react';
 
 import { useRouter } from 'next/navigation';
 
-import { useState } from 'react';
+import BottomNavBar from '@/components/BottomNavBar';
+import Button from '@/components/common/Button';
+import ImageUploader from '@/components/common/ImageUploader';
+import ActionModal from '@/components/modal/ActionModal';
+import type { PostUpdateWithFile } from '@/hooks/apis/community/usePutPost';
+import { useUpdatePostWithS3 } from '@/hooks/apis/community/usePutPost';
+import { useModal } from '@/hooks/useModal';
 
+import ExclamationIcon from '/src/assets/icons/alert_exclamationMark.svg';
 import BackIcon from '/src/assets/icons/header_back.svg';
 
-export default function PostEdit() {
-  const [content, setContent] = useState(''); // 글자 수 상태 관리
-  const maxLength = 80;
+interface PostEditProps {
+  postId: number;
+  initialContent: string;
+  initialImageUrl: string;
+}
+
+export default function PostEdit({
+  postId,
+  initialContent,
+  initialImageUrl,
+}: PostEditProps) {
   const router = useRouter();
+  const outModal = useModal(false);
 
-  // 단일 이미지 상태
-  const [image, setImage] = useState<File | null>(null);
+  const [content, setContent] = useState(initialContent);
 
-  // 단일 이미지 업로드 핸들러
-  const handleImageUpload = (file: File) => {
-    setImage(file);
+  const [file, setFile] = useState<File | null>(null);
+
+  const maxLength = 80;
+  const { mutate: updatePost } = useUpdatePostWithS3();
+
+  const handleImageUpload = (selectedFile: File) => {
+    setFile(selectedFile);
   };
 
-  // 단일 이미지 삭제 핸들러
   const handleImageDelete = () => {
-    setImage(null);
+    setFile(null);
+  };
+
+  // 수정 완료 버튼 클릭 시
+  const handleSubmit = () => {
+    const updateData: PostUpdateWithFile = {
+      content,
+      imageUrl: initialImageUrl,
+      file: file ?? undefined,
+    };
+
+    updatePost({ postId, data: updateData });
   };
 
   return (
@@ -37,6 +64,22 @@ export default function PostEdit() {
         </button>
         <h1 className="text-22px font-bold flex-1 text-center">글수정</h1>
       </div>
+
+      {/* 페이지 이탈 모달 */}
+      <ActionModal
+        isOpen={outModal.isOpen}
+        icon={<ExclamationIcon fill="#FF4F75" />}
+        message="현재 페이지를 나가시겠습니까?"
+        description="작성하신 내용이 저장되지 않습니다."
+        buttons={[
+          { label: '취소', onClick: outModal.closeModal },
+          {
+            label: '확인',
+            onClick: () => router.push('/community'),
+            className: 'text-mainPink1',
+          },
+        ]}
+      />
 
       {/* 글 수정 영역 */}
       <div className="flex flex-col p-5 space-y-4">
@@ -53,7 +96,6 @@ export default function PostEdit() {
             }}
             className="w-full h-36 p-3 border border-gray2 rounded-xl text-14px font-medium resize-none focus:outline-none focus:border-mainPink1 pr-10"
           />
-          {/* 글자 수 카운트 */}
           <p className="absolute bottom-3 right-3 text-gray1 text-12px">
             {content.length}/{maxLength}
           </p>
@@ -66,7 +108,7 @@ export default function PostEdit() {
         <ImageUploader
           onImageUpload={handleImageUpload}
           onImageDelete={handleImageDelete}
-          image={image}
+          image={file}
         />
       </div>
 
@@ -80,9 +122,7 @@ export default function PostEdit() {
             shape="rectangle"
             variant="filled"
             className="w-full py-3"
-            onClick={() => {
-              router.push('/community');
-            }}
+            onClick={handleSubmit}
           >
             수정 완료
           </Button>

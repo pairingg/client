@@ -1,35 +1,59 @@
 'use client';
 
-import BottomNavBar from '@/components/BottomNavBar';
-import Button from '@/components/common/Button';
-import ImageUploader from '@/components/common/ImageUploader';
-import { useModal } from '@/hooks/useModal';
+import { useState } from 'react';
 
 import { useRouter } from 'next/navigation';
 
-import { useState } from 'react';
-
-import ActionModal from '../../../components/modal/ActionModal/index';
+import BottomNavBar from '@/components/BottomNavBar';
+import Button from '@/components/common/Button';
+import ImageUploader from '@/components/common/ImageUploader';
+import ActionModal from '@/components/modal/ActionModal';
+import { usePostCreatePosts } from '@/hooks/apis/community/usePostCreatePost';
 
 import ExclamationIcon from '/src/assets/icons/alert_exclamationMark.svg';
 import BackIcon from '/src/assets/icons/header_back.svg';
 
+import { uploadImageToNcloud } from '@/hooks/apis/community/useUploadImageToNcloud';
+import { useModal } from '@/hooks/useModal';
+
 export default function PostCreate() {
-  const [content, setContent] = useState(''); // 글자 수 상태 관리
-  const maxLength = 80;
-  const outModal = useModal(false);
   const router = useRouter();
+  const outModal = useModal(false);
+
+  const [content, setContent] = useState('');
 
   const [image, setImage] = useState<File | null>(null);
 
-  // 단일 이미지 업로드 핸들러
+  const maxLength = 80;
+
+  const { mutate: createPost } = usePostCreatePosts();
+
   const handleImageUpload = (file: File) => {
     setImage(file);
   };
 
-  // 단일 이미지 삭제 핸들러
   const handleImageDelete = () => {
     setImage(null);
+  };
+
+  const handleSubmit = async () => {
+    try {
+      let imageUrl = '';
+
+      // 이미지 S3 업로드
+      if (image) {
+        imageUrl = await uploadImageToNcloud({ file: image });
+      }
+
+      // 게시글 생성 API 호출
+      const postData = {
+        content,
+        imageUrl,
+      };
+      createPost(postData);
+    } catch (error) {
+      console.error('이미지 업로드 or 게시글 생성 실패:', error);
+    }
   };
 
   return (
@@ -42,21 +66,17 @@ export default function PostCreate() {
         <h1 className="text-22px font-bold flex-1 text-center">글작성</h1>
       </div>
 
+      {/* 페이지 이탈 모달 */}
       <ActionModal
         isOpen={outModal.isOpen}
         icon={<ExclamationIcon fill="#FF4F75" />}
         message="현재 페이지를 나가시겠습니까?"
         description="작성하신 글이 삭제됩니다."
         buttons={[
-          {
-            label: '취소',
-            onClick: outModal.closeModal,
-          },
+          { label: '취소', onClick: outModal.closeModal },
           {
             label: '확인',
-            onClick: () => {
-              router.push('/community');
-            },
+            onClick: () => router.push('/community'),
             className: 'text-mainPink1',
           },
         ]}
@@ -64,7 +84,6 @@ export default function PostCreate() {
 
       {/* 글 작성 영역 */}
       <div className="flex flex-col p-5 space-y-4">
-        {/* 내용 입력 */}
         <div className="relative">
           <p className="text-18px font-medium pb-2">내용</p>
           <textarea
@@ -78,7 +97,6 @@ export default function PostCreate() {
             className="w-full h-36 p-3 border border-gray2 rounded-xl text-14px font-medium resize-none
               focus:outline-none focus:border-mainPink1 pr-10"
           />
-          {/* 글자 수 카운트 */}
           <p className="absolute bottom-3 right-3 text-gray1 text-12px">
             {content.length}/{maxLength}
           </p>
@@ -98,10 +116,15 @@ export default function PostCreate() {
       {/* 하단 바 */}
       <BottomNavBar />
 
-      {/* 등록 버튼  */}
+      {/* 등록 버튼 */}
       <div className="fixed bottom-[80px] left-0 right-0 z-20">
         <div className="mx-auto max-w-[520px] px-5 pb-[30px]">
-          <Button shape="rectangle" variant="filled" className="w-full py-3">
+          <Button
+            shape="rectangle"
+            variant="filled"
+            className="w-full py-3"
+            onClick={handleSubmit}
+          >
             등록
           </Button>
         </div>
