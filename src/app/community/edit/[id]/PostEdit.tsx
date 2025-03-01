@@ -85,6 +85,8 @@ export default function PostEdit({ postId }: PostEditProps) {
         const { url } = response;
         await uploadImageToNcloud({ presignedUrl: url, file });
         imageUrl = url;
+
+        imageUrl = url.split('?')[0];
       }
 
       const updateData = {
@@ -92,7 +94,14 @@ export default function PostEdit({ postId }: PostEditProps) {
         imageUrl,
       };
 
-      updatePost({ postId, data: updateData });
+      updatePost(
+        { postId, data: updateData },
+        {
+          onSuccess: () => {
+            window.location.href = '/community';
+          },
+        },
+      );
     } catch (error) {
       console.error('게시글 수정 실패:', error);
     }

@@ -45,6 +45,7 @@ export default function PostCreate() {
 
   const [content, setContent] = useState('');
   const [image, setImage] = useState<File | null>(null);
+
   const maxLength = 80;
 
   const handleImageUpload = (file: File) => {
@@ -59,7 +60,6 @@ export default function PostCreate() {
     try {
       let imageUrl = '';
 
-      // 이미지 S3 업로드
       if (image) {
         const response = await api.get<GetPresignedUrlResponse>(
           `/community/presigned-url?fileName=${encodeURIComponent(image.name)}&contentType=${encodeURIComponent(image.type)}`,
@@ -68,7 +68,7 @@ export default function PostCreate() {
 
         await uploadImageToNcloud({ presignedUrl: url, file: image });
 
-        imageUrl = url;
+        imageUrl = url.split('?')[0];
       }
 
       // 게시글 생성 API 호출
@@ -76,10 +76,11 @@ export default function PostCreate() {
         content,
         imageUrl,
       };
-
-      console.log('보내려는 데이터:', postData);
-
-      createPost(postData);
+      createPost(postData, {
+        onSuccess: () => {
+          window.location.href = '/community';
+        },
+      });
     } catch (error) {
       console.error('게시글 생성 실패:', error);
     }
