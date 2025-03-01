@@ -5,8 +5,13 @@ import Link from 'next/link';
 import PlusButton from '@/components/buttons/PlusButton';
 import PostCard from '@/components/PostCard';
 import { useGetPostList } from '@/hooks/apis/community/useGetPostList';
+import { usePostParticipation } from '@/hooks/apis/community/usePostParticipation';
 
 const PostsListTab = () => {
+  const { mutate: participate } = usePostParticipation();
+  // 실제 환경에서는 인증 정보를 통해 가져와야 함.
+  const userId = '2222';
+
   const { data: postList, isLoading, isError } = useGetPostList();
 
   return (
@@ -26,7 +31,9 @@ const PostsListTab = () => {
               imageUrl={item.imageUrl ?? '/images/pairing_logo.png'}
               time={new Date(item.createdAt)}
               buttonText="저요"
-              onButtonClick={() => console.log('저요 버튼 클릭')}
+              onButtonClick={() => {
+                participate({ postId: item.id, userId });
+              }}
             />
           ))}
       </div>
