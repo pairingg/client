@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import Link from 'next/link';
 
 import PlusButton from '@/components/buttons/PlusButton';
@@ -26,7 +27,30 @@ const PostsListTab = () => {
       <div className="flex flex-col pb-[200px] h-screen flex-grow overflow-y-auto bg-[#f9f9f9]">
         {isLoading && <p>데이터 로딩 중</p>}
         {isError && <p>데이터를 불러오지 못했습니다.</p>}
-        {postList &&
+
+        {postList?.length === 0 ? (
+          // 작성한 글이 없을 때
+          <div className="flex flex-col items-center justify-center h-full">
+            <div className="flex flex-col items-center w-full h-[50%] justify-center">
+              <Image
+                src="/images/logo_gray.png"
+                alt="내가 작성한 글 없을 때 페이지 로고"
+                width={335}
+                height={335}
+              />
+            </div>
+            <div className="flex flex-col items-center justify-center pb-4">
+              <p className="font-18-medium text-gray1 py-1">
+                아직 작성하신 글이 없습니다.
+              </p>
+              <p className="font-14-regular text-gray1 py-1">
+                새로운 글을 작성해보세요!
+              </p>
+            </div>
+          </div>
+        ) : (
+          // 작성한 글이 있을 때
+          postList &&
           postList?.map((item) => (
             <PostCard
               key={item.id}
@@ -49,7 +73,8 @@ const PostsListTab = () => {
                 );
               }}
             />
-          ))}
+          ))
+        )}
       </div>
 
       {/* 참여 완료 모달 */}
