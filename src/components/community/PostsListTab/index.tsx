@@ -3,11 +3,18 @@
 import Link from 'next/link';
 
 import PlusButton from '@/components/buttons/PlusButton';
+import ActionModal from '@/components/modal/ActionModal';
 import PostCard from '@/components/PostCard';
 import { useGetPostList } from '@/hooks/apis/community/useGetPostList';
 import { usePostParticipation } from '@/hooks/apis/community/usePostParticipation';
 
+import ExclamationIcon from '/src/assets/icons/alert_exclamationMark.svg';
+
+import { useModal } from '@/hooks/useModal';
+
 const PostsListTab = () => {
+  const checkModal = useModal(false);
+  // POST 요청
   const { mutate: participate } = usePostParticipation();
   // 실제 환경에서는 인증 정보를 통해 가져와야 함.
   const userId = '2222';
@@ -32,11 +39,32 @@ const PostsListTab = () => {
               time={new Date(item.createdAt)}
               buttonText="저요"
               onButtonClick={() => {
-                participate({ postId: item.id, userId });
+                participate(
+                  { postId: item.id, userId },
+                  {
+                    onSuccess: () => {
+                      checkModal.openModal();
+                    },
+                  },
+                );
               }}
             />
           ))}
       </div>
+
+      {/* 참여 완료 모달 */}
+      <ActionModal
+        isOpen={checkModal.isOpen}
+        icon={<ExclamationIcon fill="#FF4F75" />}
+        message="참여가 완료되었습니다!"
+        buttons={[
+          {
+            label: '확인',
+            onClick: () => (window.location.href = '/community'),
+            className: 'text-mainPink1',
+          },
+        ]}
+      />
 
       {/* 플로팅 버튼 */}
       <div className="absolute bottom-20 right-5 mb-6">

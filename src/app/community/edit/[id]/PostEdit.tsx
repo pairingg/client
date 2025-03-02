@@ -45,6 +45,8 @@ interface PostEditProps {
 export default function PostEdit({ postId }: PostEditProps) {
   const router = useRouter();
   const outModal = useModal(false);
+
+  // GET 요청
   const { data: myPosts, isLoading, isError } = useGetMyPostList();
 
   // 내 게시물 목록에서 해당 postId의 게시글을 찾아 초기값 설정
