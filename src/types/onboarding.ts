@@ -19,10 +19,8 @@ export interface idealTypeContent {
     city: string;
     district: string;
   }[];
-  age?: {
-    min: number;
-    max: number;
-  };
+  ageStart?: number;
+  ageEnd?: number;
   hobby?: string[];
   drink?: DrinkStatusType;
   smoke?: SmokeStatusType;

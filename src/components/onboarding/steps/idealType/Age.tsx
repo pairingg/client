@@ -16,10 +16,10 @@ export default function Age({
 }: StepChildProps) {
   const { data, updateData } = useOnboarding();
   const [minAge, setMinAge] = useState<string>(
-    data?.idealType?.age?.min?.toString() || '',
+    data?.idealType?.ageStart?.toString() || '',
   );
   const [maxAge, setMaxAge] = useState<string>(
-    data?.idealType?.age?.max?.toString() || '',
+    data?.idealType?.ageEnd?.toString() || '',
   );
 
   const isButtonEnabled =
@@ -32,7 +32,8 @@ export default function Age({
     updateData({
       idealType: {
         ...data?.idealType,
-        age: { min: Number(minAge), max: Number(maxAge) },
+        ageStart: Number(minAge),
+        ageEnd: Number(maxAge),
       },
     });
     onNext?.();
