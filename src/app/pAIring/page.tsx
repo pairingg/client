@@ -7,12 +7,6 @@ import BottomNavBar from '@/components/BottomNavBar';
 import KeywordRecommendation from '@/components/KeywordRecommendation';
 import ProfileCard from '@/components/ProfileCard';
 
-import SameHobbyIcon from '/src/assets/icons/keyword_hobby.svg';
-import LocationIcon from '/src/assets/icons/keyword_location.svg';
-import SameAgeIcon from '/src/assets/icons/keyword_sameAge.svg';
-import SameGenderIcon from '/src/assets/icons/keyword_sameGender.svg';
-import UnderAgeIcon from '/src/assets/icons/keyword_underAge.svg';
-import UpAgeIcon from '/src/assets/icons/keyword_upAge.svg';
 import LogoIcon from '/src/assets/icons/logo_letter.svg';
 
 import { useGetIdealRecommend } from '@/hooks/apis/idealRecommend/useGetIdealRecommend';
@@ -20,8 +14,8 @@ import { useGetKeywordRecommend } from '@/hooks/apis/idealRecommend/useGetKeywor
 import type { keywordsList } from '@/types/ideal/ideal';
 
 export default function MainPage() {
-  // 선택된 키워드 id 관리
-  const [selectedKeywordId, setSelectedKeywordId] = useState<number | null>(
+  // 수정: 선택된 키워드 객체 관리 (숫자 id에서 keywordsList 전체 객체로 변경)
+  const [selectedKeyword, setSelectedKeyword] = useState<keywordsList | null>(
     null,
   );
 
@@ -32,29 +26,31 @@ export default function MainPage() {
     error: idealError,
   } = useGetIdealRecommend();
 
-  // 키워드 추천 데이터
+  // 수정: 키워드 추천 데이터 API 호출 시, selectedKeyword의 keyword 값을 전달
   const {
     data: keywordRecommendations,
     isLoading: isKeywordLoading,
     error: keywordError,
     refetch: refetchKeywordRecommendations,
-  } = useGetKeywordRecommend(selectedKeywordId as number, !!selectedKeywordId);
+  } = useGetKeywordRecommend(
+    selectedKeyword?.keyword as string,
+    !!selectedKeyword,
+  );
 
-  // 키워드 목록
+  // 수정: 키워드 목록 데이터 구조 변경 (keyword, keywordIconUrl)
   const keywords: keywordsList[] = [
-    { keywordId: 1, icon: <SameHobbyIcon />, title: '같은 취미' },
-    { keywordId: 2, icon: <LocationIcon />, title: '같은 위치' },
-    { keywordId: 3, icon: <UpAgeIcon />, title: '연상' },
-    { keywordId: 4, icon: <UnderAgeIcon />, title: '연하' },
-    { keywordId: 5, icon: <SameAgeIcon />, title: '동갑' },
-    { keywordId: 6, icon: <SameGenderIcon />, title: '같은 성별' },
+    { keyword: '같은 취미', keywordIconUrl: 'https://placehold.co/600x400' },
+    { keyword: '같은 위치', keywordIconUrl: 'https://placehold.co/600x400' },
+    { keyword: '연상', keywordIconUrl: 'https://placehold.co/600x400' },
+    { keyword: '연하', keywordIconUrl: 'https://placehold.co/600x400' },
+    { keyword: '동갑', keywordIconUrl: 'https://placehold.co/600x400' },
+    { keyword: '같은 성별', keywordIconUrl: 'https://placehold.co/600x400' },
   ];
 
   return (
     <div className="relative min-h-screen p-6 bg-[#f9f9f9]">
       <div className="flex flex-col pb-24">
         <div className="flex flex-col">
-          {/* 로고 영역 */}
           <div className="flex flex-col gap-5">
             <div className="flex justify-start">
               <Link href="/pAIring">
@@ -62,7 +58,6 @@ export default function MainPage() {
               </Link>
             </div>
 
-            {/* 프로필카드 영역 */}
             <div className="flex flex-col justify-center items-center gap-5">
               {isIdealLoading && <p>데이터 로딩 중</p>}
               {idealError && <p>데이터를 불러오지 못했습니다.</p>}
@@ -80,23 +75,24 @@ export default function MainPage() {
             </div>
           </div>
 
-          {/* 추천 키워드 영역 */}
           <div className="flex flex-col mt-6">
             <p className="font-24-bold mb-5">맞춤 추천</p>
             <div className="flex justify-center">
               <KeywordRecommendation
                 keywords={keywords}
-                onKeywordSelected={(id: number) => {
-                  setSelectedKeywordId(id);
-                  // 키워드 버튼 클릭 시, API에서 해당 키워드 추천 데이터를 불러오기 위해 refetch 호출
-                  refetchKeywordRecommendations();
+                // 수정: onKeywordSelected 콜백이 키워드 전체 객체를 받도록 변경
+                onKeywordSelected={(keyword: keywordsList) => {
+                  setSelectedKeyword(keyword);
+                  setTimeout(() => {
+                    refetchKeywordRecommendations();
+                  }, 0);
                 }}
               />
             </div>
           </div>
 
-          {/* 추천 리스트 영역: 선택된 키워드에 해당하는 키워드 추천 데이터를 렌더링 */}
-          {selectedKeywordId && (
+          {/* 수정: selectedKeyword가 존재할 때 렌더링 */}
+          {selectedKeyword && (
             <div className="flex flex-col pt-8">
               {isKeywordLoading && <p>데이터 로딩 중</p>}
               {keywordError && <p>데이터를 불러오지 못했습니다.</p>}
