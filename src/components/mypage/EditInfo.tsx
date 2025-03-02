@@ -11,7 +11,7 @@ import ChipButton from '@/components/common/ChipButton';
 import type { DrinkStatusType, SmokeStatusType } from '@/constants/wellness';
 import { DRINK_STATUS, SMOKE_STATUS } from '@/constants/wellness';
 import { useGetMyPageProfile } from '@/hooks/apis/mypage/useGetMyPageProfile';
-import { usePostMyPageProfile } from '@/hooks/apis/mypage/usePostMyPageProfile';
+import { usePutMyPageProfile } from '@/hooks/apis/mypage/usePutMyPageProfile';
 
 import Button from '../common/Button';
 
@@ -44,7 +44,7 @@ export default function EditInfo() {
   const router = useRouter();
   const { data: profileData } = useGetMyPageProfile();
   const [isAddressOpen, setIsAddressOpen] = useState(false);
-  const { mutate: postMyPageProfile } = usePostMyPageProfile();
+  const { mutate: putMyPageProfile } = usePutMyPageProfile();
 
   // 주소 상태
   const [address, setAddress] = useState({ city: '', district: '' });
@@ -110,7 +110,7 @@ export default function EditInfo() {
       smoking: wellness.smoke ?? profileData.smoking,
     };
 
-    postMyPageProfile(updatedProfile, {
+    putMyPageProfile(updatedProfile, {
       onSuccess: () => {
         router.push('/mypage');
       },

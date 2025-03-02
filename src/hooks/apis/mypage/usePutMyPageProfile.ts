@@ -17,10 +17,10 @@ interface MyPageProfileResponse {
   images: string[];
 }
 
-const postMyPageProfile = async (data: MyPageProfileResponse) => {
-  return api.post<MyPageProfileResponse>('/member/profile', data);
+const putMyPageProfile = async (data: MyPageProfileResponse) => {
+  return api.put<MyPageProfileResponse>('/member/profile', data);
 };
 
-export const usePostMyPageProfile = () => {
-  return useMutation({ mutationFn: postMyPageProfile });
+export const usePutMyPageProfile = () => {
+  return useMutation({ mutationFn: putMyPageProfile });
 };
