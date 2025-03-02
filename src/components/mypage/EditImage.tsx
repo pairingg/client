@@ -88,14 +88,20 @@ export default function EditImage() {
       <div className="flex-1 px-5 py-8">
         <div className="flex flex-wrap gap-2">
           {[...Array(5)].map((_, index) => {
-            const existingImage = existingImages[index];
-            const newImage = files[Math.max(0, index - existingImages.length)];
+            const existingImage =
+              existingImages[existingImages.length - 1 - index];
+            const newImage =
+              files[
+                files.length - 1 - Math.max(0, index - existingImages.length)
+              ];
 
             return (
               <ImageUploader
                 key={index}
                 onImageUpload={handleImageUpload}
-                onImageDelete={() => handleImageDelete(index)}
+                onImageDelete={() =>
+                  handleImageDelete(existingImages.length - 1 - index)
+                }
                 image={existingImage ? undefined : newImage}
                 wide={false}
               />

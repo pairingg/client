@@ -5,7 +5,6 @@ import { useRouter } from 'next/navigation';
 import ProfileCardInfoContainer from '@/components/ProfileCardInfoContainer';
 import { DRINK_STATUS, SMOKE_STATUS } from '@/constants/wellness';
 import { useDeleteUser } from '@/hooks/apis/mypage/useDeleteUser';
-import { useGetIdeal } from '@/hooks/apis/mypage/useGetIdeal';
 import { useGetMyPageProfile } from '@/hooks/apis/mypage/useGetMyPageProfile';
 import { useModal } from '@/hooks/useModal';
 import { logout } from '@/utils/auth';
@@ -32,7 +31,7 @@ export default function DefaultMyPage() {
   const withdrawalConfirmModal = useModal();
   const { data: myPageProfileData, isLoading: isProfileLoading } =
     useGetMyPageProfile();
-  const { data: idealData, isLoading: isIdealLoading } = useGetIdeal();
+
   const { mutate: deleteUser } = useDeleteUser();
 
   const handleEdit = () => {
@@ -49,11 +48,11 @@ export default function DefaultMyPage() {
 
   // 음주/흡연 "키" -> "값" 변환
   const drinkStatus =
-    idealData?.drink &&
-    DRINK_STATUS[idealData.drink as keyof typeof DRINK_STATUS];
+    myPageProfileData?.drink &&
+    DRINK_STATUS[myPageProfileData.drink as keyof typeof DRINK_STATUS];
   const smokeStatus =
-    idealData?.smoke &&
-    SMOKE_STATUS[idealData.smoke as keyof typeof SMOKE_STATUS];
+    myPageProfileData?.smoking &&
+    SMOKE_STATUS[myPageProfileData.smoking as keyof typeof SMOKE_STATUS];
 
   // undefined 등 falsy 값 제거
   const drinkSmokeTags = [drinkStatus, smokeStatus].filter(Boolean) as string[];
@@ -63,19 +62,19 @@ export default function DefaultMyPage() {
     {
       icon: <LocationIcon />,
       title: '거주지',
-      description: idealData?.address?.[0]
-        ? `${idealData.address[0].city} ${idealData.address[0].district}`
+      description: myPageProfileData?.city
+        ? `${myPageProfileData.city} ${myPageProfileData.district}`
         : '정보 없음',
     },
     {
       icon: <HobbyIcon />,
       title: '취미',
-      tags: idealData?.hobby || [],
+      tags: myPageProfileData?.hobby || [],
     },
     {
       icon: <PerconalityIcon />,
       title: '성격(MBTI)',
-      description: idealData?.mbti?.[0] || '정보 없음',
+      description: myPageProfileData?.mbti?.[0] || '정보 없음',
     },
     {
       icon: <BeerIcon />,
@@ -84,7 +83,7 @@ export default function DefaultMyPage() {
     },
   ];
 
-  if (isProfileLoading || isIdealLoading) {
+  if (isProfileLoading) {
     return <div>로딩중...</div>;
   }
 
