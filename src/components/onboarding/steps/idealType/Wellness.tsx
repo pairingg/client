@@ -49,6 +49,7 @@ export default function Wellness({
         smoke: selectedWellness.smoke,
       },
     });
+
     onNext?.();
   };
 

@@ -12,6 +12,12 @@ const nextConfig = {
   // public 폴더의 assets 접근을 위한 설정
   images: {
     disableStaticImages: true,
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'kr.object.ncloudstorage.com',
+      },
+    ],
   },
 };
 
