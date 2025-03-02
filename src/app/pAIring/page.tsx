@@ -10,23 +10,31 @@ import ProfileCard from '@/components/ProfileCard';
 import LogoIcon from '/src/assets/icons/logo_letter.svg';
 
 import { useGetIdealRecommend } from '@/hooks/apis/idealRecommend/useGetIdealRecommend';
+import { useGetKeyword } from '@/hooks/apis/idealRecommend/useGetKeyword';
 import { useGetKeywordRecommend } from '@/hooks/apis/idealRecommend/useGetKeywordRecommend';
 import type { keywordsList } from '@/types/ideal/ideal';
 
 export default function MainPage() {
-  // 수정: 선택된 키워드 객체 관리 (숫자 id에서 keywordsList 전체 객체로 변경)
+  // 선택된 키워드 객체 관리
   const [selectedKeyword, setSelectedKeyword] = useState<keywordsList | null>(
     null,
   );
 
-  // 일반 추천 데이터
+  // 이상형 추천 GET 요청
   const {
     data: idealRecommendations,
     isLoading: isIdealLoading,
     error: idealError,
   } = useGetIdealRecommend();
 
-  // 수정: 키워드 추천 데이터 API 호출 시, selectedKeyword의 keyword 값을 전달
+  // 키워드 목록 GET 요청
+  const {
+    data: keywords,
+    isLoading: isKeywordsLoading,
+    error: keywordsError,
+  } = useGetKeyword();
+
+  // 키워드 이상형 추천 GET 요청
   const {
     data: keywordRecommendations,
     isLoading: isKeywordLoading,
@@ -36,16 +44,6 @@ export default function MainPage() {
     selectedKeyword?.keyword as string,
     !!selectedKeyword,
   );
-
-  // 수정: 키워드 목록 데이터 구조 변경 (keyword, keywordIconUrl)
-  const keywords: keywordsList[] = [
-    { keyword: '같은 취미', keywordIconUrl: 'https://placehold.co/600x400' },
-    { keyword: '같은 위치', keywordIconUrl: 'https://placehold.co/600x400' },
-    { keyword: '연상', keywordIconUrl: 'https://placehold.co/600x400' },
-    { keyword: '연하', keywordIconUrl: 'https://placehold.co/600x400' },
-    { keyword: '동갑', keywordIconUrl: 'https://placehold.co/600x400' },
-    { keyword: '같은 성별', keywordIconUrl: 'https://placehold.co/600x400' },
-  ];
 
   return (
     <div className="relative min-h-screen p-6 bg-[#f9f9f9]">
@@ -58,6 +56,7 @@ export default function MainPage() {
               </Link>
             </div>
 
+            {/* 이상형 추천 영역 */}
             <div className="flex flex-col justify-center items-center gap-5">
               {isIdealLoading && <p>데이터 로딩 중</p>}
               {idealError && <p>데이터를 불러오지 못했습니다.</p>}
@@ -75,23 +74,27 @@ export default function MainPage() {
             </div>
           </div>
 
+          {/* 키워드 리스트 영역 */}
           <div className="flex flex-col mt-6">
             <p className="font-24-bold mb-5">맞춤 추천</p>
             <div className="flex justify-center">
-              <KeywordRecommendation
-                keywords={keywords}
-                // 수정: onKeywordSelected 콜백이 키워드 전체 객체를 받도록 변경
-                onKeywordSelected={(keyword: keywordsList) => {
-                  setSelectedKeyword(keyword);
-                  setTimeout(() => {
-                    refetchKeywordRecommendations();
-                  }, 0);
-                }}
-              />
+              {isKeywordsLoading && <p>키워드 불러오는 중...</p>}
+              {keywordsError && <p>키워드를 불러오지 못했습니다.</p>}
+              {keywords && (
+                <KeywordRecommendation
+                  keywords={keywords}
+                  onKeywordSelected={(keyword: keywordsList) => {
+                    setSelectedKeyword(keyword);
+                    setTimeout(() => {
+                      refetchKeywordRecommendations();
+                    }, 0);
+                  }}
+                />
+              )}
             </div>
           </div>
 
-          {/* 수정: selectedKeyword가 존재할 때 렌더링 */}
+          {/* 키워드 이상형 추천 영역 */}
           {selectedKeyword && (
             <div className="flex flex-col pt-8">
               {isKeywordLoading && <p>데이터 로딩 중</p>}

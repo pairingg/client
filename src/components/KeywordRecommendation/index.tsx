@@ -4,7 +4,6 @@ import KeywordList from './KeywordList';
 
 interface KeywordRecommendationProps {
   keywords: keywordsList[];
-  // 수정: onKeywordSelected 인자를 키워드 전체 객체로 받도록 변경
   onKeywordSelected: (keyword: keywordsList) => void;
 }
 

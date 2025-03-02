@@ -15,7 +15,6 @@ import ExclamationIcon from '/src/assets/icons/alert_exclamationMark.svg';
 
 interface KeywordListProps {
   keywords: keywordsList[];
-  // 수정: onKeywordSelected 인자를 키워드 전체 객체로 받도록 변경
   onKeywordSelected: (keyword: keywordsList) => void;
 }
 
@@ -34,12 +33,11 @@ export default function KeywordList({
   const [selectedKeyword, setSelectedKeyword] = useState<keywordsList | null>(
     null,
   );
-  // 수정: 대기 중인 키워드 객체 저장 (기존 number | null 에서 변경)
+  //  키워드 객체 저장
   const [pendingKeyword, setPendingKeyword] = useState<keywordsList | null>(
     null,
   );
 
-  // 수정: 키워드 버튼 클릭 시, 숫자 id 대신 키워드 전체 객체를 인자로 받음
   const handleKeywordClick = (keyword: keywordsList) => {
     if (hasUsed) {
       alreadyUsedModal.openModal();
@@ -58,7 +56,7 @@ export default function KeywordList({
       {keywords.map((item, index) => (
         <div key={index} className="flex items-center justify-between pb-1">
           <div className="flex items-center space-x-3">
-            {/* 수정: 아이콘 자리에 이미지 사용 */}
+            {/* 키워드 아이콘 영역 */}
             <Image
               src={item.keywordIconUrl}
               alt={item.keyword}
@@ -67,7 +65,7 @@ export default function KeywordList({
               unoptimized={true}
               className="w-10 h-10"
             />
-            {/* 수정: title 대신 keyword 값을 사용 */}
+            {/* 키워드 영역 */}
             <span
               className={
                 hasUsed && item.keyword === selectedKeyword?.keyword
