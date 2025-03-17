@@ -8,6 +8,7 @@ import { useGetMyPageProfile } from '@/hooks/apis/mypage/useGetMyPageProfile';
 import { useModal } from '@/hooks/useModal';
 import { logout } from '@/utils/auth';
 
+import DataLoading from '../ exception/dataLoading';
 import BottomNavBar from '../BottomNavBar';
 import Button from '../common/Button';
 import ActionModal from '../modal/ActionModal';
@@ -85,7 +86,7 @@ export default function DefaultMyPage() {
   ];
 
   if (isProfileLoading) {
-    return <div>로딩중...</div>;
+    return <DataLoading />;
   }
 
   return (
