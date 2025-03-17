@@ -47,7 +47,7 @@ export default function RootLayout({
         <meta property="og:url" content="웹 페이지 주소 들어갈 예정" />
         <meta property="og:image" content="/public/images/og-image.png" />
         <meta
-          http-equiv="Content-Security-Policy"
+          httpEquiv="Content-Security-Policy"
           content="upgrade-insecure-requests"
         />
         <title>pAIring</title>
