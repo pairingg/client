@@ -2,7 +2,6 @@
 
 import { useRouter } from 'next/navigation';
 
-import ProfileCardInfoContainer from '@/components/ProfileCardInfoContainer';
 import { DRINK_STATUS, SMOKE_STATUS } from '@/constants/wellness';
 import { useDeleteUser } from '@/hooks/apis/mypage/useDeleteUser';
 import { useGetMyPageProfile } from '@/hooks/apis/mypage/useGetMyPageProfile';
@@ -21,6 +20,8 @@ import BeerIcon from '/src/assets/icons/profilecard_bottle_pink.svg';
 import HobbyIcon from '/src/assets/icons/profilecard_heart_pink.svg';
 import LocationIcon from '/src/assets/icons/profilecard_location_pink.svg';
 import PerconalityIcon from '/src/assets/icons/profilecard_user_pink.svg';
+
+import MypageProfileInfo from '../mypageProfileInfo';
 
 export default function DefaultMyPage() {
   const router = useRouter();
@@ -98,25 +99,13 @@ export default function DefaultMyPage() {
             <div>{myPageProfileData?.age || '-'}</div>
             <NameStarIcon />
           </div>
-
-          <button
-            className="px-3 py-2 rounded-[25px] border border-gray1 text-gray1 font-14-medium"
-            onClick={handleEdit}
-          >
-            내 프로필 수정
-          </button>
         </div>
 
         <div className="flex flex-col gap-y-8 w-[98%]">
-          {profileInfoItems.map((item, index) => (
-            <ProfileCardInfoContainer
-              key={index}
-              icon={item.icon}
-              title={item.title}
-              description={item.description}
-              tags={item.tags}
-            />
-          ))}
+          <MypageProfileInfo
+            onEdit={handleEdit}
+            profileInfoItems={profileInfoItems}
+          />
         </div>
 
         <div className="w-full font-18-medium flex flex-col gap-[10px] mt-[20px] mb-[40px]">

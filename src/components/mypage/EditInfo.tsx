@@ -136,7 +136,7 @@ export default function EditInfo() {
 
   return (
     <div className="h-[100dvh] bg-[#FFFFFF] flex flex-col">
-      <div className="relative w-full px-5 py-4 gap-6 h-[68px] flex justify-center items-center shadow-md flex-shrink-0">
+      <div className="relative w-full px-5 py-4 gap-6 h-[68px] flex justify-center items-center shadow-md flex-shrink-0 cursor-pointer">
         <div className="absolute left-[20px]">
           <BackIcon onClick={handleToMyPage} />
         </div>
