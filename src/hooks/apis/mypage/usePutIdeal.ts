@@ -1,6 +1,7 @@
 import { useMutation } from '@tanstack/react-query';
 
 import { api } from '@/api';
+import type { DrinkStatusType, SmokeStatusType } from '@/constants/wellness';
 
 export interface idealTypeContent {
   mbti?: string[];
@@ -8,17 +9,15 @@ export interface idealTypeContent {
     city: string;
     district: string;
   }[];
-  age?: {
-    min: number;
-    max: number;
-  };
+  ageStart: number;
+  ageEnd: number;
   hobby?: string[];
-  drink?: string;
-  smoke?: string;
+  drink?: DrinkStatusType;
+  smoke?: SmokeStatusType;
 }
 
-const putIdeal = async (ideal: idealTypeContent) => {
-  return api.put<idealTypeContent>('/ideal', ideal);
+const putIdeal = async (data: idealTypeContent) => {
+  return api.put<idealTypeContent>('/ideal', data);
 };
 
 export const usePutIdeal = () => {

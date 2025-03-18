@@ -48,6 +48,10 @@ export default function DefaultMyPage() {
     router.push('/mypage/edit/info');
   };
 
+  const handleIdealEdit = () => {
+    router.push('/mypage/edit/ideal-info');
+  };
+
   const handleLogout = () => {
     logoutModal.openModal();
   };
@@ -169,7 +173,7 @@ export default function DefaultMyPage() {
         <div className="flex flex-col gap-y-8 w-[98%]">
           <MypageProfileInfo
             infoTitle="이상형 정보"
-            onEdit={handleEdit}
+            onEdit={handleIdealEdit}
             profileInfoItems={profileIdealInfoItems}
           />
         </div>
