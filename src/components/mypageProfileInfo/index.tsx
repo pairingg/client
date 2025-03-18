@@ -6,11 +6,13 @@ interface ProfileInfoItem {
 }
 
 interface MypageProfileInfoProps {
+  infoTitle: string;
   onEdit?: () => void;
   profileInfoItems: ProfileInfoItem[];
 }
 
 export default function MypageProfileInfo({
+  infoTitle,
   onEdit,
   profileInfoItems,
 }: MypageProfileInfoProps) {
@@ -22,7 +24,7 @@ export default function MypageProfileInfo({
     >
       {/* 컨테이너 정보 */}
       <div className="flex justify-between items-center pb-4">
-        <div className="text-gray1 font-bold text-[20px]">내 정보</div>
+        <div className="text-gray1 font-bold text-[20px]">{infoTitle}</div>
         {onEdit && (
           <button
             onClick={onEdit}

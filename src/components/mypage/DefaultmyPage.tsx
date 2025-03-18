@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation';
 
 import { DRINK_STATUS, SMOKE_STATUS } from '@/constants/wellness';
 import { useDeleteUser } from '@/hooks/apis/mypage/useDeleteUser';
+import { useGetIdeal } from '@/hooks/apis/mypage/useGetIdeal';
 import { useGetMyPageProfile } from '@/hooks/apis/mypage/useGetMyPageProfile';
 import { useModal } from '@/hooks/useModal';
 import { logout } from '@/utils/auth';
@@ -18,6 +19,7 @@ import CheckIcon from '/src/assets/icons/alert_checkMark.svg';
 import ExclamationIcon from '/src/assets/icons/alert_exclamationMark.svg';
 import NameStarIcon from '/src/assets/icons/name_star.svg';
 import BeerIcon from '/src/assets/icons/profilecard_bottle_pink.svg';
+import CalendarIcon from '/src/assets/icons/profilecard_calendar_pink.svg';
 import HobbyIcon from '/src/assets/icons/profilecard_heart_pink.svg';
 import LocationIcon from '/src/assets/icons/profilecard_location_pink.svg';
 import PerconalityIcon from '/src/assets/icons/profilecard_user_pink.svg';
@@ -31,10 +33,16 @@ export default function DefaultMyPage() {
   const logoutConfirmModal = useModal();
   const withdrawalModal = useModal();
   const withdrawalConfirmModal = useModal();
+
+  // Get 데이터
   const { data: myPageProfileData, isLoading: isProfileLoading } =
     useGetMyPageProfile();
-
+  const { data: myPageIdealData } = useGetIdeal();
   const { mutate: deleteUser } = useDeleteUser();
+
+  if (isProfileLoading) {
+    return <DataLoading />;
+  }
 
   const handleEdit = () => {
     router.push('/mypage/edit/info');
@@ -48,7 +56,7 @@ export default function DefaultMyPage() {
     withdrawalModal.openModal();
   };
 
-  // 음주/흡연 "키" -> "값" 변환
+  // 음주/흡연 "키" -> "값" 변환 (내 정보)
   const drinkStatus =
     myPageProfileData?.drink &&
     DRINK_STATUS[myPageProfileData.drink as keyof typeof DRINK_STATUS];
@@ -59,7 +67,20 @@ export default function DefaultMyPage() {
   // undefined 등 falsy 값 제거
   const drinkSmokeTags = [drinkStatus, smokeStatus].filter(Boolean) as string[];
 
-  // 프로필 정보 배열 (거주지, 취미, MBTI, 음주/흡연)
+  // 음주/흡연 "키" -> "값" 변환 (이상형 정보)
+  const idealDrinkStatus =
+    myPageIdealData?.drink &&
+    DRINK_STATUS[myPageIdealData.drink as keyof typeof DRINK_STATUS];
+  const idealSmokeStatus =
+    myPageIdealData?.smoke &&
+    SMOKE_STATUS[myPageIdealData.smoke as keyof typeof SMOKE_STATUS];
+
+  // undefined 등 falsy 값 제거
+  const idealDrinkSmokeTags = [idealDrinkStatus, idealSmokeStatus].filter(
+    Boolean,
+  ) as string[];
+
+  // 프로필 정보
   const profileInfoItems = [
     {
       icon: <LocationIcon />,
@@ -85,9 +106,42 @@ export default function DefaultMyPage() {
     },
   ];
 
-  if (isProfileLoading) {
-    return <DataLoading />;
-  }
+  // 이상형 프로필 정보
+  const profileIdealInfoItems = [
+    {
+      icon: <PerconalityIcon />,
+      title: '상대의 성격(MBTI)',
+      description:
+        myPageIdealData?.mbti && myPageIdealData.mbti.length > 0
+          ? myPageIdealData.mbti.join(',')
+          : '정보 없음',
+    },
+    {
+      icon: <LocationIcon />,
+      title: '상대의 거주지',
+      description:
+        myPageIdealData?.address && myPageIdealData.address.length > 0
+          ? myPageIdealData.address
+              .map((addr) => `${addr.city} ${addr.district}`)
+              .join(', ')
+          : '정보 없음',
+    },
+    {
+      icon: <HobbyIcon />,
+      title: '취미',
+      tags: myPageIdealData?.hobby || [],
+    },
+    {
+      icon: <CalendarIcon />,
+      title: '상대의 나이 범위',
+      description: `${myPageIdealData?.ageStart} ~ ${myPageIdealData?.ageEnd}`,
+    },
+    {
+      icon: <BeerIcon />,
+      title: '상대의 음주 흡연 여부',
+      tags: idealDrinkSmokeTags,
+    },
+  ];
 
   return (
     <div className="flex flex-col items-center overflow-y-auto">
@@ -102,10 +156,21 @@ export default function DefaultMyPage() {
           </div>
         </div>
 
-        <div className="flex flex-col gap-y-8 w-[98%]">
+        {/* 내 정보 */}
+        <div className="flex flex-col gap-y-8 w-[98%] pb-4">
           <MypageProfileInfo
+            infoTitle="내 정보"
             onEdit={handleEdit}
             profileInfoItems={profileInfoItems}
+          />
+        </div>
+
+        {/* 이상형 정보 */}
+        <div className="flex flex-col gap-y-8 w-[98%]">
+          <MypageProfileInfo
+            infoTitle="이상형 정보"
+            onEdit={handleEdit}
+            profileInfoItems={profileIdealInfoItems}
           />
         </div>
 
