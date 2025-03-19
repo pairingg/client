@@ -12,22 +12,27 @@ import SendingButtonIcon from '/src/assets/icons/chat_send_button.svg';
 import DeleteButtonIcon from '/src/assets/icons/delete_circle_gray.svg';
 
 interface Props {
-  onSendMessage: () => void;
+  onSendMessage: (message: string) => void;
   isMenuOpen: boolean;
   setIsMenuOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  value?: string;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 export default function ChatInput({
   onSendMessage,
   isMenuOpen,
   setIsMenuOpen,
+  value,
+  onChange,
 }: Props) {
   const [message, setMessage] = useState('');
 
   const handleSend = () => {
-    if (message.trim()) {
-      onSendMessage();
-      setMessage('');
+    const currentMessage = value || message;
+    if (currentMessage.trim()) {
+      onSendMessage(currentMessage);
+      if (!onChange) setMessage('');
     }
   };
 
@@ -35,6 +40,14 @@ export default function ChatInput({
     if (e.key === 'Enter') {
       e.preventDefault();
       handleSend();
+    }
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (onChange) {
+      onChange(e);
+    } else {
+      setMessage(e.target.value);
     }
   };
 
@@ -53,8 +66,8 @@ export default function ChatInput({
 
         <Input
           wrapperClassName="h-[40px]"
-          value={message}
-          onChange={(e) => setMessage(e.target.value)}
+          value={value !== undefined ? value : message}
+          onChange={handleChange}
           onKeyDown={handleKeyDown}
         />
 
@@ -62,7 +75,7 @@ export default function ChatInput({
           onClick={handleSend}
           type="button"
           aria-label="메시지 보내기"
-          disabled={!message.trim()}
+          disabled={!(value || message).trim()}
         >
           <SendingButtonIcon />
         </button>
