@@ -7,6 +7,8 @@ import { useRouter } from 'next/navigation';
 
 import CheckIcon from '@/assets/icons/alert_checkMark.svg';
 import ExclamationIcon from '@/assets/icons/alert_exclamationMark.svg';
+import DataError from '@/components/ exception/dataError';
+import DataLoading from '@/components/ exception/dataLoading';
 import Button from '@/components/common/Button';
 import ActionModal from '@/components/modal/ActionModal';
 import BottomSheetModal from '@/components/modal/BottomSheetModal';
@@ -56,8 +58,8 @@ const MyPostsTab = () => {
   return (
     <>
       <div className="flex flex-col pb-[200px] h-screen flex-grow overflow-y-auto bg-[#f9f9f9]">
-        {isLoading && <p>데이터 로딩 중</p>}
-        {isError && <p>데이터를 불러오지 못했습니다.</p>}
+        {isLoading && <DataLoading />}
+        {isError && <DataError />}
 
         {myPosts?.length === 0 ? (
           // 작성한 글이 없을 때

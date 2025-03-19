@@ -3,6 +3,8 @@ import { useState } from 'react';
 
 import Link from 'next/link';
 
+import DataError from '@/components/ exception/dataError';
+import DataLoading from '@/components/ exception/dataLoading';
 import BottomNavBar from '@/components/BottomNavBar';
 import KeywordRecommendation from '@/components/KeywordRecommendation';
 import ProfileCard from '@/components/ProfileCard';
@@ -58,8 +60,8 @@ export default function MainPage() {
 
             {/* 이상형 추천 영역 */}
             <div className="flex flex-col justify-center items-center gap-5">
-              {isIdealLoading && <p>데이터 로딩 중</p>}
-              {idealError && <p>데이터를 불러오지 못했습니다.</p>}
+              {isIdealLoading && <DataLoading />}
+              {idealError && <DataError />}
               {idealRecommendations &&
                 idealRecommendations.map((item, index) => (
                   <ProfileCard
@@ -78,8 +80,8 @@ export default function MainPage() {
           <div className="flex flex-col mt-6">
             <p className="font-24-bold mb-5">맞춤 추천</p>
             <div className="flex justify-center">
-              {isKeywordsLoading && <p>키워드 불러오는 중...</p>}
-              {keywordsError && <p>키워드를 불러오지 못했습니다.</p>}
+              {isKeywordsLoading && <DataLoading />}
+              {keywordsError && <DataError />}
               {keywords && (
                 <KeywordRecommendation
                   keywords={keywords}
@@ -97,8 +99,8 @@ export default function MainPage() {
           {/* 키워드 이상형 추천 영역 */}
           {selectedKeyword && (
             <div className="flex flex-col pt-8">
-              {isKeywordLoading && <p>데이터 로딩 중</p>}
-              {keywordError && <p>데이터를 불러오지 못했습니다.</p>}
+              {isKeywordLoading && <DataLoading />}
+              {keywordError && <DataError />}
               {keywordRecommendations && (
                 <div className="flex flex-col items-center gap-5">
                   {keywordRecommendations.map((item, index) => (

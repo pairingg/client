@@ -3,6 +3,8 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
+import DataError from '@/components/ exception/dataError';
+import DataLoading from '@/components/ exception/dataLoading';
 import PlusButton from '@/components/buttons/PlusButton';
 import ActionModal from '@/components/modal/ActionModal';
 import PostCard from '@/components/PostCard';
@@ -27,8 +29,8 @@ const PostsListTab = () => {
   return (
     <>
       <div className="flex flex-col pb-[200px] h-screen flex-grow overflow-y-auto bg-[#f9f9f9]">
-        {isLoading && <p>데이터 로딩 중</p>}
-        {isError && <p>데이터를 불러오지 못했습니다.</p>}
+        {isLoading && <DataLoading />}
+        {isError && <DataError />}
 
         {postList?.length === 0 ? (
           // 작성한 글이 없을 때

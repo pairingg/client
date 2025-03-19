@@ -29,6 +29,9 @@ export default function PostCreate() {
   const [content, setContent] = useState('');
   const [image, setImage] = useState<File | null>(null);
 
+  // 중복 요청 방지
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const maxLength = 80;
 
   const uploadImageToNcloud = async ({
@@ -58,6 +61,9 @@ export default function PostCreate() {
 
   // 제출 핸들러
   const handleSubmit = async () => {
+    if (isSubmitting) return;
+
+    setIsSubmitting(true);
     try {
       let imageUrl = '';
 
@@ -70,6 +76,9 @@ export default function PostCreate() {
         await uploadImageToNcloud({ presignedUrl: url, file: image });
 
         imageUrl = encodeURIComponent(image.name);
+
+        // 업로드 후 이미지 상태 초기화하여 재사용 방지
+        setImage(null);
       }
 
       // 게시글 생성 POST 요청
@@ -87,6 +96,7 @@ export default function PostCreate() {
       });
     } catch (error) {
       console.error('게시글 생성 실패:', error);
+      setIsSubmitting(false);
     }
   };
 
@@ -157,6 +167,7 @@ export default function PostCreate() {
             variant="filled"
             className="w-full py-3"
             onClick={handleSubmit}
+            disabled={isSubmitting}
           >
             등록
           </Button>

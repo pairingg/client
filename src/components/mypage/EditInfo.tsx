@@ -42,9 +42,14 @@ const MBTI_OPTIONS = {
 
 export default function EditInfo() {
   const router = useRouter();
+
+  // GET 훅
   const { data: profileData } = useGetMyPageProfile();
-  const [isAddressOpen, setIsAddressOpen] = useState(false);
+  // PUT 훅
   const { mutate: putMyPageProfile } = usePutMyPageProfile();
+
+  // 주소 모달
+  const [isAddressOpen, setIsAddressOpen] = useState(false);
 
   // 주소 상태
   const [address, setAddress] = useState({ city: '', district: '' });
@@ -136,11 +141,11 @@ export default function EditInfo() {
 
   return (
     <div className="h-[100dvh] bg-[#FFFFFF] flex flex-col">
-      <div className="relative w-full px-5 py-4 gap-6 h-[68px] flex justify-center items-center shadow-md flex-shrink-0">
+      <div className="relative w-full px-5 py-4 gap-6 h-[68px] flex justify-center items-center shadow-md flex-shrink-0 cursor-pointer">
         <div className="absolute left-[20px]">
           <BackIcon onClick={handleToMyPage} />
         </div>
-        <div className="font-18-medium">프로필 수정</div>
+        <div className="font-18-medium">내 정보 수정</div>
       </div>
 
       <div className="flex-1 overflow-y-auto">

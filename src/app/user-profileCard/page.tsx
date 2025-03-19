@@ -1,5 +1,6 @@
 'use client';
 
+import DataLoading from '@/components/ exception/dataLoading';
 import FloatingButton from '@/components/common/FloatingButton';
 import ProfileCardHeader from '@/components/header/ProfileCardHeader';
 import ProfileCardInfoContainer from '@/components/ProfileCardInfoContainer';
@@ -18,49 +19,59 @@ import {
 } from '@/components/ui/Carousel';
 import type { DrinkStatusType, SmokeStatusType } from '@/constants/wellness';
 import { DRINK_STATUS, SMOKE_STATUS } from '@/constants/wellness';
+import { useGetUserProfile } from '@/hooks/useGetUserProfile';
 
 import Image from 'next/image';
 
 export default function UserProfileCard() {
-  const profile = {
-    name: '김이름',
-    age: 20,
-    gender: 'MALE',
-    birth: '2025-02-15',
-    mbti: 'INFP',
-    drink: 'atAllNothing',
-    smoking: 'never',
-    city: '서울시',
-    district: '강남구',
-    hobby: ['운동', '독서', '맛집탐방'],
-    images: [
-      'https://placehold.co/600x400',
-      'https://upload.wikimedia.org/wikipedia/ko/4/4a/%EC%8B%A0%EC%A7%B1%EA%B5%AC.png',
-    ],
-  };
+  // GET 요청
+  const { data: profile, isLoading } = useGetUserProfile();
+
+  if (isLoading) {
+    return <DataLoading />;
+  }
+
+  // const profile = {
+  //   name: '김이름',
+  //   age: 20,
+  //   gender: 'MALE',
+  //   birth: '2025-02-15',
+  //   mbti: 'INFP',
+  //   drink: 'atAllNothing',
+  //   smoking: 'never',
+  //   city: '서울시',
+  //   district: '강남구',
+  //   hobby: ['운동', '독서', '맛집탐방'],
+  //   images: [
+  //     'https://placehold.co/600x400',
+  //     'https://upload.wikimedia.org/wikipedia/ko/4/4a/%EC%8B%A0%EC%A7%B1%EA%B5%AC.png',
+  //   ],
+  // };
 
   // 음주/흡연 상태 변환
   const drinkStatus: DrinkStatusType =
-    DRINK_STATUS[profile.drink as keyof typeof DRINK_STATUS];
+    DRINK_STATUS[profile?.drink as keyof typeof DRINK_STATUS];
   const smokeStatus: SmokeStatusType =
-    SMOKE_STATUS[profile.smoking as keyof typeof SMOKE_STATUS];
+    SMOKE_STATUS[profile?.smoking as keyof typeof SMOKE_STATUS];
 
   // 프로필 정보 배열 (거주지, 취미, MBTI, 음주/흡연)
   const profileInfoItems = [
     {
       icon: <LocationIcon />,
       title: '거주지',
-      description: `${profile.city} ${profile.district}`,
+      description: profile?.city
+        ? `${profile.city} ${profile.district}`
+        : '정보없음',
     },
     {
       icon: <HobbyIcon />,
       title: '취미',
-      tags: profile.hobby,
+      tags: profile?.hobby,
     },
     {
       icon: <PerconalityIcon />,
       title: '성격(MBTI)',
-      description: profile.mbti,
+      description: profile?.mbti,
     },
     {
       icon: <BeerIcon />,
@@ -79,7 +90,10 @@ export default function UserProfileCard() {
 
   return (
     <div className="relative min-h-screen pb-24 p-5 bg-[#f9f9f9]">
-      <ProfileCardHeader name={profile.name} age={profile.age} />
+      <ProfileCardHeader
+        name={profile?.name || '이름 없음'}
+        age={profile?.age || 0}
+      />
 
       {/* 프로필 카드 */}
       <div
@@ -89,7 +103,7 @@ export default function UserProfileCard() {
         {/* 이미지 캐러셀 */}
         <Carousel>
           <CarouselContent>
-            {profile.images.map((imgUrl, index) => (
+            {profile?.images.map((imgUrl, index) => (
               <CarouselItem key={index}>
                 <Image
                   src={imgUrl}
