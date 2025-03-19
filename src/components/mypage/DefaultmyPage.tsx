@@ -34,7 +34,7 @@ export default function DefaultMyPage() {
   const withdrawalModal = useModal();
   const withdrawalConfirmModal = useModal();
 
-  // Get 데이터
+  // Get 요청
   const { data: myPageProfileData, isLoading: isProfileLoading } =
     useGetMyPageProfile();
   const { data: myPageIdealData } = useGetIdeal();
